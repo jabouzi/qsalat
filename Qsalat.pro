@@ -33,7 +33,7 @@ HEADERS = src/qsalat.h \
  src/qhijridate.h \
  src/dsingleapplication.h \
  src/domparser.h \
- src/player.h
+ src/alarm.h
 SOURCES = src/qsalat.cpp \
  src/utils.cpp \
  src/main.cpp \
@@ -49,7 +49,7 @@ SOURCES = src/qsalat.cpp \
  src/qhijridate.cpp \
  src/dsingleapplication.cpp \
  src/domparser.cpp \
- src/player.cpp
+ src/alarm.cpp
 RESOURCES += salat.qrc qibla.qrc worldtime.qrc
 TRANSLATIONS = qsalat_en.ts qsalat_fr.ts
 CODECFORTR = UTF-8

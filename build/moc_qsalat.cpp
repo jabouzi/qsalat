@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qsalat.h'
 **
-** Created: Sat Jan 9 12:12:40 2010
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
+** Created: Fri Apr 23 07:07:23 2010
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'qsalat.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.6.0. It"
+#error "This file was generated using the moc from 4.6.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Qsalat[] = {
        4,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   14, // methods
+      14,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -44,6 +44,7 @@ static const uint qt_meta_data_Qsalat[] = {
      186,    7,    7,    7, 0x08,
      195,    7,    7,    7, 0x08,
      203,    7,    7,    7, 0x08,
+     217,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -54,7 +55,7 @@ static const char qt_meta_stringdata_Qsalat[] = {
     "showCalculation()\0showWorldtime()\0"
     "showMonthly()\0showYearly()\0showHijridate()\0"
     "showPlayer()\0_about()\0_hide()\0"
-    "_showNormal()\0"
+    "_showNormal()\0itsSalatTime()\0"
 };
 
 const QMetaObject Qsalat::staticMetaObject = {
@@ -101,9 +102,10 @@ int Qsalat::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 10: _about(); break;
         case 11: _hide(); break;
         case 12: _showNormal(); break;
+        case 13: itsSalatTime(); break;
         default: ;
         }
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }
