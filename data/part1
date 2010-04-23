@@ -1,0 +1,324 @@
+<html><head>
+<title> Monthly Prayer Times </title>
+<style>
+table { 
+	font: 80% Verdana, Arial, Helvetica, sans-serif;
+	color: #000;
+	text-align: left;
+	border-collapse: collapse;
+	border: 1px solid #666666;
+	border-top: none;	
+}
+table a {
+	text-decoration: underline;
+}
+table a:visited {
+	text-decoration: none;
+}
+tr.odd {
+	background-color: #ebf3ff;
+}
+tr a {
+	color: #000000;
+}
+tr:hover a {
+	color: #ffffff;
+}
+tr:hover, tr.odd:hover {
+	background-color: #3d80df;
+	color: #ffffff;
+}
+caption {
+	height: 45px;
+	line-height: 44px;
+	color: #60634E;
+	font-weight: bold;
+	text-align: center;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	margin-left: -1px;
+	background: #ffffff url(captop.jpg) repeat-x;
+	background-position: 50% top;
+	border-left: 2px solid #616161;
+	border-right: 2px solid #616161;
+}
+thead th {
+	font-size: 105%;
+	color: #000;
+	background: #ffffff url(tbar.gif) repeat-x;
+	height: 33px;
+}
+thead th:hover {
+	background: #ffffff url(tbov.gif) repeat-x;
+	
+}
+tr {
+	vertical-align: top;
+}
+tr,th,td {
+	padding: .75em;
+}
+td {
+	border-left: 1px solid #dadada;
+}
+tfoot tr {
+	background: #fff url(bbar.gif) repeat-x;
+}
+tfoot td, tfoot th{
+	color: #000;
+	border: 0px;
+}
+
+</style>
+</head>
+<body>
+<table>
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Start</th>
+<th>End</th>
+<th>Task Content</th>
+<th>Date</th>
+</tr>
+<TR><TD>1</TD>
+<TD>test title</TD>
+<TD>22:00</TD>
+<TD>23:00</TD>
+<TD>You do not have to enter the sqlite3 interactive environment. Instead, you could perform all commands at the shell prompt, which is ideal when running bash scripts and commands in an ssh string. Here is an example of how you would create a simple table from the command prompt: </TD>
+<TD>24/02/2010</TD>
+</TR>
+<TR><TD>2</TD>
+<TD>test title 2</TD>
+<TD>22:58</TD>
+<TD>22:58</TD>
+<TD>The AFTER specification in ..."insert_t1_timeEnter AFTER..." is necessary. Without the AFTER keyword, the rowid would not have been generated. This is a common source of errors with triggers, since AFTER is not the default, so it must be specified. If your trigger depends on newly-created data in any of the fields from the created row (which was the case in this example, since we need the rowid), the AFTER specification is needed. Otherwise, the trigger is a BEFORE trigger, and will fire before rowid or other pertinent data is entered into the field. </TD>
+<TD>24/02/2010</TD>
+</TR>
+<TR><TD>3</TD>
+<TD>test title</TD>
+<TD>23:28</TD>
+<TD>23:28</TD>
+<TD></TD>
+<TD>24/02/2010</TD>
+</TR>
+<TR><TD>4</TD>
+<TD>test title</TD>
+<TD>23:41</TD>
+<TD>23:41</TD>
+<TD></TD>
+<TD>24/02/2010</TD>
+</TR>
+<TR><TD>5</TD>
+<TD>test title</TD>
+<TD>23:41</TD>
+<TD>23:41</TD>
+<TD></TD>
+<TD>24/02/2010</TD>
+</TR>
+<TR><TD>6</TD>
+<TD>test title</TD>
+<TD>23:43</TD>
+<TD>23:43</TD>
+<TD></TD>
+<TD>24/02/2010</TD>
+</TR>
+<TR><TD>7</TD>
+<TD>test 3</TD>
+<TD>22:15</TD>
+<TD>22:15</TD>
+<TD>dsdsdas</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>8</TD>
+<TD>zzzzz</TD>
+<TD>22:15</TD>
+<TD>22:15</TD>
+<TD>zzzzz</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>9</TD>
+<TD>wwww</TD>
+<TD>22:17</TD>
+<TD>22:17</TD>
+<TD>wwwwwww</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>10</TD>
+<TD>wwwww</TD>
+<TD>22:17</TD>
+<TD>22:17</TD>
+<TD>wwwwwww</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>11</TD>
+<TD>ssss</TD>
+<TD>22:18</TD>
+<TD>22:18</TD>
+<TD>ssss</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>12</TD>
+<TD>yyyyyy</TD>
+<TD>22:18</TD>
+<TD>22:18</TD>
+<TD>yyyyy</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>13</TD>
+<TD>eeeee</TD>
+<TD>22:19</TD>
+<TD>22:19</TD>
+<TD>eeeeee</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>14</TD>
+<TD>qqqq</TD>
+<TD>22:19</TD>
+<TD>22:19</TD>
+<TD>qqqqq</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>15</TD>
+<TD>xxxxx</TD>
+<TD>22:22</TD>
+<TD>22:22</TD>
+<TD>xxxxxx</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>16</TD>
+<TD>xx</TD>
+<TD>22:22</TD>
+<TD>22:22</TD>
+<TD>xxxxxx</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>17</TD>
+<TD>dddd</TD>
+<TD>22:22</TD>
+<TD>22:22</TD>
+<TD>xxxxxx</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>18</TD>
+<TD>tryryryr</TD>
+<TD>22:22</TD>
+<TD>22:22</TD>
+<TD>xxxxxx</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>19</TD>
+<TD>xcxcxcxc</TD>
+<TD>22:25</TD>
+<TD>22:25</TD>
+<TD>cxcxcxcxcx</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>20</TD>
+<TD>gggg</TD>
+<TD>22:31</TD>
+<TD>22:31</TD>
+<TD>ggggg</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>21</TD>
+<TD>fdfdfd</TD>
+<TD>22:33</TD>
+<TD>22:33</TD>
+<TD>fdfdfd</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>22</TD>
+<TD>xvxvv</TD>
+<TD>22:35</TD>
+<TD>22:35</TD>
+<TD>xvvvvv</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>24</TD>
+<TD>WQWQWQ</TD>
+<TD>22:35</TD>
+<TD>22:35</TD>
+<TD>asaSA</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>25</TD>
+<TD>zxzxzxxzx</TD>
+<TD>22:35</TD>
+<TD>22:35</TD>
+<TD>asaSA</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>26</TD>
+<TD>xdxdxd</TD>
+<TD>22:41</TD>
+<TD>22:41</TD>
+<TD>xdxdxdxddxdx</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>29</TD>
+<TD>mnmnn</TD>
+<TD>22:55</TD>
+<TD>22:55</TD>
+<TD>nnnnnn</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>30</TD>
+<TD>fffffffffff</TD>
+<TD>22:55</TD>
+<TD>22:55</TD>
+<TD>nnnnnn</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>31</TD>
+<TD>skander</TD>
+<TD>22:55</TD>
+<TD>22:55</TD>
+<TD>nnnnnn</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>32</TD>
+<TD>ghghhgh</TD>
+<TD>22:58</TD>
+<TD>22:58</TD>
+<TD>hghgh</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>33</TD>
+<TD>zzzzzzzzzzzzzzzzzzz</TD>
+<TD>22:59</TD>
+<TD>22:59</TD>
+<TD></TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>34</TD>
+<TD>lalas</TD>
+<TD>23:04</TD>
+<TD>23:04</TD>
+<TD>lalas lalas</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>35</TD>
+<TD>fdfdfd</TD>
+<TD>23:04</TD>
+<TD>23:04</TD>
+<TD>lalas lalas</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>36</TD>
+<TD>jjjjjjjj</TD>
+<TD>23:14</TD>
+<TD>23:14</TD>
+<TD>jjjj</TD>
+<TD>02/03/2010</TD>
+</TR>
+<TR><TD>37</TD>
+<TD>jabouzi</TD>
+<TD>00:04</TD>
+<TD>00:04</TD>
+<TD>djkdhajkshdj hjdjksdhjkhdkjsadhjkd</TD>
+<TD>03/03/2010</TD>
+</TR>
+</table>
+
