@@ -115,6 +115,8 @@ private:
     int getMaghrib();
     int getIsha();
     int getMidNight(); 
+    int salatOrder;
+    QString salatTitle;
     
 private slots:
     void iconActivated(QSystemTrayIcon::ActivationReason);

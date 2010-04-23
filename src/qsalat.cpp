@@ -87,12 +87,12 @@ void Qsalat::init()
 /**    
  * timer initialization : this function is used to initialize the timer 
  */
-void Qsalat::initTimer()
+/*void Qsalat::initTimer()
 {
     timer = startTimer(1000);
     QTimerEvent * e = new QTimerEvent(timer);
     QCoreApplication::postEvent(this,e);    
-}
+}*/
 
 /**    
  * window position function : this function is used to adjust the main window to the center of the screen
@@ -384,7 +384,8 @@ int Qsalat::getFajr()
     int year = today.date().year();
     int month = today.date().month();
     int day = today.date().day();
-    QTime time = QTime::fromString(salatTimes[0], "HH:mm");
+    QString salat = salatTimes[0]+":00";
+    QTime time = QTime::fromString(salat, "HH:mm:ss");
     QDateTime salatTime(QDate(year, month, day), time);
     return today.secsTo(salatTime);
 }
@@ -395,7 +396,9 @@ int Qsalat::getDuhr()
     int year = today.date().year();
     int month = today.date().month();
     int day = today.date().day();
-    QTime time = QTime::fromString(salatTimes[2], "HH:mm");
+    QString salat = salatTimes[2]+":00";
+    QTime time = QTime::fromString(salat, "HH:mm:ss");
+    //QTime time = QTime::fromString("10:32:00", "HH:mm:ss");
     QDateTime salatTime(QDate(year, month, day), time);
     return today.secsTo(salatTime);
 }
@@ -406,7 +409,9 @@ int Qsalat::getAsr()
     int year = today.date().year();
     int month = today.date().month();
     int day = today.date().day();
-    QTime time = QTime::fromString(salatTimes[3], "HH:mm");
+    QString salat = salatTimes[3]+":00";
+    QTime time = QTime::fromString(salat, "HH:mm:ss");
+    //QTime time = QTime::fromString("10:18", "HH:mm");
     QDateTime salatTime(QDate(year, month, day), time);
     return today.secsTo(salatTime);
 }
@@ -417,7 +422,8 @@ int Qsalat::getMaghrib()
     int year = today.date().year();
     int month = today.date().month();
     int day = today.date().day();
-    QTime time = QTime::fromString(salatTimes[5], "HH:mm");
+    QString salat = salatTimes[5]+":00";
+    QTime time = QTime::fromString(salat, "HH:mm:ss");
     QDateTime salatTime(QDate(year, month, day), time);
     return today.secsTo(salatTime);
 }
@@ -428,7 +434,8 @@ int Qsalat::getIsha()
     int year = today.date().year();
     int month = today.date().month();
     int day = today.date().day();
-    QTime time = QTime::fromString(salatTimes[6], "HH:mm");
+    QString salat = salatTimes[6]+":00";
+    QTime time = QTime::fromString(salat, "HH:mm:ss");
     QDateTime salatTime(QDate(year, month, day), time);
     return today.secsTo(salatTime);
 }
@@ -439,27 +446,61 @@ int Qsalat::getMidNight()
     int year = today.date().year();
     int month = today.date().month();
     int day = today.date().day();
-    QTime time = QTime::fromString("24:00", "HH:mm");
+    QTime time = QTime::fromString("24:00:00", "HH:mm:ss");
     QDateTime salatTime(QDate(year, month, day), time);
     return today.secsTo(salatTime);
 } 
 
 QString Qsalat::getNextSalat()
 {
-   if (getFajr() > 0) timeOfSalat = salatTimes[0];
-   else if (getDuhr() > 0) timeOfSalat = salatTimes[2];
-   else if (getAsr() > 0) timeOfSalat = salatTimes[3];
-   else if (getMaghrib() > 0) timeOfSalat = salatTimes[5];
-   else if (getIsha() > 0) timeOfSalat =salatTimes[6];
-   else timeOfSalat = "24:00"; 
+   if (getFajr() > 0) 
+   {
+	   timeOfSalat = salatTimes[0]+":00";
+	   salatOrder = 0;
+	   salatTitle = "Fajr prayer "+ QString::fromUtf8(" صلاة الفجر");
+   }
+   else if (getDuhr() > 0)
+   {
+	    timeOfSalat = salatTimes[2]+":00";
+	    //timeOfSalat = "10:32:00";
+	    salatOrder = 1;
+	    salatTitle = QString::fromUtf8("Duhr prayér ") ; //+ QString::fromUtf8(" صلاة الظهر");
+   }
+   else if (getAsr() > 0) 
+   {
+	   timeOfSalat = salatTimes[3]+":00";
+	   //timeOfSalat = "16:45:00";
+	   salatOrder = 2;
+	   salatTitle = "Asr prayer " + QString::fromUtf8(" صلاة العصر");
+   }
+   else if (getMaghrib() > 0)
+   {
+	    timeOfSalat = salatTimes[5]+":00";
+	    //timeOfSalat = "10:14:00";
+	    salatOrder = 3;
+	    salatTitle = "Maghreb prayer " + QString::fromUtf8(" صلاة المغرب");
+   }
+   else if (getIsha() > 0)
+   {
+		timeOfSalat =salatTimes[6]+":00";
+		salatOrder = 4;
+		salatTitle = "Isha prayer " + QString::fromUtf8(" صلاة العشاء");
+   }
+   else 
+   {
+	   timeOfSalat = "24:00:00"; 
+	   salatOrder = 5;
+   }
    qDebug(timeOfSalat.toLatin1().data());
+   qDebug(QString::number(salatOrder).toLatin1().data());
+   qDebug(salatTitle.toLatin1().data());
    return timeOfSalat;
 }
 
 void Qsalat::startSalatAlarm()
 {
     QDateTime today = QDateTime::currentDateTime();
-    QTime time = QTime::fromString(getNextSalat(), "HH:mm");
+    QTime time = QTime::fromString(getNextSalat(), "HH:mm:ss");
     alarm.init();   
     alarm.setYear(today.date().year());
     alarm.setMonth(today.date().month());
@@ -662,9 +703,31 @@ void Qsalat::showPlayer()
     list << prayerAudio << duaAudio;
     setPlayer(list,"test");
 }
-
+ 
 void Qsalat::itsSalatTime()
 {
+	if (salatOrder > 4)
+	{
+		init();      
+		getSalats();
+		getHijri();
+		createTrayIcon();   
+	}
+	else if (salatOrder > 0)
+	{
+		audioList.clear();
+		audioList << prayerAudio;
+		if (playDua == "1") audioList << duaAudio;
+		setPlayer(audioList, salatTitle);  
+		 
+	}
+	else
+	{
+		audioList.clear();
+		audioList << fajrAudio;
+		if (playDua == "1") audioList << duaAudio;
+		setPlayer(audioList, salatTitle);   
+	}
     startSalatAlarm();
 }
 //
