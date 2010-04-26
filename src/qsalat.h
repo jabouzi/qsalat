@@ -95,9 +95,9 @@ private:
     int highlatitude;
     QString path;    
     QStringList audioList;
+    
     // private methods
-    void init();    
-    //void initTimer();     
+    void init();      
     void adjustWindow();    
     void getSalats();
     void getHijri();
@@ -105,7 +105,6 @@ private:
     void setVisible(bool);    
     void closeEvent(QCloseEvent *);
     void createActions();
-    void timerEvent(QTimerEvent *e);
     void setPlayer(QStringList,QString);
     QString getNextSalat();
     void startSalatAlarm();   
@@ -128,7 +127,6 @@ private slots:
     void showMonthly();
     void showYearly();
     void showHijridate();
-    void showPlayer();
     void _about();
     void _hide();
     void _showNormal();

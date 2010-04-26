@@ -44,7 +44,6 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     init();
     getSalats();
     getHijri();
-    //initTimer();
     createTrayIcon();
     startSalatAlarm();
 }
@@ -83,16 +82,6 @@ void Qsalat::init()
     QString strTime = time.toString("HH");    
     worldtime.setImage(worldtime.getImage(strTime.toInt(),timezone));    
 }
-
-/**    
- * timer initialization : this function is used to initialize the timer 
- */
-/*void Qsalat::initTimer()
-{
-    timer = startTimer(1000);
-    QTimerEvent * e = new QTimerEvent(timer);
-    QCoreApplication::postEvent(this,e);    
-}*/
 
 /**    
  * window position function : this function is used to adjust the main window to the center of the screen
@@ -226,158 +215,6 @@ void Qsalat::createActions()
     //connect(actionShow, SIGNAL(triggered()), this, SLOT(showPlayer()));    
 }
 
-/**    
- * timer function : check and play the athan and the config changes
- */
-void Qsalat::timerEvent(QTimerEvent *e)
-{
-    if (!e) return;
-      if (e->timerId() == timer){
-          if (DomParser::changed) {
-              location.init(1);
-              calculation.init(1);
-              init();            
-              audio.init(1);
-              hijridate.init();
-            getSalats();
-            getHijri();
-            createTrayIcon();
-            qibla.init();
-              DomParser::changed = false;
-        }        
-          QTime time = QTime::currentTime();           
-        QString strTime = time.toString("HH:mm:ss");
-        if ("00:00:00" == strTime){
-            init();      
-            getSalats();
-            getHijri();
-            createTrayIcon();    
-            worldtime.setImage(worldtime.getImage(0,timezone));
-           }
-           else if ("01:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(1,timezone));
-           }
-           else if ("02:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(2,timezone));
-           }
-           else if ("03:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(3,timezone));
-           }
-           else if ("04:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(4,timezone));
-           }
-           else if ("05:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(5,timezone));
-           }
-           else if ("06:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(6,timezone));
-           }
-           else if ("07:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(7,timezone));
-           }
-           else if ("08:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(8,timezone));
-           }
-           else if ("09:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(9,timezone));
-           }
-           else if ("10:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(10,timezone));
-           }
-           else if ("11:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(11,timezone));
-           }
-           else if ("12:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(12,timezone));
-           }
-           else if ("13:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(13,timezone));
-           }
-           else if ("14:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(14,timezone));
-           }
-           else if ("15:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(15,timezone));
-           }
-           else if ("16:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(16,timezone));
-           }
-           else if ("17:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(17,timezone));
-           }
-           else if ("18:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(18,timezone));
-           }
-           else if ("19:00:00" == strTime){            
-               worldtime.setImage(worldtime.getImage(19,timezone));
-           }
-           else if ("20:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(20,timezone));
-           }
-           else if ("21:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(21,timezone));
-           }
-           else if ("22:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(22,timezone));
-           }
-           else if ("23:00:00" == strTime){            
-            worldtime.setImage(worldtime.getImage(23,timezone));
-           }
-           if (playAthan == "1"){           
-               audioList.clear();            
-               if (label_fajr->text()+":00" == strTime){
-                   audioList.clear();
-                   audioList << fajrAudio;
-                   if (playDua == "1") audioList << duaAudio;
-                   QString salatTitle = "Fajr prayer "+ QString::fromUtf8(" صلاة الفجر");    
-                   setPlayer(audioList, salatTitle);                   
-              }
-               else if (label_duhr->text()+":00" == strTime){
-                   audioList.clear();
-                   audioList << prayerAudio;
-                   if (playDua == "1") audioList << duaAudio;
-                  QString salatTitle = "Duhr prayer " + QString::fromUtf8(" صلاة الظهر");
-                   setPlayer(audioList, salatTitle);                                
-              }
-               else if (label_asr->text()+":00" == strTime){
-                   audioList.clear();
-                   audioList << prayerAudio;
-                   if (playDua == "1") audioList << duaAudio;
-                   QString salatTitle = "Asr prayer " + QString::fromUtf8(" صلاة العصر");
-                   setPlayer(audioList, salatTitle);                   
-              }
-              else if (label_maghreb->text()+":00" == strTime){
-                  audioList.clear();
-                  audioList << prayerAudio;
-                   if (playDua == "1") audioList << duaAudio;
-                  QString salatTitle = "Maghreb prayer " + QString::fromUtf8(" صلاة المغرب");
-                   setPlayer(audioList, salatTitle);                                 
-              }
-              else if (label_isha->text()+":00" == strTime){
-                  audioList.clear();
-                  audioList << prayerAudio;
-                   if (playDua == "1") audioList << duaAudio;
-                  QString salatTitle = "Isha prayer " + QString::fromUtf8(" صلاة العشاء");
-                   setPlayer(audioList, salatTitle);                                  
-              }              
-              //else if ("21:18:00" == strTime){
-                  //audioList.clear();
-                  //audioList << fajrAudio;
-                   //if (playDua == "1") audioList << duaAudio;
-                  //QString salatTitle = "Isha prayer " + QString::fromUtf8(" صلاة العشاء");
-                   //setPlayer(audioList, salatTitle);                                  
-              //}              
-              //else if ("21:18:30" == strTime){
-                  //audioList.clear();
-                  //audioList << prayerAudio;
-                   //if (playDua == "1") audioList << duaAudio;
-                  //QString salatTitle = "Isha prayer " + QString::fromUtf8(" صلاة العشاء");
-                   //setPlayer(audioList, salatTitle);                                          
-              //}              
-          }            
-     }    
-}
-
 int Qsalat::getFajr()
 {
     QDateTime today = QDateTime::currentDateTime();
@@ -455,41 +292,42 @@ QString Qsalat::getNextSalat()
 {
    if (getFajr() > 0) 
    {
-	   timeOfSalat = salatTimes[0]+":00";
-	   salatOrder = 0;
-	   salatTitle = "Fajr prayer "+ QString::fromUtf8(" صلاة الفجر");
+       timeOfSalat = salatTimes[0]+":00";
+       salatOrder = 0;
+       salatTitle = "Fajr prayer ";
    }
    else if (getDuhr() > 0)
    {
-	    timeOfSalat = salatTimes[2]+":00";
-	    //timeOfSalat = "10:32:00";
-	    salatOrder = 1;
-	    salatTitle = QString::fromUtf8("Duhr prayér ") ; //+ QString::fromUtf8(" صلاة الظهر");
+        timeOfSalat = salatTimes[2]+":00";
+        //timeOfSalat = "10:32:00";
+        salatOrder = 1;
+        salatTitle = "Duhr prayer "; 
    }
    else if (getAsr() > 0) 
    {
-	   timeOfSalat = salatTimes[3]+":00";
-	   //timeOfSalat = "16:45:00";
-	   salatOrder = 2;
-	   salatTitle = "Asr prayer " + QString::fromUtf8(" صلاة العصر");
+       timeOfSalat = salatTimes[3]+":00";
+       //timeOfSalat = "16:45:00";
+       salatOrder = 2;
+       salatTitle = "Asr prayer ";
    }
    else if (getMaghrib() > 0)
    {
-	    timeOfSalat = salatTimes[5]+":00";
-	    //timeOfSalat = "10:14:00";
-	    salatOrder = 3;
-	    salatTitle = "Maghreb prayer " + QString::fromUtf8(" صلاة المغرب");
+        timeOfSalat = salatTimes[5]+":00";
+        //timeOfSalat = "10:14:00";
+        salatOrder = 3;
+        salatTitle = "Maghreb prayer ";
    }
    else if (getIsha() > 0)
    {
-		timeOfSalat =salatTimes[6]+":00";
-		salatOrder = 4;
-		salatTitle = "Isha prayer " + QString::fromUtf8(" صلاة العشاء");
+        timeOfSalat =salatTimes[6]+":00";
+        salatOrder = 4;
+        salatTitle = "Isha prayer ";
    }
    else 
    {
-	   timeOfSalat = "24:00:00"; 
-	   salatOrder = 5;
+        timeOfSalat = "00:00:00"; 
+        salatOrder = 5;
+        salatTitle = "Midnight ";
    }
    qDebug(timeOfSalat.toLatin1().data());
    qDebug(QString::number(salatOrder).toLatin1().data());
@@ -499,12 +337,16 @@ QString Qsalat::getNextSalat()
 
 void Qsalat::startSalatAlarm()
 {
+    QString salatTime = getNextSalat();    
     QDateTime today = QDateTime::currentDateTime();
-    QTime time = QTime::fromString(getNextSalat(), "HH:mm:ss");
+    QTime time = QTime::fromString(salatTime, "HH:mm:ss");
     alarm.init();   
     alarm.setYear(today.date().year());
     alarm.setMonth(today.date().month());
-    alarm.setDay(today.date().day());
+    if (5 == salatOrder)
+    {
+        alarm.setDay(today.date().day()+1);
+    }
     alarm.setHours(time.hour());
     alarm.setMinutes(time.minute());
     alarm.setSeconds(time.second());
@@ -695,39 +537,31 @@ void Qsalat::setPlayer(QStringList files, QString label)
     myProcess->start(program, files);
     
 }
-
-void Qsalat::showPlayer()
-{    
-    QStringList list;
-    list.clear();
-    list << prayerAudio << duaAudio;
-    setPlayer(list,"test");
-}
  
 void Qsalat::itsSalatTime()
 {
-	if (salatOrder > 4)
-	{
-		init();      
-		getSalats();
-		getHijri();
-		createTrayIcon();   
-	}
-	else if (salatOrder > 0)
-	{
-		audioList.clear();
-		audioList << prayerAudio;
-		if (playDua == "1") audioList << duaAudio;
-		setPlayer(audioList, salatTitle);  
-		 
-	}
-	else
-	{
-		audioList.clear();
-		audioList << fajrAudio;
-		if (playDua == "1") audioList << duaAudio;
-		setPlayer(audioList, salatTitle);   
-	}
+    if (salatOrder > 4)
+    {
+        init();      
+        getSalats();
+        getHijri();
+        createTrayIcon();   
+    }
+    else if (salatOrder > 0)
+    {
+        audioList.clear();
+        audioList << prayerAudio;
+        if (playDua == "1") audioList << duaAudio;
+        setPlayer(audioList, salatTitle);  
+         
+    }
+    else
+    {
+        audioList.clear();
+        audioList << fajrAudio;
+        if (playDua == "1") audioList << duaAudio;
+        setPlayer(audioList, salatTitle);   
+    }
     startSalatAlarm();
 }
 //

@@ -24,6 +24,10 @@ void Alarm::setAlarm()
 {
     QDateTime now = QDateTime::currentDateTime();
     QDateTime alarmTime(QDate(year, month, day), QTime(hours, minutes, seconds));
+    qDebug("Hour : %d ", hours);
+    qDebug("minutes : %d ", minutes);
+    qDebug("day : %d ", day);
+    qDebug("month : %d ", month);
     timeLeft = now.secsTo(alarmTime);
     if (timeLeft > 0)
     {

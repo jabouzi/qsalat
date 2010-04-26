@@ -34,36 +34,39 @@ class Qcalculation : public QDialog, public Ui::Calculation
 {
 Q_OBJECT
 public:
-	Qcalculation( QWidget * parent = 0, Qt::WFlags f = 0 );	
-	void init(int);
-	
+    Qcalculation( QWidget * parent = 0, Qt::WFlags f = 0 );    
+    void init(int);
+    
 protected:
-	void closeEvent(QCloseEvent *);
-	
-private slots:	
-	void save();
-	void cancel();
-	void apply();
-	
+    void closeEvent(QCloseEvent *);
+    
+private slots:    
+    void save();
+    void cancel();
+    void apply();
+    
 private:
-	 void setUI();	 
-	 void setActions();
-	 DomParser parser;
-	 QString file;
-	 QStringList list;	
-	 QStringList hList;
-	 QString path;
-	 Qpray *prayers;
-	 QDate date;
-	 QString *times;
-	 int calcMethod;
-	 int asrMethod;
-	 int duhrMinutes;
-	 int calcTime(QString,QString);
-	 int getDuhrMinutes();
-	 int setDuhrMinutes();
-	 int getAsrDiff(int,QString,QString);
-	 int asrMinutes;
+    void setUI();     
+    void setActions();
+    DomParser parser;
+    QString file;
+    QStringList list;    
+    QStringList hList;
+    QString path;
+    Qpray *prayers;
+    QDate date;
+    QString *times;
+    int calcMethod;
+    int asrMethod;
+    int duhrMinutes;
+    int calcTime(QString,QString);
+    int getDuhrMinutes();
+    int setDuhrMinutes();
+    int getAsrDiff(int,QString,QString);
+    int asrMinutes;
+    
+signals:
+    void calculationChanged();
 };
 
 #endif // __CALCULATION_H__
