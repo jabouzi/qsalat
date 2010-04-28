@@ -21,7 +21,7 @@
 **
 ***************************************************************************/
 
-#include "qsalat.h"
+#include "qsalat.h" 
 //
 Qsalat::Qsalat( QWidget * parent, Qt::WFlags f) 
     : QMainWindow(parent, f)
@@ -42,6 +42,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     createActions();
     setVisible(true);
     init();
+    initSalat();
     getSalats();
     getHijri();
     createTrayIcon();
@@ -52,13 +53,17 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
  * initialization function : this function is used to initialize and reinitialize the qsalat object 
  */
 void Qsalat::init()
-{
+{    
     date = QDate::currentDate();    
-    year = date.year();;
+    year = date.year();
     month = date.month();
-    day = date.day();        
+    day = date.day();
+}
+
+void Qsalat::initSalat()
+{
 #ifdef Q_WS_WIN
-    file = path+"data/qsalat.xml";
+    file = path+"data/qsalat.xml"; 
 #else 
     file = QDir::homePath ()+"/.qsalat/config/qsalat.xml";
 #endif    
@@ -106,7 +111,7 @@ void Qsalat::adjustWindow(){
 /**    
  * salat function : calculate the salats times for the current day
  */
-void Qsalat::getSalats(){            
+void Qsalat::getSalats(){        
     salatTimes = new QString[7];
     prayers->setCalcMethod(calcMethod);
     prayers->setAsrMethod(asrMethod);
@@ -119,13 +124,13 @@ void Qsalat::getSalats(){
     label_maghreb->setText(salatTimes[5]);
     label_isha->setText(salatTimes[6]);
     label_shourouk->setText(salatTimes[1]);
-    label_location->setText(city+", "+country);    
+    label_location->setText(city+", "+country); 
 }
 
 /**    
  * hijri function : calculate the hijri date for the current day
  */
-void Qsalat::getHijri(){
+void Qsalat::getHijri(){    
     QString *dates = new QString[4];
     dates = hijri->isToString(year, month, day,hijriDays);
     label_hijri->setText(QString::fromUtf8((dates[0]+" "+dates[2]+" "+dates[3]).toLatin1().data()));
@@ -223,7 +228,7 @@ int Qsalat::getFajr()
     int day = today.date().day();
     QString salat = salatTimes[0]+":00";
     QTime time = QTime::fromString(salat, "HH:mm:ss");
-    QDateTime salatTime(QDate(year, month, day), time);
+    QDateTime salatTime(QDate(year, month, day), time);    
     return today.secsTo(salatTime);
 }
 
@@ -235,7 +240,6 @@ int Qsalat::getDuhr()
     int day = today.date().day();
     QString salat = salatTimes[2]+":00";
     QTime time = QTime::fromString(salat, "HH:mm:ss");
-    //QTime time = QTime::fromString("10:32:00", "HH:mm:ss");
     QDateTime salatTime(QDate(year, month, day), time);
     return today.secsTo(salatTime);
 }
@@ -248,7 +252,6 @@ int Qsalat::getAsr()
     int day = today.date().day();
     QString salat = salatTimes[3]+":00";
     QTime time = QTime::fromString(salat, "HH:mm:ss");
-    //QTime time = QTime::fromString("10:18", "HH:mm");
     QDateTime salatTime(QDate(year, month, day), time);
     return today.secsTo(salatTime);
 }
@@ -299,21 +302,18 @@ QString Qsalat::getNextSalat()
    else if (getDuhr() > 0)
    {
         timeOfSalat = salatTimes[2]+":00";
-        //timeOfSalat = "10:32:00";
         salatOrder = 1;
         salatTitle = "Duhr prayer "; 
    }
    else if (getAsr() > 0) 
    {
        timeOfSalat = salatTimes[3]+":00";
-       //timeOfSalat = "16:45:00";
        salatOrder = 2;
        salatTitle = "Asr prayer ";
    }
    else if (getMaghrib() > 0)
    {
         timeOfSalat = salatTimes[5]+":00";
-        //timeOfSalat = "10:14:00";
         salatOrder = 3;
         salatTitle = "Maghreb prayer ";
    }
@@ -325,7 +325,7 @@ QString Qsalat::getNextSalat()
    }
    else 
    {
-        timeOfSalat = "00:00:00"; 
+        timeOfSalat = "00:00:01"; 
         salatOrder = 5;
         salatTitle = "Midnight ";
    }

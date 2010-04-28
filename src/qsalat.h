@@ -98,6 +98,7 @@ private:
     
     // private methods
     void init();      
+    void initSalat();
     void adjustWindow();    
     void getSalats();
     void getHijri();

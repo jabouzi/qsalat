@@ -16,7 +16,7 @@ class Database : public QObject
         void setTable(QString); 
         void where(QString); 
         void selectAll();
-        void select(QString);
+        QString select(QString);
         void insert(QString); 
         void update(QString, QString);
         QString getStringResult(QString);

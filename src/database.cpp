@@ -43,20 +43,16 @@ void Database::selectAll()
     query.exec("SELECT * FROM "+table+" "+sqlWhere);
 }
 
-void Database::select(QString select)
+QString Database::select(QString select)
 {   
     prepareDB();
     QSqlQuery query;
-    //where("");
-    QString sql = "SELECT "+select+" FROM "+this->table+" "+sqlWhere;
+    QString sql = "SELECT "+select+" FROM "+table+" "+sqlWhere;
     qDebug(sql.toLatin1().data());
     query.exec(sql);
     int field = query.record().indexOf(select);
     query.next();
-    query.value(field).toString();
-    qDebug(query.value(field).toString().toLatin1().data());       
-    
-    //dbQuery = query;
+    return query.value(field).toString();
 }
 
 void Database::insert(QString sqlQuery)
@@ -72,7 +68,6 @@ void Database::update(QString field, QString value)
     QSqlQuery query;
     QString sql = "UPDATE "+table+" SET "+field+" = '"+value+"' "+sqlWhere;
     query.exec(sql);
-    qDebug(sql.toLatin1().data());
 }
 
 QString Database::getStringResult(QString filedName)
