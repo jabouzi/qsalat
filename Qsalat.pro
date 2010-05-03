@@ -10,6 +10,7 @@ CONFIG += qt warn_on release
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
+QRC_DIR = build
 FORMS = ui/salat.ui \
  ui/qibla.ui \
  ui/hijri.ui \
