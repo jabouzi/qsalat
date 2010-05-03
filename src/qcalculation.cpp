@@ -44,15 +44,9 @@ Qcalculation::Qcalculation( QWidget * parent, Qt::WFlags f)
 
 void Qcalculation::initDB()
 {
-    qDebug("ICI1");
-    Database *db;
-    qDebug("ICI2");
     db = Database::getInstance();
-    qDebug("ICI3");
     db->setDatabaseName("data/qsalat.db");
-    qDebug("ICI4");
     db->setDatabase();   
-    qDebug("ICI5"); 
     db->setTable("calculation");
     //int calcMethod = db->select("method").toInt();
     //qDebug("AAA :  %d ",calcMethod);
@@ -75,19 +69,12 @@ void Qcalculation::init(QString * times)
     file = QDir::homePath ()+"/.qsalat/config/qsalat.xml";
 #endif    
     parser.readFile(file);
-    qDebug("ICI00");
-    //db->setTable("calculation");
     //calcMethod = parser.getElement(2,0).toInt();
     //asrMethod = parser.getElement(2,2).toInt();
     QString temp = "";
-    qDebug("ICI11");
     db->prepareDB();
-    temp = db->select("method");
-    calcMethod = temp.toInt();
-    qDebug("ICI22");
-    temp = db->select("asr");
-    asrMethod = temp.toInt();
-    qDebug("IC33");
+    calcMethod = db->select("method").toInt();
+    asrMethod = db->select("asr").toInt();
     qDebug(" Methodes : %d - %d ",calcMethod, asrMethod);
     //prayers->setAsrMethod(asrMethod);        
     //times = prayers->getDatePrayerTimes(date.year(),date.month(),date.day(),parser.getElement(0,0).toDouble(),parser.getElement(0,1).toDouble(),parser.getElement(0,4).toDouble());    
@@ -142,7 +129,8 @@ void Qcalculation::apply()
     db->update("method",QString::number(calcList->currentIndex()));
     qDebug("ICI55");
     db->update("asr",QString::number(asrChecked));
-    if (asrMethod != asrChecked){
+    qDebug("ICI66");
+    /*if (asrMethod != asrChecked){
         //prayers->setAsrMethod(asrChecked);
         QString *times_ = new QString[7];
         //times_ = prayers->getDatePrayerTimes(date.year(),date.month(),date.day(),parser.getElement(0,0).toDouble(),parser.getElement(0,1).toDouble(),parser.getElement(0,4).toDouble());    
@@ -150,8 +138,9 @@ void Qcalculation::apply()
     }
     else{
         asrMinutes = 0;
-    }
+    }*/
     //int temp = setDuhrMinutes() + asrMinutes;
+    asrMinutes = 0;
     parser.changeElement(QString::number(duhrBox->value()),2,1);
     parser.saveData(file);
     DomParser::changed = true;

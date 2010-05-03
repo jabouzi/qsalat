@@ -61,21 +61,13 @@ void Database::selectAll()
 
 QString Database::select(QString select)
 {   
-    qDebug("111111");
-    //prepareDB();
-    qDebug("22222222222");
+    prepareDB();
     QSqlQuery query;
-    qDebug("333333");
     QString sql = "SELECT "+select+" FROM "+table+" "+sqlWhere;
-    qDebug("44444");
     qDebug("%s",sql.toLatin1().data());
-    qDebug("55555");
     query.exec(sql);
-    qDebug("66666");
     int field = query.record().indexOf(select);
-    //qDebug("7777");
     query.next();
-    //qDebug("88888");
     return query.value(field).toString();
 }
 
