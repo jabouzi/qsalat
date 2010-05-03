@@ -329,9 +329,9 @@ QString Qsalat::getNextSalat()
         salatOrder = 5;
         salatTitle = "Midnight ";
    }
-   qDebug(timeOfSalat.toLatin1().data());
-   qDebug(QString::number(salatOrder).toLatin1().data());
-   qDebug(salatTitle.toLatin1().data());
+   qDebug("%s",timeOfSalat.toLatin1().data());
+   qDebug("%s",QString::number(salatOrder).toLatin1().data());
+   qDebug("%s",salatTitle.toLatin1().data());
    return timeOfSalat;
 }
 
@@ -413,7 +413,8 @@ void Qsalat::showAudio(){
 /**    
  * show calculation window function : show the salat calculation parameters window
  */
-void Qsalat::showCalculation(){        
+void Qsalat::showCalculation(){   
+    calculation.init(salatTimes);
     if (calculation.isHidden()){        
         calculation.show();
     }    

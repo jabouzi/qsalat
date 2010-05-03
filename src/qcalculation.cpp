@@ -38,9 +38,24 @@ Qcalculation::Qcalculation( QWidget * parent, Qt::WFlags f)
     setUI();    
     setActions();
     date = QDate::currentDate();
-    prayers = new Qpray();
-    times = new QString[7];
-    init(0);        
+    times = new QString[7]; 
+    initDB();
+}
+
+void Qcalculation::initDB()
+{
+    qDebug("ICI1");
+    Database *db;
+    qDebug("ICI2");
+    db = Database::getInstance();
+    qDebug("ICI3");
+    db->setDatabaseName("data/qsalat.db");
+    qDebug("ICI4");
+    db->setDatabase();   
+    qDebug("ICI5"); 
+    db->setTable("calculation");
+    //int calcMethod = db->select("method").toInt();
+    //qDebug("AAA :  %d ",calcMethod);
 }
 
 //
@@ -51,7 +66,7 @@ void Qcalculation::closeEvent(QCloseEvent *event)
 }
 
 //
-void Qcalculation::init(int flag = 0)
+void Qcalculation::init(QString * times)
 {
     
 #ifdef Q_WS_WIN
@@ -60,14 +75,26 @@ void Qcalculation::init(int flag = 0)
     file = QDir::homePath ()+"/.qsalat/config/qsalat.xml";
 #endif    
     parser.readFile(file);
-    calcMethod = parser.getElement(2,0).toInt();
-    asrMethod = parser.getElement(2,2).toInt();
-    prayers->setAsrMethod(asrMethod);        
-    times = prayers->getDatePrayerTimes(date.year(),date.month(),date.day(),parser.getElement(0,0).toDouble(),parser.getElement(0,1).toDouble(),parser.getElement(0,4).toDouble());    
+    qDebug("ICI00");
+    //db->setTable("calculation");
+    //calcMethod = parser.getElement(2,0).toInt();
+    //asrMethod = parser.getElement(2,2).toInt();
+    QString temp = "";
+    qDebug("ICI11");
+    db->prepareDB();
+    temp = db->select("method");
+    calcMethod = temp.toInt();
+    qDebug("ICI22");
+    temp = db->select("asr");
+    asrMethod = temp.toInt();
+    qDebug("IC33");
+    qDebug(" Methodes : %d - %d ",calcMethod, asrMethod);
+    //prayers->setAsrMethod(asrMethod);        
+    //times = prayers->getDatePrayerTimes(date.year(),date.month(),date.day(),parser.getElement(0,0).toDouble(),parser.getElement(0,1).toDouble(),parser.getElement(0,4).toDouble());    
     duhrBox->setMaximum(calcTime(times[2],times[3]));    
     label_12->setText(" Max "+QString::number(duhrBox->maximum())+" min (5 min before asr)");
 
-    if (0 == flag){
+    //if (0 == flag){
         list << "Ithna Ashari"<<"University of Islamic Sciences, Karachi"<<"Islamic Society of North America (ISNA)"
             <<"Muslim World League (MWL)"<<"Umm al-Qura, Makkah"<<"Egyptian General Authority of Survey"<<"Institute of Geophysics, University of Tehran";
              //<<"Custom settings";    
@@ -80,10 +107,10 @@ void Qcalculation::init(int flag = 0)
         if (parser.getElement(2,2).toInt() == 0) shafiiButton->setChecked(true);
         else hanafiButton->setChecked(true);
         hijriBox->setValue(parser.getElement(2,3).toInt());            
-    }
-    else{
-        apply();
-    }
+    //}
+   //else{
+    //    apply();
+   // }
 }
 
 //
@@ -111,10 +138,14 @@ void Qcalculation::apply()
     parser.changeElement(QString::number(asrChecked),2,2);
     parser.changeElement(QString::number(hijriBox->value()),2,3);
     parser.changeElement(QString::number(highList->currentIndex()),2,4);
+    qDebug("ICI44");
+    db->update("method",QString::number(calcList->currentIndex()));
+    qDebug("ICI55");
+    db->update("asr",QString::number(asrChecked));
     if (asrMethod != asrChecked){
-        prayers->setAsrMethod(asrChecked);
+        //prayers->setAsrMethod(asrChecked);
         QString *times_ = new QString[7];
-        times_ = prayers->getDatePrayerTimes(date.year(),date.month(),date.day(),parser.getElement(0,0).toDouble(),parser.getElement(0,1).toDouble(),parser.getElement(0,4).toDouble());    
+        //times_ = prayers->getDatePrayerTimes(date.year(),date.month(),date.day(),parser.getElement(0,0).toDouble(),parser.getElement(0,1).toDouble(),parser.getElement(0,4).toDouble());    
         asrMinutes = calcTime(times[3],times_[3]);        
     }
     else{

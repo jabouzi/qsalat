@@ -1,9 +1,30 @@
 #include "database.h"
 
-Database::Database(QObject* parent) :
-    QObject(parent)
+bool Database::instanceFlag = false;
+Database* Database::single = NULL;
+
+Database::Database() 
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
+}
+
+Database* Database::getInstance()
+{
+    if(! instanceFlag)
+    {
+        single = new Database();
+        instanceFlag = true;
+        return single;       
+    }
+    else
+    {
+        return single;
+    }
+}
+
+Database::~Database()
+{
+    db.close();
 }
 
 void Database::setDatabaseName(QString dbName)
@@ -19,11 +40,6 @@ void Database::setDatabase()
 void Database::prepareDB()
 {
     db.open();    
-} 
-
-void Database::quit()
-{
-    db.close();    
 } 
 
 void Database::setTable(QString tableName)
@@ -45,13 +61,21 @@ void Database::selectAll()
 
 QString Database::select(QString select)
 {   
-    prepareDB();
+    qDebug("111111");
+    //prepareDB();
+    qDebug("22222222222");
     QSqlQuery query;
+    qDebug("333333");
     QString sql = "SELECT "+select+" FROM "+table+" "+sqlWhere;
-    qDebug(sql.toLatin1().data());
+    qDebug("44444");
+    qDebug("%s",sql.toLatin1().data());
+    qDebug("55555");
     query.exec(sql);
+    qDebug("66666");
     int field = query.record().indexOf(select);
+    //qDebug("7777");
     query.next();
+    //qDebug("88888");
     return query.value(field).toString();
 }
 
@@ -65,8 +89,9 @@ void Database::insert(QString sqlQuery)
 void Database::update(QString field, QString value)
 {
     prepareDB();
-    QSqlQuery query;
+    QSqlQuery query;    
     QString sql = "UPDATE "+table+" SET "+field+" = '"+value+"' "+sqlWhere;
+    qDebug("%s",sql.toLatin1().data());
     query.exec(sql);
 }
 

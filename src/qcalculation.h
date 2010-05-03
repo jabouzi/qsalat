@@ -2,8 +2,8 @@
 ** Qsalat project V1.0
 ** qcalculation.h
 **
-** Copyright (C) 2008 Skander Jabouzi (Skander Software Solutions).
-** Contact: skander@skanderjabouzi.com or jabouzi@gmail.com
+** Copyright (C) 2008 - 2010 Skander Jabouzi (Skander Software Solutions).
+** Contact: skander@skanderjabouzi.com
 **
 ** This file is part of the Qsalat open source software.
 **
@@ -28,14 +28,15 @@
 #include <QString>
 #include "ui_calculation.h"
 #include "domparser.h"
-#include "qpray.h"
+#include "database.h"
+
 
 class Qcalculation : public QDialog, public Ui::Calculation
 {
 Q_OBJECT
 public:
     Qcalculation( QWidget * parent = 0, Qt::WFlags f = 0 );    
-    void init(int);
+    void init(QString *);
     
 protected:
     void closeEvent(QCloseEvent *);
@@ -45,25 +46,27 @@ private slots:
     void cancel();
     void apply();
     
-private:
-    void setUI();     
-    void setActions();
+private:    
     DomParser parser;
     QString file;
     QStringList list;    
     QStringList hList;
     QString path;
-    Qpray *prayers;
     QDate date;
     QString *times;
     int calcMethod;
     int asrMethod;
     int duhrMinutes;
+    int asrMinutes;
+    Database *db;
+    
+    void initDB();
+    void setUI();     
+    void setActions();
     int calcTime(QString,QString);
     int getDuhrMinutes();
     int setDuhrMinutes();
     int getAsrDiff(int,QString,QString);
-    int asrMinutes;
     
 signals:
     void calculationChanged();

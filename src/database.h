@@ -8,8 +8,9 @@
 class Database : public QObject
 {  
   Q_OBJECT     
-    public:
-        Database(QObject* = 0); 
+    public:        
+        static Database* getInstance();
+        ~Database();
         void setDatabaseName(QString);
         void setDatabase();
         void prepareDB(); 
@@ -24,15 +25,17 @@ class Database : public QObject
         void sqlQuery(QString);
         bool tableExists(QString);
         void createTable(QString);
-        void quit();
     
     private:    
+        static bool instanceFlag;
+        static Database *single;          
         QSqlDatabase db;
         QString database;
         QString table;
         QString sqlWhere;
         QStringList result;  
-        QSqlQuery dbQuery;      
+        QSqlQuery dbQuery;             
+        Database(); 
 };
 
 #endif
