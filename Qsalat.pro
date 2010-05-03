@@ -53,7 +53,7 @@ SOURCES = src/qsalat.cpp \
  src/domparser.cpp \
  src/alarm.cpp \
  src/database.cpp
-RESOURCES += salat.qrc qibla.qrc worldtime.qrc
-TRANSLATIONS = qsalat_en.ts qsalat_fr.ts
+RESOURCES += qrc/salat.qrc qrc/qibla.qrc qrc/worldtime.qrc
+TRANSLATIONS = en/qsalat_en.ts fr/qsalat_fr.ts
 CODECFORTR = UTF-8
-RC_FILE = qsalat.rc
+RC_FILE = rc/qsalat.rc
