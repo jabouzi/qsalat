@@ -27,28 +27,35 @@
 #include <QDialog>
 #include "ui_qibla.h"
 #include "domparser.h"
+#include "database.h"
 //
 class Qqibla : public QDialog, public Ui::Qibla
 {
 Q_OBJECT
 public:
-	Qqibla( QWidget * parent = 0, Qt::WFlags f = 0 );	
-	void paintEvent(QPaintEvent *);
-	void init();
-	double getQibla();
-	
+    Qqibla( QWidget * parent = 0, Qt::WFlags f = 0 );    
+    void paintEvent(QPaintEvent *);
+    void init();
+    double getQibla();
+    
 protected:
-	void closeEvent(QCloseEvent *);
-	
+    void closeEvent(QCloseEvent *);
+    
 private slots:
+    
 
 private:
-	DomParser parser;
-	QString file;
-	double latitude;
-	double longitude;	
-	double qiblaAngle;
-	QString path;
+    DomParser parser;
+    QString file;
+    double latitude;
+    double longitude;    
+    double qiblaAngle;
+    QString path;
+    Database *db;
+    void initDB();
+    
+signals:
+    void qiblaChanged();
 };
 #endif
 

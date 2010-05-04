@@ -42,12 +42,14 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     createActions();
     setVisible(true);
     init();
-    initSalat();
+    initDB();
+    initLocation();
+    initAudio();
+    initCalculation();
     getSalats();
     getHijri();
     createTrayIcon();
     startSalatAlarm();
-    initDB();
 }
 
 /**    
@@ -68,30 +70,35 @@ void Qsalat::initDB()
     db->setDatabase();   
 }
 
-void Qsalat::initSalat()
+void Qsalat::initLocation()
+{ 
+    db->setTable("location");
+    latitude = db->select("latitude").toDouble();
+    longitude = db->select("longitude").toDouble(); 
+    city = db->select("city");
+    country = db->select("country");
+    timezone = db->select("timezone").toDouble();
+}
+
+void Qsalat::initAudio()
 {
-#ifdef Q_WS_WIN
-    file = path+"data/qsalat.xml"; 
-#else 
-    file = QDir::homePath ()+"/.qsalat/config/qsalat.xml";
-#endif    
-    
-    parser.readFile(file);
-    latitude = parser.getElement(0,0).toDouble();
-    longitude = parser.getElement(0,1).toDouble();    
-    city = parser.getElement(0,2);
-    country = parser.getElement(0,3);
-    timezone = parser.getElement(0,4).toDouble();
-    prayerAudio = parser.getElement(1,0);
-    fajrAudio = parser.getElement(1,1);
-    duaAudio = parser.getElement(1,2);    
-    playAthan = parser.getElement(1,3);
-    playDua = parser.getElement(1,4);
-    calcMethod = parser.getElement(2,0).toInt();
-    duhrMinutes = parser.getElement(2,1).toInt();
-    asrMethod = parser.getElement(2,2).toInt();    
-    hijriDays = parser.getElement(2,3).toInt();
-    highlatitude = parser.getElement(2,4).toInt();
+    db->setTable("audio");
+    prayerAudio = db->select("athan");
+    fajrAudio = db->select("fajr");
+    duaAudio = db->select("dua"); 
+    playAthan = db->select("playAthan").toInt(); 
+    playDua = db->select("playDua").toInt(); 
+}
+
+void Qsalat::initCalculation()
+{
+    db->setTable("calculation");
+    calcMethod = db->select("method").toInt();
+    fajrMinutes = db->select("fajr").toInt();
+    duhrMinutes = db->select("duhr").toInt();
+    asrMethod = db->select("asr").toInt();    
+    hijriDays = db->select("hijri").toInt();
+    highlatitude = db->select("higherLat").toInt();
     QTime time = QTime::currentTime();           
     QString strTime = time.toString("HH");    
     worldtime.setImage(worldtime.getImage(strTime.toInt(),timezone));    
@@ -122,6 +129,7 @@ void Qsalat::adjustWindow(){
  */
 void Qsalat::getSalats(){        
     salatTimes = new QString[7];
+    qDebug(" %d %d %d %d ",calcMethod,asrMethod,duhrMinutes,highlatitude);
     prayers->setCalcMethod(calcMethod);
     prayers->setAsrMethod(asrMethod);
     prayers->setDhuhrMinutes(duhrMinutes);
@@ -205,6 +213,8 @@ void Qsalat::closeEvent(QCloseEvent *event)
 void Qsalat::createActions()
 {
     connect(&alarm, SIGNAL(itsTime()), this, SLOT(itsSalatTime()));
+    connect(&calculation, SIGNAL(calculationChanged()), this, SLOT(updateCalculation()));
+    connect(&location, SIGNAL(locationChanged()), this, SLOT(updateLocation()));
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason))); 
     minimizeAction = new QAction(tr("Mi&nimize"), this);
     connect(minimizeAction, SIGNAL(triggered()), this, SLOT(_hide()));
@@ -573,5 +583,20 @@ void Qsalat::itsSalatTime()
         setPlayer(audioList, salatTitle);   
     }
     startSalatAlarm();
+}
+
+void Qsalat::updateCalculation()
+{
+    qDebug("CALC");
+    initCalculation();    
+    getSalats();
+}
+
+void Qsalat::updateLocation()
+{
+    qDebug("LOCA");
+    initLocation();    
+    getSalats();
+    qibla.init();
 }
 //

@@ -37,32 +37,33 @@ Qlocation::Qlocation( QWidget * parent, Qt::WFlags f)
     setUI();
     manager = new QNetworkAccessManager(this);
     setActions();            
-    init(0);
+    initDB();
+    init();
 }
 
 //
-void Qlocation::init(int flag = 0)
+void Qlocation::init()
 {
-#ifdef Q_WS_WIN
-    file = path+"data/qsalat.xml";
-#else 
-    file = QDir::homePath ()+"/.qsalat/config/qsalat.xml";
-#endif    
-    parser.readFile(file);    
-    if (0 == flag){
-        latitude = parser.getElement(0,0).toFloat();
-        longitude = parser.getElement(0,1).toFloat();
-        country = parser.getElement(0,2);
-        city = parser.getElement(0,3);
-        timezone = parser.getElement(0,4).toInt();    
-        loadCoordinates(latitude,longitude);
-        latLineEdit->setText(QString::number(latitude));
-        lngLineEdit->setText(QString::number(longitude));
-        countryLineEdit->setText(country);
-        cityLineEdit->setText(city);
-        timezoneLineEdit->setText(QString::number(timezone));
-        locationLineEdit->setText("");            
-    }
+    latitude = db->select("latitude").toFloat();
+    longitude = db->select("longitude").toFloat(); 
+    city = db->select("city");
+    country = db->select("country");
+    timezone = db->select("timezone").toFloat();
+    loadCoordinates(latitude,longitude);
+    latLineEdit->setText(QString::number(latitude));
+    lngLineEdit->setText(QString::number(longitude));
+    countryLineEdit->setText(country);
+    cityLineEdit->setText(city);
+    timezoneLineEdit->setText(QString::number(timezone));
+    locationLineEdit->setText("");
+}
+
+void Qlocation::initDB()
+{
+    db = Database::getInstance();
+    db->setDatabaseName("data/qsalat.db");
+    db->setDatabase();   
+    db->setTable("location");
 }
 
 //search location with webkit and google maps
@@ -160,13 +161,12 @@ void Qlocation::setUI()
 //
 void Qlocation::apply()
 {
-    parser.changeElement(latLineEdit->text(),0,0);
-    parser.changeElement(lngLineEdit->text(),0,1);
-    parser.changeElement(countryLineEdit->text(),0,2);    
-    parser.changeElement(cityLineEdit->text(),0,3);
-    parser.changeElement(timezoneLineEdit->text(),0,4);
-    parser.saveData(file);
-    DomParser::changed = true;     
+    db->update("latitude",latLineEdit->text());
+    db->update("longitude",lngLineEdit->text()); 
+    db->update("city",cityLineEdit->text());
+    db->update("country",countryLineEdit->text());
+    db->update("timezone",timezoneLineEdit->text());
+    emit(locationChanged());
 }
 
 //

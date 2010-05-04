@@ -37,13 +37,14 @@
 #include "ui_location.h"
 #include "domparser.h"
 #include "qcalculation.h"
+#include "database.h"
 //
 class Qlocation : public QDialog, public Ui::Location
 {
 Q_OBJECT
 public:
     Qlocation( QWidget * parent = 0, Qt::WFlags f = 0 );
-    void init(int);
+    void init();
     
 private slots:
     void loadAddress(QString);
@@ -71,10 +72,16 @@ private:
     QString country;
     QString city;
     int timezone;
-    int pendingRequests;    
+    int pendingRequests;   
+    QString path;
+    Database *db;
+    
     void setActions();
     void setUI();    
-    QString path;
+    void initDB();
+    
+signals:
+    void locationChanged();
 };
 #endif
 

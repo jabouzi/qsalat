@@ -90,8 +90,9 @@ private:
     QString playAthan;
     QString playDua;
     int calcMethod;
-    int asrMethod;
+    int fajrMinutes;
     int duhrMinutes;
+    int asrMethod;
     int hijriDays;
     int highlatitude;
     QString path;    
@@ -100,7 +101,9 @@ private:
     
     // private methods
     void init();      
-    void initSalat();
+    void initLocation();
+    void initAudio();
+    void initCalculation();
     void adjustWindow();    
     void getSalats();
     void getHijri();
@@ -135,6 +138,8 @@ private slots:
     void _hide();
     void _showNormal();
     void itsSalatTime();
+    void updateCalculation();
+    void updateLocation();
 };
 #endif
 

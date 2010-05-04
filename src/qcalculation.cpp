@@ -123,11 +123,8 @@ void Qcalculation::apply()
     parser.changeElement(QString::number(asrChecked),2,2);
     parser.changeElement(QString::number(hijriBox->value()),2,3);
     parser.changeElement(QString::number(highList->currentIndex()),2,4);
-    qDebug("ICI44");
     db->update("method",QString::number(calcList->currentIndex()));
-    qDebug("ICI55");
     db->update("asr",QString::number(asrChecked));
-    qDebug("ICI66");
     /*if (asrMethod != asrChecked){
         //prayers->setAsrMethod(asrChecked);
         QString *times_ = new QString[7];
