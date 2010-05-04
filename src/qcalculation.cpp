@@ -117,6 +117,7 @@ void Qcalculation::setActions(){
 //
 void Qcalculation::apply()
 {
+	db->setTable("calculation");
     int asrChecked = 0;
     parser.changeElement(QString::number(calcList->currentIndex()),2,0);
     if (hanafiButton->isChecked()) asrChecked = 1;

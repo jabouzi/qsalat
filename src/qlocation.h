@@ -48,7 +48,7 @@ public:
     
 private slots:
     void loadAddress(QString);
-    void loadCoordinates(float,float);
+    void loadCoordinates(double,double);
     void showItem();
     void updateLatLng();
     void apply();
@@ -67,8 +67,8 @@ private:
     QList<QPointF> coordinates;
     DomParser parser;
     QString file;    
-    float latitude;
-    float longitude;
+    double latitude;
+    double longitude;
     QString country;
     QString city;
     int timezone;

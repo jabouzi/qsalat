@@ -53,12 +53,10 @@ void Qqibla::initDB()
 // 
 void Qqibla::init()
 {
+	qDebug("Qibla");
     latitude = db->select("latitude").toDouble();
     longitude = db->select("longitude").toDouble(); 
     qiblaAngle = getQibla();        
-    //emit(qiblaChanged());
-    //QPaintEvent* p = new QPaintEvent();
-    //paintEvent(*p);
 }
 
 //Qibla calculation

@@ -33,7 +33,6 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
 #endif
     if (path.data()[path.size() - 1] != '/') path += "/";
     setupUi(this);
-    //setWindowFlags(Qt::WindowMinimizeButtonHint);
     adjustWindow();
     prayers = new Qpray();
     hijri = new Qhijri();
@@ -77,7 +76,7 @@ void Qsalat::initLocation()
     longitude = db->select("longitude").toDouble(); 
     city = db->select("city");
     country = db->select("country");
-    timezone = db->select("timezone").toDouble();
+    timezone = db->select("timezone").toInt();
 }
 
 void Qsalat::initAudio()
@@ -99,9 +98,9 @@ void Qsalat::initCalculation()
     asrMethod = db->select("asr").toInt();    
     hijriDays = db->select("hijri").toInt();
     highlatitude = db->select("higherLat").toInt();
-    QTime time = QTime::currentTime();           
-    QString strTime = time.toString("HH");    
-    worldtime.setImage(worldtime.getImage(strTime.toInt(),timezone));    
+    //QTime time = QTime::currentTime();           
+    //QString strTime = time.toString("HH");    
+    //worldtime.setImage(worldtime.getImage(strTime.toInt(),timezone));    
 }
 
 /**    
@@ -129,7 +128,8 @@ void Qsalat::adjustWindow(){
  */
 void Qsalat::getSalats(){        
     salatTimes = new QString[7];
-    qDebug(" %d %d %d %d ",calcMethod,asrMethod,duhrMinutes,highlatitude);
+    qDebug(" CALC : %d %d %d %d ",calcMethod,asrMethod,duhrMinutes,highlatitude);
+    qDebug(" LOCA : %f %f %f ",latitude,longitude,timezone);
     prayers->setCalcMethod(calcMethod);
     prayers->setAsrMethod(asrMethod);
     prayers->setDhuhrMinutes(duhrMinutes);

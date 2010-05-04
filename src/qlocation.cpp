@@ -41,14 +41,22 @@ Qlocation::Qlocation( QWidget * parent, Qt::WFlags f)
     init();
 }
 
+void Qlocation::initDB()
+{
+    db = Database::getInstance();
+    db->setDatabaseName("data/qsalat.db");
+    db->setDatabase();   
+    db->setTable("location");
+}
+
 //
 void Qlocation::init()
 {
-    latitude = db->select("latitude").toFloat();
-    longitude = db->select("longitude").toFloat(); 
+    latitude = db->select("latitude").toDouble();
+    longitude = db->select("longitude").toDouble(); 
     city = db->select("city");
     country = db->select("country");
-    timezone = db->select("timezone").toFloat();
+    timezone = db->select("timezone").toInt();
     loadCoordinates(latitude,longitude);
     latLineEdit->setText(QString::number(latitude));
     lngLineEdit->setText(QString::number(longitude));
@@ -56,14 +64,6 @@ void Qlocation::init()
     cityLineEdit->setText(city);
     timezoneLineEdit->setText(QString::number(timezone));
     locationLineEdit->setText("");
-}
-
-void Qlocation::initDB()
-{
-    db = Database::getInstance();
-    db->setDatabaseName("data/qsalat.db");
-    db->setDatabase();   
-    db->setTable("location");
 }
 
 //search location with webkit and google maps
@@ -82,7 +82,7 @@ void Qlocation::loadAddress(QString adr)
 }
 
 //get geocodes from web service
-void Qlocation::loadCoordinates(float lat, float lng)
+void Qlocation::loadCoordinates(double lat, double lng)
 {
    QStringList scriptStr;   
    scriptStr << QString("http://www.skanderjabouzi.com/qpray/?adr=0&lat=%1&lng=%2")                        
@@ -161,6 +161,7 @@ void Qlocation::setUI()
 //
 void Qlocation::apply()
 {
+	db->setTable("location");
     db->update("latitude",latLineEdit->text());
     db->update("longitude",lngLineEdit->text()); 
     db->update("city",cityLineEdit->text());
