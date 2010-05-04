@@ -38,7 +38,6 @@ Qqibla::Qqibla( QWidget * parent, Qt::WFlags f)
     setWindowIcon(QIcon(path+"images/mecque.png"));
     initDB();
     init();
-    //connect(this, SIGNAL(qiblaChanged()), this, SLOT(paintEvent(QPaintEvent *))); 
 }
 
 
@@ -53,10 +52,11 @@ void Qqibla::initDB()
 // 
 void Qqibla::init()
 {
-	qDebug("Qibla");
     latitude = db->select("latitude").toDouble();
     longitude = db->select("longitude").toDouble(); 
     qiblaAngle = getQibla();        
+    update();
+    qDebug("Angle : %f", qiblaAngle);
 }
 
 //Qibla calculation

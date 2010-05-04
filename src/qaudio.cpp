@@ -35,37 +35,39 @@ Qaudio::Qaudio( QWidget * parent, Qt::WFlags f) : QDialog(parent, f )
 	setupUi(this);
 	setUI();
 	setActions();
-	init(0);
+	initDB();
+	init();
+}
+
+void Qaudio::initDB()
+{
+    db = Database::getInstance();
+    db->setDatabaseName("data/qsalat.db");
+    db->setDatabase();   
+    db->setTable("audio");
 }
 
 //
-void Qaudio::init(int flag = 0)
+void Qaudio::init()
 {
-#ifdef Q_WS_WIN
-	file = path+"data/qsalat.xml";
-#else 
-	file = QDir::homePath ()+"/.qsalat/config/qsalat.xml";
-#endif	
-	parser.readFile(file);	
-	if (0 == flag){
-		prayerLineEdit->setText(parser.getElement(1,0));
-	    fajrLineEdit->setText(parser.getElement(1,1));
-	    duaLineEdit->setText(parser.getElement(1,2));
-	    if (0 == parser.getElement(1,3).toInt()) {
-			salatCheckBox->setChecked(false); 
-			duaCheckBox->setChecked(false);
-			duaCheckBox->setEnabled(false);		
+	prayerLineEdit->setText(db->select("athan"));
+    fajrLineEdit->setText(db->select("fajr"));
+    duaLineEdit->setText(db->select("dua"));
+    if (0 == db->select("playAthan").toInt()) {
+		salatCheckBox->setChecked(false); 
+		duaCheckBox->setChecked(false);
+		duaCheckBox->setEnabled(false);		
+	}
+	else{
+		salatCheckBox->setChecked(true);
+		if (0 == db->select("playDua").toInt()) {
+			duaCheckBox->setChecked(false); 		
 		}
 		else{
-			salatCheckBox->setChecked(true);
-			if (0 == parser.getElement(1,4).toInt()) {
-				duaCheckBox->setChecked(false); 		
-			}
-			else{
-				duaCheckBox->setChecked(true);
-			}	
-		}				
-	}    
+			duaCheckBox->setChecked(true);
+		}	
+	}				
+  
 }
 
 //
@@ -133,17 +135,17 @@ void Qaudio::preview()
 //
 void Qaudio::apply()
 {
+	db->setTable("audio");
 	int prayerChecked = 0;
 	int duaChecked = 0;
-	parser.changeElement(prayerLineEdit->text(),1,0);
-	parser.changeElement(fajrLineEdit->text(),1,1);
-	parser.changeElement(duaLineEdit->text(),1,2);
+	db->update("athan",prayerLineEdit->text());
+	db->update("fajr",fajrLineEdit->text());
+	db->update("dua",duaLineEdit->text());
 	if (salatCheckBox->isChecked()) prayerChecked = 1;
 	if (duaCheckBox->isChecked()) duaChecked = 1;
-	parser.changeElement(QString::number(prayerChecked),1,3);	
-	parser.changeElement(QString::number(duaChecked),1,4);
-	parser.saveData(file);
-	DomParser::changed = true; 
+	db->update("playAthan",QString::number(prayerChecked));
+	db->update("playDua",QString::number(duaChecked));
+	emit(audioChanged());
 }
 
 //

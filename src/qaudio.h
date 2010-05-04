@@ -29,13 +29,14 @@
 #include <QProcess>
 #include "ui_audio.h"
 #include "domparser.h"
+#include "database.h"
 
 class Qaudio : public QDialog, public Ui::Audio
 {
 Q_OBJECT
 public:
 	Qaudio( QWidget * parent = 0, Qt::WFlags f = 0 );
-	void init(int);
+	void init();
 	
 public slots:
 
@@ -51,6 +52,8 @@ private:
 		
 	void setActions();
     void setUI();
+    Database *db;
+    void initDB();
 
 
 private slots:
@@ -62,6 +65,9 @@ private slots:
 	void apply();
 	void checkChanged();
 	void preview();	
+    
+signals:
+    void audioChanged();
 	
 };
 

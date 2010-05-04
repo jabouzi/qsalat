@@ -33,16 +33,13 @@ class Qqibla : public QDialog, public Ui::Qibla
 {
 Q_OBJECT
 public:
-    Qqibla( QWidget * parent = 0, Qt::WFlags f = 0 );    
-    void paintEvent(QPaintEvent *);
+    Qqibla( QWidget * parent = 0, Qt::WFlags f = 0 );       
     void init();
     double getQibla();
     
 protected:
     void closeEvent(QCloseEvent *);
-    
-private slots:
-    
+    void paintEvent(QPaintEvent *);   
 
 private:
     DomParser parser;
@@ -53,9 +50,6 @@ private:
     QString path;
     Database *db;
     void initDB();
-    
-signals:
-    void qiblaChanged();
 };
 #endif
 

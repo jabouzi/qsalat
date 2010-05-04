@@ -87,8 +87,8 @@ private:
     QString prayerAudio;
     QString fajrAudio;
     QString duaAudio;
-    QString playAthan;
-    QString playDua;
+    int playAthan;
+    int playDua;
     int calcMethod;
     int fajrMinutes;
     int duhrMinutes;
@@ -140,6 +140,7 @@ private slots:
     void itsSalatTime();
     void updateCalculation();
     void updateLocation();
+    void updateAudio();
 };
 #endif
 

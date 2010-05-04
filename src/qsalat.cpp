@@ -87,6 +87,7 @@ void Qsalat::initAudio()
     duaAudio = db->select("dua"); 
     playAthan = db->select("playAthan").toInt(); 
     playDua = db->select("playDua").toInt(); 
+    qDebug("aud : %d %d ",playAthan,playDua);
 }
 
 void Qsalat::initCalculation()
@@ -98,9 +99,9 @@ void Qsalat::initCalculation()
     asrMethod = db->select("asr").toInt();    
     hijriDays = db->select("hijri").toInt();
     highlatitude = db->select("higherLat").toInt();
-    //QTime time = QTime::currentTime();           
-    //QString strTime = time.toString("HH");    
-    //worldtime.setImage(worldtime.getImage(strTime.toInt(),timezone));    
+    QTime time = QTime::currentTime();           
+    QString strTime = time.toString("HH");    
+    worldtime.setImage(worldtime.getImage(strTime.toInt(),timezone));    
 }
 
 /**    
@@ -215,6 +216,7 @@ void Qsalat::createActions()
     connect(&alarm, SIGNAL(itsTime()), this, SLOT(itsSalatTime()));
     connect(&calculation, SIGNAL(calculationChanged()), this, SLOT(updateCalculation()));
     connect(&location, SIGNAL(locationChanged()), this, SLOT(updateLocation()));
+    connect(&audio, SIGNAL(audioChanged()), this, SLOT(updateAudio()));
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason))); 
     minimizeAction = new QAction(tr("Mi&nimize"), this);
     connect(minimizeAction, SIGNAL(triggered()), this, SLOT(_hide()));
@@ -551,10 +553,13 @@ void Qsalat::_showNormal()
  */
 void Qsalat::setPlayer(QStringList files, QString label)
 {
-    files << label;
-    QString program = "salatPlayer";
-    QProcess *myProcess = new QProcess(this);
-    myProcess->start(program, files);
+	if (playAthan == 1)
+	{
+		files << label;
+		QString program = "salatPlayer";
+		QProcess *myProcess = new QProcess(this);
+		myProcess->start(program, files);
+	}
     
 }
  
@@ -571,7 +576,7 @@ void Qsalat::itsSalatTime()
     {
         audioList.clear();
         audioList << prayerAudio;
-        if (playDua == "1") audioList << duaAudio;
+        if (playDua == 1) audioList << duaAudio;
         setPlayer(audioList, salatTitle);  
          
     }
@@ -579,7 +584,7 @@ void Qsalat::itsSalatTime()
     {
         audioList.clear();
         audioList << fajrAudio;
-        if (playDua == "1") audioList << duaAudio;
+        if (playDua == 1) audioList << duaAudio;
         setPlayer(audioList, salatTitle);   
     }
     startSalatAlarm();
@@ -598,5 +603,11 @@ void Qsalat::updateLocation()
     initLocation();    
     getSalats();
     qibla.init();
+}
+
+void Qsalat::updateAudio()
+{
+    qDebug("AUD");
+    initAudio(); 
 }
 //
