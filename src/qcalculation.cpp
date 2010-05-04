@@ -48,8 +48,6 @@ void Qcalculation::initDB()
     db->setDatabaseName("data/qsalat.db");
     db->setDatabase();   
     db->setTable("calculation");
-    //int calcMethod = db->select("method").toInt();
-    //qDebug("AAA :  %d ",calcMethod);
 }
 
 //
@@ -144,13 +142,13 @@ void Qcalculation::apply()
     parser.changeElement(QString::number(duhrBox->value()),2,1);
     parser.saveData(file);
     DomParser::changed = true;
+    emit(calculationChanged());
 }
 
 //
 void Qcalculation::save()
 {
-    apply();
-    emit(calculationChanged());
+    apply();    
     close();
 }
 

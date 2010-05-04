@@ -43,6 +43,7 @@
 #include "qhijridate.h"
 #include "domparser.h"
 #include "alarm.h"
+#include "database.h"
 
 //
 class Qsalat : public QMainWindow, public Ui::Salat
@@ -95,6 +96,7 @@ private:
     int highlatitude;
     QString path;    
     QStringList audioList;
+    Database *db;
     
     // private methods
     void init();      
@@ -117,6 +119,7 @@ private:
     int getMidNight(); 
     int salatOrder;
     QString salatTitle;
+    void initDB();
     
 private slots:
     void iconActivated(QSystemTrayIcon::ActivationReason);

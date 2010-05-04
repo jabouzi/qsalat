@@ -47,6 +47,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     getHijri();
     createTrayIcon();
     startSalatAlarm();
+    initDB();
 }
 
 /**    
@@ -60,6 +61,13 @@ void Qsalat::init()
     day = date.day();
 }
 
+void Qsalat::initDB()
+{
+    db = Database::getInstance();
+    db->setDatabaseName("data/qsalat.db");
+    db->setDatabase();   
+}
+
 void Qsalat::initSalat()
 {
 #ifdef Q_WS_WIN
@@ -67,6 +75,7 @@ void Qsalat::initSalat()
 #else 
     file = QDir::homePath ()+"/.qsalat/config/qsalat.xml";
 #endif    
+    
     parser.readFile(file);
     latitude = parser.getElement(0,0).toDouble();
     longitude = parser.getElement(0,1).toDouble();    
