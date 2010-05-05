@@ -553,13 +553,13 @@ void Qsalat::_showNormal()
  */
 void Qsalat::setPlayer(QStringList files, QString label)
 {
-	if (playAthan == 1)
-	{
-		files << label;
-		QString program = "salatPlayer";
-		QProcess *myProcess = new QProcess(this);
-		myProcess->start(program, files);
-	}
+    if (playAthan == 1)
+    {
+        files << label;
+        QString program = "salatPlayer";
+        QProcess *myProcess = new QProcess(this);
+        myProcess->start(program, files);
+    }
     
 }
  

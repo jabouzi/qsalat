@@ -36,6 +36,8 @@ class Database : public QObject
         QStringList result;  
         QSqlQuery dbQuery;             
         Database(); 
+        bool tablesExists();
+        void createTables();
 };
 
 #endif

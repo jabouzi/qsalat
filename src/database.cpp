@@ -30,6 +30,10 @@ Database::~Database()
 void Database::setDatabaseName(QString dbName)
 {
     database = dbName;
+    if (!tablesExists())
+    {
+        createTables();
+    }
 }
 
 void Database::setDatabase()
@@ -120,4 +124,20 @@ void Database::sqlQuery(QString sqlQuery)
     prepareDB(); 
     QSqlQuery query;
     query.exec(sqlQuery);
+}
+
+bool Database::tablesExists()
+{
+    QStringList tables = db.tables(QSql::Tables);
+    return (tables.indexOf("audio") >= 0 and tables.indexOf("calculation") >= 0 and tables.indexOf("location") >= 0);
+}
+
+void Database::createTables()
+{
+    qDebug("Create tables");
+    QStringList args;
+    args << "../data/qsalat.db" << "<" << "../qsalat.sql";
+    QString program = "sqlite3";
+    QProcess *myProcess = new QProcess(this);
+    myProcess->start(program, args);
 }
