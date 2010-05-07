@@ -26,8 +26,6 @@
 //
 #include <QDialog>
 #include "ui_qibla.h"
-#include "domparser.h"
-#include "database.h"
 //
 class Qqibla : public QDialog, public Ui::Qibla
 {
@@ -35,6 +33,8 @@ Q_OBJECT
 public:
     Qqibla( QWidget * parent = 0, Qt::WFlags f = 0 );       
     void init();
+    void setLatitude(double);
+    void setLongitude(double);
     double getQibla();
     
 protected:
@@ -42,14 +42,10 @@ protected:
     void paintEvent(QPaintEvent *);   
 
 private:
-    DomParser parser;
-    QString file;
     double latitude;
     double longitude;    
     double qiblaAngle;
     QString path;
-    Database *db;
-    void initDB();
 };
 #endif
 

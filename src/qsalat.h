@@ -125,6 +125,8 @@ private:
     void initDB();
     void initLocationObject();
     void initCalculationObject();
+    void initAudioObject();
+    void initQiblaObject();
     
 private slots:
     void iconActivated(QSystemTrayIcon::ActivationReason);

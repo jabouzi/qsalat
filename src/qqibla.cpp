@@ -36,27 +36,23 @@ Qqibla::Qqibla( QWidget * parent, Qt::WFlags f)
     if (path.data()[path.size() - 1] != '/') path += "/";
     setupUi(this);
     setWindowIcon(QIcon(path+"images/mecque.png"));
-    initDB();
     init();
 }
 
-
-void Qqibla::initDB()
+void Qqibla::setLatitude(double latde)
 {
-    db = Database::getInstance();
-    db->setDatabaseName("data/qsalat.db");
-    db->setDatabase();   
-    db->setTable("location");
+    latitude = latde;
+}
+void Qqibla::setLongitude(double lngtde)
+{
+    longitude = lngtde;
 }
 
 // 
 void Qqibla::init()
 {
-    latitude = db->select("latitude").toDouble();
-    longitude = db->select("longitude").toDouble(); 
     qiblaAngle = getQibla();        
     update();
-    qDebug("Angle : %f", qiblaAngle);
 }
 
 //Qibla calculation

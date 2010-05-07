@@ -25,52 +25,46 @@
 
 //
 Qhijridate::Qhijridate( QWidget * parent, Qt::WFlags f) 
-	: QDialog(parent, f)
+    : QDialog(parent, f)
 {
 #ifdef Q_WS_WIN
-	path = QCoreApplication::applicationDirPath ();
+    path = QCoreApplication::applicationDirPath ();
 #else 
-	path = "/usr/share/qsalat/";
+    path = "/usr/share/qsalat/";
 #endif
-	if (path.data()[path.size() - 1] != '/') path += "/";
-	setupUi(this);	
-	setUI();
-	setActions();	
-	hijri = new Qhijri();
-	init();	
+    if (path.data()[path.size() - 1] != '/') path += "/";
+    setupUi(this);    
+    setUI();
+    setActions();    
+    hijri = new Qhijri();
+    init();    
 }
 
 //
 void Qhijridate::closeEvent(QCloseEvent *event)
 {
-	hide();
-	event->ignore();
+    hide();
+    event->ignore();
 }
 
 //
-void Qhijridate::init(){
-#ifdef Q_WS_WIN
-	file = path+"data/qsalat.xml";
-#else 
-	file = QDir::homePath ()+"/.qsalat/config/qsalat.xml";
-#endif	
-	parser.readFile(file);	
-	QDate date = QDate::currentDate(); 
-	QString *dates = new QString[4];
-	dates = hijri->isToString(date.year(), date.month(), date.day(),parser.getElement(2,3).toInt());	
-	hyearBox->setValue(dates[3].toInt());
-	jyearBox->setValue(date.year());
+void Qhijridate::init(){ 
+    QDate date = QDate::currentDate(); 
+    QString *dates = new QString[4];
+    dates = hijri->isToString(date.year(), date.month(), date.day(),0);    
+    hyearBox->setValue(dates[3].toInt());
+    jyearBox->setValue(date.year());
 }
 
 //
 void Qhijridate::setUI()
 {
-	setWindowIcon(QIcon(path+"images/mecque.png"));
-	convertButton->setIcon(style()->standardIcon(QStyle::SP_DialogApplyButton));
-	glist << "January"<<"February"<<"March"<<"April"<<"May"<<"June"<<"July"<<"August"<<"September"<<"October"<<"November"<<"December";	
-	jmonthBox->addItems(glist);
-	hlist <<"Muharram"<<"Safar"<<"Rabi-al Awwal"<<"Rabi-al Thani"<<"Jumada al-Ula"<<"Jumada al-Thani"<<"Rajab"<<"Sha\'ban"<<"Ramadhan"<<"Shawwal"<<"Dhul Qa\'dah"<<"Dhul Hijjah";
-	hmonthBox->addItems(hlist);
+    setWindowIcon(QIcon(path+"images/mecque.png"));
+    convertButton->setIcon(style()->standardIcon(QStyle::SP_DialogApplyButton));
+    glist << "January"<<"February"<<"March"<<"April"<<"May"<<"June"<<"July"<<"August"<<"September"<<"October"<<"November"<<"December";    
+    jmonthBox->addItems(glist);
+    hlist <<"Muharram"<<"Safar"<<"Rabi-al Awwal"<<"Rabi-al Thani"<<"Jumada al-Ula"<<"Jumada al-Thani"<<"Rajab"<<"Sha\'ban"<<"Ramadhan"<<"Shawwal"<<"Dhul Qa\'dah"<<"Dhul Hijjah";
+    hmonthBox->addItems(hlist);
 }
 
 //
@@ -83,37 +77,37 @@ void Qhijridate::setActions(){
 //convert from/to hijri and georgian calendars
 void Qhijridate::convert()
 {
-	QString *dates = new QString[4];
-	QString text = "";	
-	if (hijriButton->isChecked()){
-		dates = hijri->chrToString(hyearBox->value(),hmonthBox->currentIndex()+1,hdayBox->value(),parser.getElement(2,3).toInt());
-		text = dates[0]+" "+dates[1]+" "+dates[2];	
-		QMessageBox::information(this, tr("My Application"),text,QMessageBox::Ok);
-	}
-	else{
-		dates = hijri->isToString(jyearBox->value(),jmonthBox->currentIndex()+1,jdayBox->value(),parser.getElement(2,3).toInt());
-		text = dates[0]+" "+dates[1]+" "+dates[3];	
-		QMessageBox::information(this, tr("My Application"),text,QMessageBox::Ok);
-	}
+    QString *dates = new QString[4];
+    QString text = "";    
+    if (hijriButton->isChecked()){
+        dates = hijri->chrToString(hyearBox->value(),hmonthBox->currentIndex()+1,hdayBox->value(),0);
+        text = dates[0]+" "+dates[1]+" "+dates[2];    
+        QMessageBox::information(this, tr("My Application"),text,QMessageBox::Ok);
+    }
+    else{
+        dates = hijri->isToString(jyearBox->value(),jmonthBox->currentIndex()+1,jdayBox->value(),0);
+        text = dates[0]+" "+dates[1]+" "+dates[3];    
+        QMessageBox::information(this, tr("My Application"),text,QMessageBox::Ok);
+    }
 }
 
 //
 void Qhijridate::update()
 {
-	if (hijriButton->isChecked()){
-		hyearBox->setEnabled(true);
-		hmonthBox->setEnabled(true);
-		hdayBox->setEnabled(true);
-		jyearBox->setEnabled(false);
-		jmonthBox->setEnabled(false);
-		jdayBox->setEnabled(false);
-	}
-	else{
-		jyearBox->setEnabled(true);
-		jmonthBox->setEnabled(true);
-		jdayBox->setEnabled(true);
-		hyearBox->setEnabled(false);
-		hmonthBox->setEnabled(false);
-		hdayBox->setEnabled(false);
-	}
+    if (hijriButton->isChecked()){
+        hyearBox->setEnabled(true);
+        hmonthBox->setEnabled(true);
+        hdayBox->setEnabled(true);
+        jyearBox->setEnabled(false);
+        jmonthBox->setEnabled(false);
+        jdayBox->setEnabled(false);
+    }
+    else{
+        jyearBox->setEnabled(true);
+        jmonthBox->setEnabled(true);
+        jdayBox->setEnabled(true);
+        hyearBox->setEnabled(false);
+        hmonthBox->setEnabled(false);
+        hdayBox->setEnabled(false);
+    }
 }

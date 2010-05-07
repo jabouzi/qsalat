@@ -44,7 +44,9 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     initDB();
     initLocation();
     initLocationObject();
+    initQiblaObject();
     initAudio();
+    initAudioObject();
     initCalculation();
     initCalculationObject();
     getSalats();
@@ -91,6 +93,14 @@ void Qsalat::initLocationObject()
     location.init();
 }
 
+void Qsalat::initQiblaObject()
+{
+    qibla.setLatitude(latitude);
+    qibla.setLongitude(longitude);
+    qibla.init();
+}
+
+
 void Qsalat::initAudio()
 {
     db->setTable("audio");
@@ -100,6 +110,16 @@ void Qsalat::initAudio()
     playAthan = db->select("playAthan").toInt(); 
     playDua = db->select("playDua").toInt(); 
     qDebug("aud : %d %d ",playAthan,playDua);
+}
+
+void Qsalat::initAudioObject()
+{
+    audio.setSalatAudio(prayerAudio);
+    audio.setFajrAudio(fajrAudio);
+    audio.setDuaAudio(duaAudio);
+    audio.setPlayAthan(playAthan);
+    audio.setPlayDua(playDua);
+    audio.init();
 }
 
 void Qsalat::initCalculation()
@@ -618,7 +638,7 @@ void Qsalat::updateLocation()
     qDebug("LOCA");
     initLocation();    
     getSalats();
-    qibla.init();
+    initQiblaObject();
 }
 
 void Qsalat::updateAudio()

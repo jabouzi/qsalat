@@ -136,9 +136,9 @@ void Qcalculation::apply()
     }*/
     //int temp = setDuhrMinutes() + asrMinutes;
     asrMinutes = 0;
-    parser.changeElement(QString::number(duhrBox->value()),2,1);
-    parser.saveData(file);
-    DomParser::changed = true;
+    //parser.changeElement(QString::number(duhrBox->value()),2,1);
+    //parser.saveData(file);
+    //DomParser::changed = true;
     emit(calculationChanged());
 }
 

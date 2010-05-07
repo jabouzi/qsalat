@@ -44,6 +44,7 @@ void Qworldtime::init(int timezone)
     QString strTime = time.toString("HH");   
     if (WorldTime != strTime)
     {
+        qDebug("%s",getImage(strTime.toInt(),timezone).toLatin1().data());
         setImage(getImage(strTime.toInt(),timezone));
     }
 }

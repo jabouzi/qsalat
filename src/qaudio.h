@@ -35,40 +35,47 @@ class Qaudio : public QDialog, public Ui::Audio
 {
 Q_OBJECT
 public:
-	Qaudio( QWidget * parent = 0, Qt::WFlags f = 0 );
-	void init();
-	
-public slots:
+    Qaudio( QWidget * parent = 0, Qt::WFlags f = 0 );
+    void init();
+    void setSalatAudio(QString);
+    void setFajrAudio(QString);
+    void setDuaAudio(QString);
+    void setPlayAthan(int);
+    void setPlayDua(int);
+    
 
 protected:
-	void closeEvent(QCloseEvent *);
-
-signals:
-
+    void closeEvent(QCloseEvent *);
+    
 private:
     DomParser parser;
-	QString file;	
-	QString path;
-		
-	void setActions();
+    QString file;    
+    QString path;
+    QString salatAudio;
+    QString fajrAudio;
+    QString duaAudio;
+    int playAthan;
+    int playDua;
+        
+    void setActions();
     void setUI();
     Database *db;
     void initDB();
 
 
 private slots:
-	void loadPrayer();
-	void loadFajr();
-	void loadDua();
-	void save();
-	void cancel();
-	void apply();
-	void checkChanged();
-	void preview();	
+    void loadPrayer();
+    void loadFajr();
+    void loadDua();
+    void save();
+    void cancel();
+    void apply();
+    void checkChanged();
+    void preview();    
     
 signals:
     void audioChanged();
-	
+    
 };
 
 #endif // __QAUDIO_H__
