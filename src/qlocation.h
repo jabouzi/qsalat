@@ -45,6 +45,11 @@ Q_OBJECT
 public:
     Qlocation( QWidget * parent = 0, Qt::WFlags f = 0 );
     void init();
+    void setLatitude(double);
+    void setLongitude(double);
+    void setCountry(QString);
+    void setCity(QString);
+    void setTimezone(int);
     
 private slots:
     void loadAddress(QString);

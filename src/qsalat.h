@@ -123,6 +123,8 @@ private:
     int salatOrder;
     QString salatTitle;
     void initDB();
+    void initLocationObject();
+    void initCalculationObject();
     
 private slots:
     void iconActivated(QSystemTrayIcon::ActivationReason);

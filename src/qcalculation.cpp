@@ -50,6 +50,16 @@ void Qcalculation::initDB()
     db->setTable("calculation");
 }
 
+void Qcalculation::setCalcMethod(int method)
+{    
+    calcMethod = method;
+}
+
+void Qcalculation::setAsrMethod(int method)
+{
+    asrMethod = method;
+}
+
 //
 void Qcalculation::closeEvent(QCloseEvent *event)
 {
@@ -58,40 +68,27 @@ void Qcalculation::closeEvent(QCloseEvent *event)
 }
 
 //
-void Qcalculation::init(QString * times)
-{
-    
-#ifdef Q_WS_WIN
-    file = path+"data/qsalat.xml";
-#else 
-    file = QDir::homePath ()+"/.qsalat/config/qsalat.xml";
-#endif    
-    parser.readFile(file);
-    //calcMethod = parser.getElement(2,0).toInt();
-    //asrMethod = parser.getElement(2,2).toInt();
-    QString temp = "";
-    db->prepareDB();
-    calcMethod = db->select("method").toInt();
-    asrMethod = db->select("asr").toInt();
-    qDebug(" Methodes : %d - %d ",calcMethod, asrMethod);
+void Qcalculation::init()
+{    
+    QString temp = "";    
     //prayers->setAsrMethod(asrMethod);        
     //times = prayers->getDatePrayerTimes(date.year(),date.month(),date.day(),parser.getElement(0,0).toDouble(),parser.getElement(0,1).toDouble(),parser.getElement(0,4).toDouble());    
-    duhrBox->setMaximum(calcTime(times[2],times[3]));    
-    label_12->setText(" Max "+QString::number(duhrBox->maximum())+" min (5 min before asr)");
+    //duhrBox->setMaximum(calcTime(times[2],times[3]));    
+    //label_12->setText(" Max "+QString::number(duhrBox->maximum())+" min (5 min before asr)");
 
     //if (0 == flag){
         list << "Ithna Ashari"<<"University of Islamic Sciences, Karachi"<<"Islamic Society of North America (ISNA)"
             <<"Muslim World League (MWL)"<<"Umm al-Qura, Makkah"<<"Egyptian General Authority of Survey"<<"Institute of Geophysics, University of Tehran";
              //<<"Custom settings";    
         calcList->addItems(list);
-        calcList->setCurrentIndex(parser.getElement(2,0).toInt());
+        calcList->setCurrentIndex(calcMethod);
         hList << "No adjustment"<<"middle of night"<<"1/7th of night"<<"angle/60th of night";
         highList->addItems(hList);
-        highList->setCurrentIndex(parser.getElement(2,4).toInt());
-        duhrBox->setValue(parser.getElement(2,1).toInt());
-        if (parser.getElement(2,2).toInt() == 0) shafiiButton->setChecked(true);
+        //highList->setCurrentIndex(parser.getElement(2,4).toInt());
+        //duhrBox->setValue(parser.getElement(2,1).toInt());
+        if (asrMethod == 0) shafiiButton->setChecked(true);
         else hanafiButton->setChecked(true);
-        hijriBox->setValue(parser.getElement(2,3).toInt());            
+        //hijriBox->setValue(parser.getElement(2,3).toInt());            
     //}
    //else{
     //    apply();
@@ -117,13 +114,15 @@ void Qcalculation::setActions(){
 //
 void Qcalculation::apply()
 {
-	db->setTable("calculation");
     int asrChecked = 0;
-    parser.changeElement(QString::number(calcList->currentIndex()),2,0);
     if (hanafiButton->isChecked()) asrChecked = 1;
-    parser.changeElement(QString::number(asrChecked),2,2);
-    parser.changeElement(QString::number(hijriBox->value()),2,3);
-    parser.changeElement(QString::number(highList->currentIndex()),2,4);
+    calcMethod = calcList->currentIndex();
+    asrMethod = asrChecked;
+    db->setTable("calculation");   
+    //~ parser.changeElement(QString::number(calcList->currentIndex()),2,0);   
+    //~ parser.changeElement(QString::number(asrChecked),2,2);
+    //~ parser.changeElement(QString::number(hijriBox->value()),2,3);
+    //~ parser.changeElement(QString::number(highList->currentIndex()),2,4);
     db->update("method",QString::number(calcList->currentIndex()));
     db->update("asr",QString::number(asrChecked));
     /*if (asrMethod != asrChecked){

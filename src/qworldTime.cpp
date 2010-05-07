@@ -25,45 +25,56 @@
 
 //
 Qworldtime::Qworldtime( QWidget * parent, Qt::WFlags f) 
-	: QDialog(parent, f)
+    : QDialog(parent, f)
 {
 #ifdef Q_WS_WIN
-	path = QCoreApplication::applicationDirPath ();
+    path = QCoreApplication::applicationDirPath ();
 #else 
-	path = "/usr/share/qsalat/";
+    path = "/usr/share/qsalat/";
 #endif
-	if (path.data()[path.size() - 1] != '/') path += "/";
-	setupUi(this);	
-	setUI();	
+    if (path.data()[path.size() - 1] != '/') path += "/";
+    setupUi(this);    
+    setUI();        
+}
+
+void Qworldtime::init(int timezone)
+{
+    qDebug("W-T");
+    QTime time = QTime::currentTime();    
+    QString strTime = time.toString("HH");   
+    if (WorldTime != strTime)
+    {
+        setImage(getImage(strTime.toInt(),timezone));
+    }
 }
 
 //set background image
 void Qworldtime::setImage(QString img)
 {
-	QImage image(img);	
-	label->setPixmap(QPixmap::fromImage(image));
+    QImage image(img);    
+    label->setPixmap(QPixmap::fromImage(image));
 }
 
 //get background image
 QString Qworldtime::getImage(int hour, int timezone)
 {
-	int number = hour - int(timezone);
-	if (number >= 24) number = number -24;
-	else if (number < 0) number = 24 - timezone;
-	return path+"images/worldtime/img"+QString::number(number)+".jpg";
+    int number = hour - int(timezone);
+    if (number >= 24) number = number -24;
+    else if (number < 0) number = 24 - timezone;
+    return path+"images/worldtime/img"+QString::number(number)+".jpg";
 }
 
 //
 void Qworldtime::closeEvent(QCloseEvent *event)
 {
-	hide();
-	event->ignore();
+    hide();
+    event->ignore();
 }
 
 //
 void Qworldtime::setUI()
 {
-	setWindowIcon(QIcon(path+"images/mecque.png"));	
+    setWindowIcon(QIcon(path+"images/mecque.png"));    
 }
 
 

@@ -43,8 +43,10 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     init();
     initDB();
     initLocation();
+    initLocationObject();
     initAudio();
     initCalculation();
+    initCalculationObject();
     getSalats();
     getHijri();
     createTrayIcon();
@@ -76,7 +78,17 @@ void Qsalat::initLocation()
     longitude = db->select("longitude").toDouble(); 
     city = db->select("city");
     country = db->select("country");
-    timezone = db->select("timezone").toInt();
+    timezone = db->select("timezone").toInt();    
+}
+
+void Qsalat::initLocationObject()
+{
+    location.setLatitude(latitude);
+    location.setLongitude(longitude);
+    location.setCountry(country);
+    location.setCity(city);
+    location.setTimezone(timezone);
+    location.init();
 }
 
 void Qsalat::initAudio()
@@ -98,10 +110,14 @@ void Qsalat::initCalculation()
     duhrMinutes = db->select("duhr").toInt();
     asrMethod = db->select("asr").toInt();    
     hijriDays = db->select("hijri").toInt();
-    highlatitude = db->select("higherLat").toInt();
-    QTime time = QTime::currentTime();           
-    QString strTime = time.toString("HH");    
-    worldtime.setImage(worldtime.getImage(strTime.toInt(),timezone));    
+    highlatitude = db->select("higherLat").toInt();        
+}
+
+void Qsalat::initCalculationObject()
+{
+    calculation.setCalcMethod(calcMethod);
+    calculation.setAsrMethod(asrMethod);
+    calculation.init();
 }
 
 /**    
@@ -434,8 +450,7 @@ void Qsalat::showAudio(){
 /**    
  * show calculation window function : show the salat calculation parameters window
  */
-void Qsalat::showCalculation(){   
-    calculation.init(salatTimes);
+void Qsalat::showCalculation(){       
     if (calculation.isHidden()){        
         calculation.show();
     }    
@@ -448,7 +463,8 @@ void Qsalat::showCalculation(){
 /**    
  * show calculation window function : show the salat calculation parameters window
  */
-void Qsalat::showWorldtime(){    
+void Qsalat::showWorldtime(){
+    worldtime.init(timezone);
     if (worldtime.isHidden()){        
         worldtime.show();
     }    

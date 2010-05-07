@@ -31,16 +31,18 @@ class Qworldtime : public QDialog, public Ui::WorldTime
 {
 Q_OBJECT
 public:
-	Qworldtime( QWidget * parent = 0, Qt::WFlags f = 0 );	
-	void setImage(QString);
-	QString getImage(int,int);
+    Qworldtime( QWidget * parent = 0, Qt::WFlags f = 0 );    
+    void setImage(QString);
+    QString getImage(int,int);
+    void init(int);
 
 protected:
-	void closeEvent(QCloseEvent *);
-	
+    void closeEvent(QCloseEvent *);
+    
 private:
-	 void setUI();	
-	 QString path;
+     void setUI();    
+     QString path;
+     QString WorldTime;
 };
 
 #endif // __WORLDTIME_H__

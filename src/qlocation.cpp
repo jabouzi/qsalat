@@ -38,7 +38,7 @@ Qlocation::Qlocation( QWidget * parent, Qt::WFlags f)
     manager = new QNetworkAccessManager(this);
     setActions();            
     initDB();
-    init();
+    //init();
 }
 
 void Qlocation::initDB()
@@ -49,14 +49,39 @@ void Qlocation::initDB()
     db->setTable("location");
 }
 
+void Qlocation::setLatitude(double latitude_)
+{
+    latitude = latitude_;
+}
+
+void Qlocation::setLongitude(double longitude_)
+{
+    longitude = longitude_;
+}
+
+void Qlocation::setCountry(QString country_)
+{
+    country = country_;
+}
+
+void Qlocation::setCity(QString city_)
+{
+    city = city_;
+}
+
+void Qlocation::setTimezone(int timezone_)
+{
+    timezone = timezone_;
+}
+
 //
 void Qlocation::init()
 {
-    latitude = db->select("latitude").toDouble();
-    longitude = db->select("longitude").toDouble(); 
-    city = db->select("city");
-    country = db->select("country");
-    timezone = db->select("timezone").toInt();
+    //~ latitude = db->select("latitude").toDouble();
+    //~ longitude = db->select("longitude").toDouble(); 
+    //~ city = db->select("city");
+    //~ country = db->select("country");
+    //~ timezone = db->select("timezone").toInt();
     loadCoordinates(latitude,longitude);
     latLineEdit->setText(QString::number(latitude));
     lngLineEdit->setText(QString::number(longitude));
@@ -161,7 +186,12 @@ void Qlocation::setUI()
 //
 void Qlocation::apply()
 {
-	db->setTable("location");
+    latitude = latLineEdit->text().toDouble();
+    longitude = lngLineEdit->text().toDouble();
+    city = cityLineEdit->text();
+    country = countryLineEdit->text();
+    timezone = timezoneLineEdit->text().toInt();
+    db->setTable("location");
     db->update("latitude",latLineEdit->text());
     db->update("longitude",lngLineEdit->text()); 
     db->update("city",cityLineEdit->text());

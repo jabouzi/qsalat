@@ -36,7 +36,11 @@ class Qcalculation : public QDialog, public Ui::Calculation
 Q_OBJECT
 public:
     Qcalculation( QWidget * parent = 0, Qt::WFlags f = 0 );    
-    void init(QString *);
+    void init();
+    void setCalcMethod(int);
+    void setAsrMethod(int);
+    //void setDuhrMinutes();
+    //void setAsrMinute();
     
 protected:
     void closeEvent(QCloseEvent *);

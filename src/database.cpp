@@ -5,7 +5,7 @@ Database* Database::single = NULL;
 
 Database::Database() 
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
+    db = QSqlDatabase::addDatabase("QSQLITE");    
 }
 
 Database* Database::getInstance()
@@ -29,11 +29,7 @@ Database::~Database()
 
 void Database::setDatabaseName(QString dbName)
 {
-    database = dbName;
-    if (!tablesExists())
-    {
-        createTables();
-    }
+    database = dbName;    
 }
 
 void Database::setDatabase()
@@ -43,7 +39,11 @@ void Database::setDatabase()
 
 void Database::prepareDB()
 {
-    db.open();    
+    db.open();   
+    if (!tablesExists())
+    {
+        createTables();
+    } 
 } 
 
 void Database::setTable(QString tableName)
@@ -134,10 +134,13 @@ bool Database::tablesExists()
 
 void Database::createTables()
 {
-    qDebug("Create tables");
-    QStringList args;
-    args << "../data/qsalat.db" << "<" << "../qsalat.sql";
-    QString program = "sqlite3";
-    QProcess *myProcess = new QProcess(this);
-    myProcess->start(program, args);
+    qDebug("##CREATE##");
+    prepareDB(); 
+    QSqlQuery query;
+    query.exec ("CREATE TABLE audio (id integer, athan string, fajr string, dua string, playAthan integer, playDua integer)");
+    query.exec ("CREATE TABLE calculation (id integer, method integer, fajr integer, duhr integer, asr integer, hijri integer, higherLat integer)");
+    query.exec ("CREATE TABLE location (id integer, latitude float, longitude float, country string, city string, timezone integer)");
+    query.exec ("INSERT INTO audio VALUES ('1','/home/nour/Development/Qsalat/audio/athan.mp4','/home/nour/Development/Qsalat/audio/athanFajr.mp4','/home/nour/Development/Qsalat/audio/dua.mp4','1','1')");
+    query.exec ("INSERT INTO calculation VALUES ('1','2','0','0','0','0','0')");
+    query.exec ("INSERT INTO location VALUES ('1','45.5454','-73.6391','Canada','Montreal','-4')"); 
 }
