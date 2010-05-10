@@ -34,27 +34,27 @@ class Qyearly : public QDialog, public Ui::Yearly
 {
 Q_OBJECT
 public:
-	Qyearly( QWidget * parent = 0, Qt::WFlags f = 0 );	
-	
+    Qyearly( QWidget * parent = 0, Qt::WFlags f = 0 );    
+    
 private slots:
-	 void generate();
-	 void load();
+    void generate();
+    void load();
 
 protected:
-	void closeEvent(QCloseEvent *);
-	
+    void closeEvent(QCloseEvent *);
+    
 private:
-	 void setUI();
-	 void init();
-	 void setActions();
-	 QDate date;
-	 Qpray *prayers;
-	 DomParser parser;
-	 QString file;
-	 int calcMethod;
-	 int asrMethod;
-	 int duhrMinutes;
-	 QString path;
+    void setUI();
+    void init();
+    void setActions();
+    QDate date;
+    Qpray *prayers;
+    DomParser parser;
+    QString file;
+    int calcMethod;
+    int asrMethod;
+    int duhrMinutes;
+    QString path;
 };
 
 

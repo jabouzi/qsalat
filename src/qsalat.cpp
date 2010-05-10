@@ -109,7 +109,6 @@ void Qsalat::initAudio()
     duaAudio = db->select("dua"); 
     playAthan = db->select("playAthan").toInt(); 
     playDua = db->select("playDua").toInt(); 
-    qDebug("aud : %d %d ",playAthan,playDua);
 }
 
 void Qsalat::initAudioObject()
@@ -165,8 +164,6 @@ void Qsalat::adjustWindow(){
  */
 void Qsalat::getSalats(){        
     salatTimes = new QString[7];
-    qDebug(" CALC : %d %d %d %d ",calcMethod,asrMethod,duhrMinutes,highlatitude);
-    qDebug(" LOCA : %f %f %f ",latitude,longitude,timezone);
     prayers->setCalcMethod(calcMethod);
     prayers->setAsrMethod(asrMethod);
     prayers->setDhuhrMinutes(duhrMinutes);
@@ -210,7 +207,7 @@ void Qsalat::createTrayIcon()
     trayIcon->setContextMenu(trayIconMenu);
     trayIcon->setIcon(QIcon(path+"images/mecque.png"));
     QString ttmessage = "Fajr : "+label_fajr->text()+ QString::fromUtf8(" : فجر")+"\nDuhr : "    +label_duhr->text()+QString::fromUtf8(" : ظهر")+"\nAsr : "+label_asr->text()+QString::fromUtf8(" : عصر")+"\nMaghreb : "+label_maghreb->text()+QString::fromUtf8(" : مغرب")+"\nIsha : "+label_isha->text()+QString::fromUtf8(" : عشاء");
-    trayIcon->setToolTip("Qsalat Islamic cross-platform prayers time V0.9.3");
+    trayIcon->setToolTip("Qsalat Islamic cross-platform prayers time V1.0");
     trayIcon->setToolTip(ttmessage);
     trayIcon->show();    
 }
@@ -274,7 +271,6 @@ void Qsalat::createActions()
     actionHide->setShortcut(tr("Ctrl+H"));
     connect(actionHide, SIGNAL(triggered()), this, SLOT(hide()));    
     connect(actionAbout_Qsalat, SIGNAL(triggered()), this, SLOT(_about()));  
-    //connect(actionShow, SIGNAL(triggered()), this, SLOT(showPlayer()));    
 }
 
 int Qsalat::getFajr()
@@ -386,28 +382,28 @@ QString Qsalat::getNextSalat()
         salatOrder = 5;
         salatTitle = "Midnight ";
    }
-   qDebug("%s",timeOfSalat.toLatin1().data());
-   qDebug("%s",QString::number(salatOrder).toLatin1().data());
-   qDebug("%s",salatTitle.toLatin1().data());
    return timeOfSalat;
 }
 
 void Qsalat::startSalatAlarm()
 {
-    QString salatTime = getNextSalat();    
-    QDateTime today = QDateTime::currentDateTime();
-    QTime time = QTime::fromString(salatTime, "HH:mm:ss");
-    alarm.init();   
-    alarm.setYear(today.date().year());
-    alarm.setMonth(today.date().month());
-    if (5 == salatOrder)
+    if (1 == playAthan)
     {
-        alarm.setDay(today.date().day()+1);
+        QString salatTime = getNextSalat();    
+        QDateTime today = QDateTime::currentDateTime();
+        QTime time = QTime::fromString(salatTime, "HH:mm:ss");
+        alarm.init();   
+        alarm.setYear(today.date().year());
+        alarm.setMonth(today.date().month());
+        if (5 == salatOrder)
+        {
+            alarm.setDay(today.date().day()+1);
+        }
+        alarm.setHours(time.hour());
+        alarm.setMinutes(time.minute());
+        alarm.setSeconds(time.second());
+        alarm.setAlarm();
     }
-    alarm.setHours(time.hour());
-    alarm.setMinutes(time.minute());
-    alarm.setSeconds(time.second());
-    alarm.setAlarm();
 } 
 
 // Private Slots
@@ -540,7 +536,7 @@ void Qsalat::_about()
 {    
     QString cp = "©";
     QMessageBox::about(this, tr("About Qsalat"),
-             tr("<b> Qsalat V0.9.3</b> Copyright ") +  QString::fromUtf8(cp.toLatin1().data()) + tr(" 2008-2009 Skander Jabouzi skander@skanderjabouzi.com<br>"             
+             tr("<b> Qsalat V0.9.3</b> Copyright ") +  QString::fromUtf8(cp.toLatin1().data()) + tr(" 2008-2010 Skander Jabouzi skander@skanderjabouzi.com<br>"             
                  " This is a free software distributed under the terms of the GNU General Public License version 3\n(http://www.gnu.org/licenses/gpl-3.0.html)"));     
 } 
 
@@ -628,22 +624,22 @@ void Qsalat::itsSalatTime()
 
 void Qsalat::updateCalculation()
 {
-    qDebug("CALC");
     initCalculation();    
     getSalats();
+    startSalatAlarm();
 }
 
 void Qsalat::updateLocation()
 {
-    qDebug("LOCA");
     initLocation();    
     getSalats();
+    startSalatAlarm();
     initQiblaObject();
 }
 
 void Qsalat::updateAudio()
 {
-    qDebug("AUD");
     initAudio(); 
+    startSalatAlarm();
 }
 //

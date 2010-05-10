@@ -35,29 +35,28 @@ class Qmonthly : public QDialog, public Ui::Monthly
 {
 Q_OBJECT
 public:
-	Qmonthly( QWidget * parent = 0, Qt::WFlags f = 0 );	
-	
+    Qmonthly( QWidget * parent = 0, Qt::WFlags f = 0 );    
+    
 protected:
-	void closeEvent(QCloseEvent *);
-	
+    void closeEvent(QCloseEvent *);
+    
 private slots:
-	 void generate();
-	 void load();
-		
+    void generate();
+    void load();
+        
 private:
-	 void setUI();
-	 void setMethods();
-	 void init();
-	 void setActions();
-	 QDate date;
-	 Qpray *prayers;
-	 DomParser parser;
-	 QString file;
-	 int calcMethod;
-	 int asrMethod;
-	 int duhrMinutes;
-	 QString path;
-	
+    void setUI();
+    void setMethods();
+    void init();
+    void setActions();
+    QDate date;
+    Qpray *prayers;
+    DomParser parser;
+    QString file;
+    int calcMethod;
+    int asrMethod;
+    int duhrMinutes;
+    QString path;    
 };
 
 

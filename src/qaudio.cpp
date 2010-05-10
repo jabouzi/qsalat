@@ -97,6 +97,7 @@ void Qaudio::init()
 void Qaudio::closeEvent(QCloseEvent *event)
 {
     hide();
+    init();
     event->ignore();
 }
 
@@ -110,6 +111,7 @@ void Qaudio::setActions()
     connect(okButton, SIGNAL(clicked()), this, SLOT(save()));
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(cancel()));
     connect(previewButton,SIGNAL(clicked()), this, SLOT(preview()));    
+    connect(salatCheckBox,SIGNAL(clicked()), this, SLOT(checkChanged()));    
 }
 
 //

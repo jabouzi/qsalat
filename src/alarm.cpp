@@ -7,7 +7,7 @@ Alarm::Alarm(QObject* parent) :
 }
 
 void Alarm::init()
-{
+{    
     QDateTime today = QDateTime::currentDateTime();
     year = today.date().year();
     month = today.date().month();
@@ -22,6 +22,7 @@ void Alarm::init()
 
 void Alarm::setAlarm()
 {
+    stopAlarm();
     QDateTime now = QDateTime::currentDateTime();
     QDateTime alarmTime(QDate(year, month, day), QTime(hours, minutes, seconds));
     timeLeft = now.secsTo(alarmTime);
@@ -34,7 +35,7 @@ void Alarm::setAlarm()
     else
     {
         qDebug("There are %d seconds passed", abs(now.secsTo(alarmTime)));
-        timer->stop(); 
+        stopAlarm();
     }
 }
 

@@ -135,7 +135,6 @@ bool Database::tablesExists()
 void Database::createTables()
 {
     qDebug("##CREATE##");
-    //prepareDB(); 
     QSqlQuery query;
     query.exec ("CREATE TABLE audio (id integer, athan string, fajr string, dua string, playAthan integer, playDua integer)");
     query.exec ("CREATE TABLE calculation (id integer, method integer, fajr integer, duhr integer, asr integer, hijri integer, higherLat integer)");

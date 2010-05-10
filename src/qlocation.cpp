@@ -38,7 +38,6 @@ Qlocation::Qlocation( QWidget * parent, Qt::WFlags f)
     manager = new QNetworkAccessManager(this);
     setActions();            
     initDB();
-    //init();
 }
 
 void Qlocation::initDB()
@@ -77,11 +76,6 @@ void Qlocation::setTimezone(int timezone_)
 //
 void Qlocation::init()
 {
-    //~ latitude = db->select("latitude").toDouble();
-    //~ longitude = db->select("longitude").toDouble(); 
-    //~ city = db->select("city");
-    //~ country = db->select("country");
-    //~ timezone = db->select("timezone").toInt();
     loadCoordinates(latitude,longitude);
     latLineEdit->setText(QString::number(latitude));
     lngLineEdit->setText(QString::number(longitude));

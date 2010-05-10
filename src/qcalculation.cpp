@@ -64,6 +64,7 @@ void Qcalculation::setAsrMethod(int method)
 void Qcalculation::closeEvent(QCloseEvent *event)
 {
     hide();
+    init();
     event->ignore();
 }
 
