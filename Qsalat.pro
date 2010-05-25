@@ -19,8 +19,7 @@ FORMS = ui/salat.ui \
  ui/audio.ui \
  ui/calculation.ui \
  ui/monthly.ui \
- ui/yearly.ui \
- ui/player.ui
+ ui/yearly.ui 
 HEADERS = src/qsalat.h \
  src/utils.h \
  src/qpray.h \
