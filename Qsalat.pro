@@ -21,7 +21,6 @@ FORMS = ui/salat.ui \
  ui/monthly.ui \
  ui/yearly.ui 
 HEADERS = src/qsalat.h \
- src/utils.h \
  src/qpray.h \
  src/qhijri.h \
  src/qqibla.h \
@@ -37,7 +36,6 @@ HEADERS = src/qsalat.h \
  src/alarm.h \
  src/database.h
 SOURCES = src/qsalat.cpp \
- src/utils.cpp \
  src/main.cpp \
  src/qpray.cpp \
  src/qhijri.cpp \
