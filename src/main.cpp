@@ -1,6 +1,5 @@
 #include <QApplication>
 #include "qsalat.h"
-#include "dsingleapplication.h"
 //
 int main(int argc, char ** argv)
 {

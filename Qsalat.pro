@@ -31,8 +31,6 @@ HEADERS = src/qsalat.h \
  src/qworldTime.h \
  src/qcalculation.h \
  src/qhijridate.h \
- src/dsingleapplication.h \
- src/domparser.h \
  src/alarm.h \
  src/database.h
 SOURCES = src/qsalat.cpp \
@@ -47,8 +45,6 @@ SOURCES = src/qsalat.cpp \
  src/qcalculation.cpp \
  src/qworldTime.cpp \
  src/qhijridate.cpp \
- src/dsingleapplication.cpp \
- src/domparser.cpp \
  src/alarm.cpp \
  src/database.cpp
 RESOURCES += qrc/salat.qrc qrc/qibla.qrc qrc/worldtime.qrc
