@@ -27,17 +27,17 @@
 Qhijridate::Qhijridate( QWidget * parent, Qt::WFlags f) 
     : QDialog(parent, f)
 {
-#ifdef Q_WS_WIN
-    path = QCoreApplication::applicationDirPath ();
-#else 
-    path = "/usr/share/qsalat/";
-#endif
     if (path.data()[path.size() - 1] != '/') path += "/";
     setupUi(this);    
     setUI();
     setActions();    
     hijri = new Qhijri();
     init();    
+}
+
+void Qhijridate::setPath(QString lpath)
+{
+    path = lpath;
 }
 
 //

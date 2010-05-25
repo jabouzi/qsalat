@@ -28,15 +28,13 @@
 Qqibla::Qqibla( QWidget * parent, Qt::WFlags f) 
     : QDialog(parent, f)
 {
-#ifdef Q_WS_WIN
-    path = QCoreApplication::applicationDirPath ();
-#else 
-    path = "/usr/share/qsalat/";
-#endif
-    if (path.data()[path.size() - 1] != '/') path += "/";
-    setupUi(this);
-    setWindowIcon(QIcon(path+"images/mecque.png"));
+    setupUi(this);    
     init();
+}
+
+void Qqibla::setPath(QString lpath)
+{
+    path = lpath;
 }
 
 void Qqibla::setLatitude(double latde)
@@ -51,6 +49,7 @@ void Qqibla::setLongitude(double lngtde)
 // 
 void Qqibla::init()
 {
+    setWindowIcon(QIcon(path+"images/mecque.png"));
     qiblaAngle = getQibla();        
     update();
 }

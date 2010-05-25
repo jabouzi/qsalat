@@ -26,11 +26,8 @@
 Qsalat::Qsalat( QWidget * parent, Qt::WFlags f) 
     : QMainWindow(parent, f)
 {
-#ifdef Q_WS_WIN
+
     path = QCoreApplication::applicationDirPath ();
-#else 
-    path = "/usr/share/qsalat/";
-#endif
     if (path.data()[path.size() - 1] != '/') path += "/";
     setupUi(this);
     adjustWindow();
@@ -113,6 +110,7 @@ void Qsalat::initAudio()
 
 void Qsalat::initAudioObject()
 {
+    audio.setPath(path);
     audio.setSalatAudio(prayerAudio);
     audio.setFajrAudio(fajrAudio);
     audio.setDuaAudio(duaAudio);

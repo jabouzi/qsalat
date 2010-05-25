@@ -42,7 +42,7 @@ public:
     void setDuaAudio(QString);
     void setPlayAthan(int);
     void setPlayDua(int);
-    
+    void setPath(QString);
 
 protected:
     void closeEvent(QCloseEvent *);

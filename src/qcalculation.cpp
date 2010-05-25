@@ -28,18 +28,17 @@
 Qcalculation::Qcalculation( QWidget * parent, Qt::WFlags f) 
     : QDialog(parent, f)
 {
-#ifdef Q_WS_WIN
-    path = QCoreApplication::applicationDirPath ();
-#else 
-    path = "/usr/share/qsalat/";
-#endif
-    if (path.data()[path.size() - 1] != '/') path += "/";
     setupUi(this);    
     setUI();    
     setActions();
     date = QDate::currentDate();
     times = new QString[7]; 
     initDB();
+}
+
+void Qcalculation::setPath(QString lpath)
+{
+    path = lpath;
 }
 
 void Qcalculation::initDB()
