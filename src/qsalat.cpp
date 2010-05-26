@@ -46,6 +46,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     initAudioObject();
     initCalculation();
     initCalculationObject();
+    initHijriDateObject();
     getSalats();
     getHijri();
     createTrayIcon();
@@ -82,6 +83,7 @@ void Qsalat::initLocation()
 
 void Qsalat::initLocationObject()
 {
+    location.setPath(path);
     location.setLatitude(latitude);
     location.setLongitude(longitude);
     location.setCountry(country);
@@ -92,6 +94,7 @@ void Qsalat::initLocationObject()
 
 void Qsalat::initQiblaObject()
 {
+    qibla.setPath(path);
     qibla.setLatitude(latitude);
     qibla.setLongitude(longitude);
     qibla.init();
@@ -132,9 +135,15 @@ void Qsalat::initCalculation()
 
 void Qsalat::initCalculationObject()
 {
+    calculation.setPath(path);
     calculation.setCalcMethod(calcMethod);
     calculation.setAsrMethod(asrMethod);
     calculation.init();
+}
+
+void Qsalat::initHijriDateObject()
+{
+    hijridate.setPath(path);
 }
 
 /**    
@@ -234,8 +243,8 @@ void Qsalat::closeEvent(QCloseEvent *event)
     audio.hide();
     calculation.hide();
     worldtime.hide();
-    monthly.hide();
-    yearly.hide();
+    //monthly.hide();
+   // yearly.hide();
     hijridate.hide();
 }
 
@@ -491,28 +500,28 @@ void Qsalat::showWorldtime(){
 /**    
  * show monthly prayer window function : show the salat time for one month
  */
-void Qsalat::showMonthly(){    
-    if (monthly.isHidden()){        
-        monthly.show();
-    }    
-    else{        
-        monthly.activateWindow();
-        monthly.raise();        
-    }    
-}
+//~ void Qsalat::showMonthly(){    
+    //~ if (monthly.isHidden()){        
+        //~ monthly.show();
+    //~ }    
+    //~ else{        
+        //~ monthly.activateWindow();
+        //~ monthly.raise();        
+    //~ }    
+//~ }
 
 /**    
  * show yearly prayer window function : show the salat time for one year
  */
-void Qsalat::showYearly(){    
-    if (yearly.isHidden()){        
-        yearly.show();
-    }    
-    else{        
-        yearly.activateWindow();
-        yearly.raise();        
-    }    
-}
+//~ void Qsalat::showYearly(){    
+    //~ if (yearly.isHidden()){        
+        //~ yearly.show();
+    //~ }    
+    //~ else{        
+        //~ yearly.activateWindow();
+        //~ yearly.raise();        
+    //~ }    
+//~ }
 
 /**    
  * show hijri date window function : show the hijri date conversion
@@ -559,12 +568,12 @@ void::Qsalat::_hide()
     if (!worldtime.isHidden()){        
         worldtime.hide();
     }    
-    if (!monthly.isHidden()){        
-        monthly.hide();
-    }    
-    if (!yearly.isHidden()){        
-        yearly.hide();
-    }    
+    //~ if (!monthly.isHidden()){        
+        //~ monthly.hide();
+    //~ }    
+    //~ if (!yearly.isHidden()){        
+        //~ yearly.hide();
+    //~ }    
     if (!hijridate.isHidden()){        
         hijridate.hide();
     }    
@@ -605,16 +614,16 @@ void Qsalat::itsSalatTime()
     else if (salatOrder > 0)
     {
         audioList.clear();
-        audioList << prayerAudio;
-        if (playDua == 1) audioList << duaAudio;
+        audioList << path+"audio/salat/"+prayerAudio;
+        if (playDua == 1) audioList << path+"audio/dua/"+duaAudio;
         setPlayer(audioList, salatTitle);  
          
     }
     else
     {
         audioList.clear();
-        audioList << fajrAudio;
-        if (playDua == 1) audioList << duaAudio;
+        audioList << path+"audio/fajr/"+fajrAudio;
+        if (playDua == 1) audioList << path+"audio/dua/"+duaAudio;
         setPlayer(audioList, salatTitle);   
     }
     startSalatAlarm();
@@ -638,6 +647,7 @@ void Qsalat::updateLocation()
 void Qsalat::updateAudio()
 {
     initAudio(); 
+    initAudioObject();
     startSalatAlarm();
 }
 //

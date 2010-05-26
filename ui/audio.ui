@@ -47,7 +47,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Select</string>
+     <string>Add</string>
     </property>
    </widget>
    <widget class="QPushButton" name="fajrButton">
@@ -60,27 +60,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Select</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="prayerLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>20</y>
-      <width>231</width>
-      <height>28</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="fajrLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>60</y>
-      <width>231</width>
-      <height>28</height>
-     </rect>
+     <string>Add</string>
     </property>
    </widget>
    <widget class="QLabel" name="prayerLabel">
@@ -119,20 +99,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Select</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="duaLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>100</y>
-      <width>231</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
+     <string>Add</string>
     </property>
    </widget>
    <widget class="QLabel" name="duaLabel">
@@ -146,6 +113,45 @@
     </property>
     <property name="text">
      <string>Dua</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="salatFiles">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>20</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="fajrFiles">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>60</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="duaFiles">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>100</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
@@ -224,7 +230,7 @@
      <rect>
       <x>20</x>
       <y>20</y>
-      <width>131</width>
+      <width>151</width>
       <height>24</height>
      </rect>
     </property>
@@ -240,7 +246,7 @@
      <rect>
       <x>170</x>
       <y>20</y>
-      <width>111</width>
+      <width>131</width>
       <height>24</height>
      </rect>
     </property>
@@ -279,19 +285,6 @@
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>360</y>
-     <width>80</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Apply</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="okButton">
-   <property name="geometry">
-    <rect>
-     <x>210</x>
      <y>360</y>
      <width>80</width>
      <height>28</height>

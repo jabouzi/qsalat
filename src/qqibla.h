@@ -36,6 +36,7 @@ public:
     void setLatitude(double);
     void setLongitude(double);
     double getQibla();
+    void setPath(QString);
     
 protected:
     void closeEvent(QCloseEvent *);

@@ -26,8 +26,7 @@
 //
 Qaudio::Qaudio( QWidget * parent, Qt::WFlags f) : QDialog(parent, f )
 {
-    setupUi(this);
-    setUI();
+    setupUi(this);    
     setActions();
     initDB();
 }
@@ -35,6 +34,7 @@ Qaudio::Qaudio( QWidget * parent, Qt::WFlags f) : QDialog(parent, f )
 void Qaudio::setPath(QString lpath)
 {
     path = lpath;
+    setUI();
 }
 
 void Qaudio::initDB()
@@ -73,9 +73,7 @@ void Qaudio::setPlayDua(int dua)
 //
 void Qaudio::init()
 {
-    prayerLineEdit->setText(salatAudio);
-    fajrLineEdit->setText(fajrAudio);
-    duaLineEdit->setText(duaAudio);
+    setMediaFilesLists();    
     if (0 == playAthan) {
         salatCheckBox->setChecked(false); 
         duaCheckBox->setChecked(false);
@@ -106,8 +104,7 @@ void Qaudio::setActions()
     connect(prayerButton, SIGNAL(clicked()), this, SLOT(loadPrayer()));
     connect(fajrButton, SIGNAL(clicked()), this, SLOT(loadFajr()));
     connect(duaButton, SIGNAL(clicked()), this, SLOT(loadDua()));
-    connect(saveButton, SIGNAL(clicked()), this, SLOT(apply()));
-    connect(okButton, SIGNAL(clicked()), this, SLOT(save()));
+    connect(saveButton, SIGNAL(clicked()), this, SLOT(save()));
     connect(cancelButton, SIGNAL(clicked()), this, SLOT(cancel()));
     connect(previewButton,SIGNAL(clicked()), this, SLOT(preview()));    
     connect(salatCheckBox,SIGNAL(clicked()), this, SLOT(checkChanged()));    
@@ -120,7 +117,6 @@ void Qaudio::setUI()
     prayerButton->setIcon(style()->standardIcon(QStyle::SP_DialogOpenButton));
     fajrButton->setIcon(style()->standardIcon(QStyle::SP_DialogOpenButton));
     duaButton->setIcon(style()->standardIcon(QStyle::SP_DialogOpenButton));
-    okButton->setIcon(style()->standardIcon(QStyle::SP_DialogOkButton));
     saveButton->setIcon(style()->standardIcon(QStyle::SP_DialogApplyButton));
     cancelButton->setIcon(style()->standardIcon(QStyle::SP_DialogCancelButton));   
 }
@@ -128,19 +124,19 @@ void Qaudio::setUI()
 // load athan file
 void Qaudio::loadPrayer()
 {
-    prayerLineEdit->setText(QFileDialog::getOpenFileName(this,tr("Open File"),".",tr("audios et videos (*.mp3 *.wma *.ogg *.wave *.midi *.mp4 *.flv *.ogv *.mpeg *.mpg *.avi *.divx *.wmv *.mov)")));
+    salatFiles->addItem(QFileDialog::getOpenFileName(this,tr("Open File"),".",tr("audios et videos (*.mp3 *.wma *.ogg *.wave *.midi *.mp4 *.flv *.ogv *.mpeg *.mpg *.avi *.divx *.wmv *.mov)")));
 }
 
 // load fajr file
 void Qaudio::loadFajr()
 {
-        fajrLineEdit->setText(QFileDialog::getOpenFileName(this,tr("Open File"),".",tr("audios et videos (*.mp3 *.wma *.ogg *.wave *.midi *.mp4 *.flv *.ogv *.mpeg *.mpg *.avi *.divx *.wmv *.mov)")));
+    fajrFiles->addItem(QFileDialog::getOpenFileName(this,tr("Open File"),".",tr("audios et videos (*.mp3 *.wma *.ogg *.wave *.midi *.mp4 *.flv *.ogv *.mpeg *.mpg *.avi *.divx *.wmv *.mov)")));
 }
 
 // load dua file
 void Qaudio::loadDua()
 {
-        duaLineEdit->setText(QFileDialog::getOpenFileName(this,tr("Open File"),".",tr("audios et videos (*.mp3 *.wma *.ogg *.wave *.midi *.mp4 *.flv *.ogv *.mpeg *.mpg *.avi *.divx *.wmv *.mov)")));
+    duaFiles->addItem(QFileDialog::getOpenFileName(this,tr("Open File"),".",tr("audios et videos (*.mp3 *.wma *.ogg *.wave *.midi *.mp4 *.flv *.ogv *.mpeg *.mpg *.avi *.divx *.wmv *.mov)")));
 }
 
 //
@@ -148,9 +144,9 @@ void Qaudio::preview()
 {       
     QStringList audioFile;         
     audioFile.clear();
-    if (regularRadioButton->isChecked()) audioFile << prayerLineEdit->text() << "Athan preview";
-    else if (fajrRadioButton->isChecked()) audioFile << fajrLineEdit->text() << "Athan fajr preview"; 
-    else audioFile << duaLineEdit->text() << "Dua fajr preview";   
+    if (regularRadioButton->isChecked()) audioFile << path+"audio/salat/"+salatFiles->currentText() << "Athan preview";
+    else if (fajrRadioButton->isChecked()) audioFile << path+"audio/fajr/"+fajrFiles->currentText() << "Athan fajr preview"; 
+    else audioFile << path+"audio/dua/"+duaFiles->currentText() << "Dua fajr preview";   
     QString program = "salatPlayer";
     QProcess *myProcess = new QProcess(this);
     myProcess->start(program, audioFile);
@@ -162,13 +158,34 @@ void Qaudio::apply()
     db->setTable("audio");
     int prayerChecked = 0;
     int duaChecked = 0;
-    db->update("athan",prayerLineEdit->text());
-    db->update("fajr",fajrLineEdit->text());
-    db->update("dua",duaLineEdit->text());
+    QString fileName = "";
+    QStringList list;
+    QString newFileName = "";
+    
+    fileName = salatFiles->currentText();
+    list = fileName.split("/");
+    newFileName = list[list.size()-1];    
+    db->update("athan",newFileName);
+    
+    fileName = fajrFiles->currentText();
+    list = fileName.split("/");
+    newFileName = list[list.size()-1];
+    db->update("fajr",newFileName);
+    
+    fileName = duaFiles->currentText();
+    list = fileName.split("/");
+    newFileName = list[list.size()-1];
+    db->update("dua",newFileName);
+    
     if (salatCheckBox->isChecked()) prayerChecked = 1;
     if (duaCheckBox->isChecked()) duaChecked = 1;
     db->update("playAthan",QString::number(prayerChecked));
-    db->update("playDua",QString::number(duaChecked));
+    db->update("playDua",QString::number(duaChecked));    
+    
+    addNewFiles(salatFiles,"salat");
+    addNewFiles(fajrFiles,"fajr");
+    addNewFiles(duaFiles,"dua");
+    
     emit(audioChanged());
 }
 
@@ -193,5 +210,52 @@ void Qaudio::checkChanged()
     }
     else{
         duaCheckBox->setEnabled(true);
+    }
+}
+
+QStringList Qaudio::getMediaFiles(QString folder)
+{
+    QDir currentDir = QDir(path+"audio/"+folder+"/");
+    QStringList fileName;
+    fileName << "*.mp3" << "*.wma" << "*.ogg" << "*.wave" << "*.midi" << "*.mp4" << "*.flv" << "*.ogv" << "*.mpeg" << "*.mpg" << "*.avi" << "*.divx" << "*.wmv" << "*.mov";
+    return currentDir.entryList(QStringList(fileName),QDir::Files | QDir::NoSymLinks);
+}
+
+void Qaudio::setMediaFilesLists()
+{
+    salatFiles->clear();
+    fajrFiles->clear();
+    duaFiles->clear();
+    
+    int currentIndex = 0;    
+    QStringList files;
+    
+    files = getMediaFiles("salat");
+    salatFiles->addItems(files);
+    currentIndex = files.indexOf(salatAudio);
+    salatFiles->setCurrentIndex(currentIndex);
+    
+    files = getMediaFiles("fajr");
+    fajrFiles->addItems(files);
+    currentIndex = files.indexOf(fajrAudio);
+    fajrFiles->setCurrentIndex(currentIndex);
+    
+    files = getMediaFiles("dua");
+    duaFiles->addItems(files);
+    currentIndex = files.indexOf(duaAudio);
+    duaFiles->setCurrentIndex(currentIndex);
+}
+
+void Qaudio::addNewFiles(QComboBox* fileList, QString folder)
+{
+    for (int i = 0; i < fileList->count(); ++i)
+    {
+        QString file = fileList->itemText(i);
+        QStringList list = file.split("/");
+        QString newFile = list[list.size()-1];
+        if (!QFile::exists(path+"audio/"+folder+"/"+newFile))
+        {
+            QFile::copy(file,path+"audio/"+folder+"/"+newFile);
+        }
     }
 }

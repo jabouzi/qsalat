@@ -27,8 +27,7 @@
 Qlocation::Qlocation( QWidget * parent, Qt::WFlags f) 
     : QDialog(parent, f)
 {
-    setupUi(this);
-    setUI();
+    setupUi(this);    
     manager = new QNetworkAccessManager(this);
     setActions();            
     initDB();
@@ -37,6 +36,7 @@ Qlocation::Qlocation( QWidget * parent, Qt::WFlags f)
 void Qlocation::setPath(QString lpath)
 {
     path = lpath;
+    setUI();
 }
 
 void Qlocation::initDB()

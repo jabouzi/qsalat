@@ -35,7 +35,6 @@
 #include <QVariant>
 #include <QHttp>
 #include "ui_location.h"
-#include "domparser.h"
 #include "qcalculation.h"
 #include "database.h"
 //
@@ -50,6 +49,7 @@ public:
     void setCountry(QString);
     void setCity(QString);
     void setTimezone(int);
+    void setPath(QString);
     
 private slots:
     void loadAddress(QString);
@@ -70,7 +70,6 @@ signals:
 private:
     QNetworkAccessManager *manager;
     QList<QPointF> coordinates;
-    DomParser parser;
     QString file;    
     double latitude;
     double longitude;

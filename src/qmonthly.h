@@ -27,9 +27,7 @@
 #include <QtGui>
 #include <QString>
 #include "ui_monthly.h"
-#include "utils.h"
 #include "qpray.h"
-#include "domparser.h"
 
 class Qmonthly : public QDialog, public Ui::Monthly
 {
@@ -51,7 +49,6 @@ private:
     void setActions();
     QDate date;
     Qpray *prayers;
-    DomParser parser;
     QString file;
     int calcMethod;
     int asrMethod;

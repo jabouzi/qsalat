@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>Qibla</class>
- <widget class="QDialog" name="Qibla" >
-  <property name="geometry" >
+ <widget class="QDialog" name="Qibla">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,27 +10,27 @@
     <height>400</height>
    </rect>
   </property>
-  <property name="minimumSize" >
+  <property name="minimumSize">
    <size>
     <width>300</width>
     <height>400</height>
    </size>
   </property>
-  <property name="maximumSize" >
+  <property name="maximumSize">
    <size>
     <width>300</width>
     <height>400</height>
    </size>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Qsalat - qibla direction</string>
   </property>
-  <property name="styleSheet" >
-   <string notr="true" >background-image: url(/usr/share/qsalat/images/boussole.png);
+  <property name="styleSheet">
+   <string notr="true">background-image: url(/usr/share/qsalat/images/boussole.png);
 </string>
   </property>
-  <widget class="QLabel" name="label" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>7</y>
@@ -37,23 +38,23 @@
      <height>41</height>
     </rect>
    </property>
-   <property name="font" >
+   <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <pointsize>10</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Qibla angle direction : 57,6N</string>
    </property>
-   <property name="alignment" >
+   <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>
  <resources>
-  <include location="../qibla.qrc" />
+  <include location="../qrc/qibla.qrc"/>
  </resources>
  <connections/>
 </ui>

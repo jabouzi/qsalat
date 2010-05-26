@@ -27,7 +27,6 @@
 #include <QtGui>
 #include <QString>
 #include "ui_calculation.h"
-#include "domparser.h"
 #include "database.h"
 
 
@@ -39,8 +38,9 @@ public:
     void init();
     void setCalcMethod(int);
     void setAsrMethod(int);
-    //void setDuhrMinutes();
-    //void setAsrMinute();
+    //void setDuhrMinutes(int);
+    //void setFajrMinutes(int);
+    void setPath(QString);
     
 protected:
     void closeEvent(QCloseEvent *);
@@ -51,7 +51,6 @@ private slots:
     void apply();
     
 private:    
-    DomParser parser;
     QString file;
     QStringList list;    
     QStringList hList;

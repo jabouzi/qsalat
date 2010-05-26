@@ -27,9 +27,7 @@
 Qhijridate::Qhijridate( QWidget * parent, Qt::WFlags f) 
     : QDialog(parent, f)
 {
-    if (path.data()[path.size() - 1] != '/') path += "/";
     setupUi(this);    
-    setUI();
     setActions();    
     hijri = new Qhijri();
     init();    
@@ -38,6 +36,7 @@ Qhijridate::Qhijridate( QWidget * parent, Qt::WFlags f)
 void Qhijridate::setPath(QString lpath)
 {
     path = lpath;
+    setUI();
 }
 
 //

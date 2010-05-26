@@ -35,6 +35,7 @@ public:
     void setImage(QString);
     QString getImage(int,int);
     void init(int);
+    void setPath(QString);
 
 protected:
     void closeEvent(QCloseEvent *);

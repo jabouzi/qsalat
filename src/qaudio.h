@@ -28,7 +28,6 @@
 #include <phonon>
 #include <QProcess>
 #include "ui_audio.h"
-#include "domparser.h"
 #include "database.h"
 
 class Qaudio : public QDialog, public Ui::Audio
@@ -48,7 +47,6 @@ protected:
     void closeEvent(QCloseEvent *);
     
 private:
-    DomParser parser;
     QString file;    
     QString path;
     QString salatAudio;
@@ -61,6 +59,9 @@ private:
     void setUI();
     Database *db;
     void initDB();
+    QStringList getMediaFiles(QString);
+    void setMediaFilesLists();
+    void addNewFiles(QComboBox*,QString);
 
 
 private slots:

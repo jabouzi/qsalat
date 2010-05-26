@@ -38,10 +38,7 @@
 #include "qaudio.h"
 #include "qcalculation.h"
 #include "qworldTime.h"
-#include "qmonthly.h"
-#include "qyearly.h"
 #include "qhijridate.h"
-#include "domparser.h"
 #include "alarm.h"
 #include "database.h"
 
@@ -78,10 +75,9 @@ private:
     Qaudio audio;
     Qcalculation calculation;
     Qworldtime worldtime;
-    Qmonthly monthly;
-    Qyearly yearly;
+   // Qmonthly monthly;
+   // Qyearly yearly;
     Qhijridate hijridate; 
-    DomParser parser;
     QString file;    
     int timer;    
     QString prayerAudio;
@@ -127,6 +123,7 @@ private:
     void initCalculationObject();
     void initAudioObject();
     void initQiblaObject();
+    void initHijriDateObject();
     
 private slots:
     void iconActivated(QSystemTrayIcon::ActivationReason);
@@ -135,8 +132,8 @@ private slots:
     void showAudio();
     void showCalculation();
     void showWorldtime();
-    void showMonthly();
-    void showYearly();
+   // void showMonthly();
+   // void showYearly();
     void showHijridate();
     void _about();
     void _hide();

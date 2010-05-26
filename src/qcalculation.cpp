@@ -28,8 +28,7 @@
 Qcalculation::Qcalculation( QWidget * parent, Qt::WFlags f) 
     : QDialog(parent, f)
 {
-    setupUi(this);    
-    setUI();    
+    setupUi(this);          
     setActions();
     date = QDate::currentDate();
     times = new QString[7]; 
@@ -39,6 +38,7 @@ Qcalculation::Qcalculation( QWidget * parent, Qt::WFlags f)
 void Qcalculation::setPath(QString lpath)
 {
     path = lpath;
+    setUI();  
 }
 
 void Qcalculation::initDB()
@@ -58,6 +58,11 @@ void Qcalculation::setAsrMethod(int method)
 {
     asrMethod = method;
 }
+
+//~ void Qcalculation::setAsrMethod(int method)
+//~ {
+    //~ asrMethod = method;
+//~ }
 
 //
 void Qcalculation::closeEvent(QCloseEvent *event)
@@ -84,8 +89,7 @@ void Qcalculation::init()
         calcList->setCurrentIndex(calcMethod);
         hList << "No adjustment"<<"middle of night"<<"1/7th of night"<<"angle/60th of night";
         highList->addItems(hList);
-        //highList->setCurrentIndex(parser.getElement(2,4).toInt());
-        //duhrBox->setValue(parser.getElement(2,1).toInt());
+
         if (asrMethod == 0) shafiiButton->setChecked(true);
         else hanafiButton->setChecked(true);
         //hijriBox->setValue(parser.getElement(2,3).toInt());            
@@ -99,15 +103,13 @@ void Qcalculation::init()
 void Qcalculation::setUI()
 {
     setWindowIcon(QIcon(path+"images/mecque.png"));
-    okButton->setIcon(style()->standardIcon(QStyle::SP_DialogOkButton));
     saveButton->setIcon(style()->standardIcon(QStyle::SP_DialogApplyButton));
     cancelButton->setIcon(style()->standardIcon(QStyle::SP_DialogCancelButton));
 }
 
 //
 void Qcalculation::setActions(){   
-    connect(saveButton,SIGNAL(clicked()),this,SLOT(apply()));
-    connect(okButton,SIGNAL(clicked()),this,SLOT(save()));
+    connect(saveButton,SIGNAL(clicked()),this,SLOT(save()));
     connect(cancelButton,SIGNAL(clicked()),this,SLOT(cancel()));   
 }
 
@@ -119,26 +121,9 @@ void Qcalculation::apply()
     calcMethod = calcList->currentIndex();
     asrMethod = asrChecked;
     db->setTable("calculation");   
-    //~ parser.changeElement(QString::number(calcList->currentIndex()),2,0);   
-    //~ parser.changeElement(QString::number(asrChecked),2,2);
-    //~ parser.changeElement(QString::number(hijriBox->value()),2,3);
-    //~ parser.changeElement(QString::number(highList->currentIndex()),2,4);
     db->update("method",QString::number(calcList->currentIndex()));
     db->update("asr",QString::number(asrChecked));
-    /*if (asrMethod != asrChecked){
-        //prayers->setAsrMethod(asrChecked);
-        QString *times_ = new QString[7];
-        //times_ = prayers->getDatePrayerTimes(date.year(),date.month(),date.day(),parser.getElement(0,0).toDouble(),parser.getElement(0,1).toDouble(),parser.getElement(0,4).toDouble());    
-        asrMinutes = calcTime(times[3],times_[3]);        
-    }
-    else{
-        asrMinutes = 0;
-    }*/
-    //int temp = setDuhrMinutes() + asrMinutes;
     asrMinutes = 0;
-    //parser.changeElement(QString::number(duhrBox->value()),2,1);
-    //parser.saveData(file);
-    //DomParser::changed = true;
     emit(calculationChanged());
 }
 
@@ -166,14 +151,16 @@ int Qcalculation::calcTime(QString time1,QString time2){
 
 //
 int Qcalculation::getDuhrMinutes(){
-    return duhrBox->maximum() - parser.getElement(2,1).toInt();
+    //return duhrBox->maximum() - parser.getElement(2,1).toInt();
+    return 0;
 }
 
 //
 int Qcalculation::setDuhrMinutes(){
-    int result = duhrBox->maximum() - duhrBox->value();
-    if (result < 0) return 0;
-    else return result;
+    //int result = duhrBox->maximum() - duhrBox->value();
+    //if (result < 0) return 0;
+    //else return result;
+    return 0;
 }
 
 //calculate time diffrence between duhr and asr

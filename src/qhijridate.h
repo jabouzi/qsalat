@@ -34,6 +34,7 @@ Q_OBJECT
 public:
     Qhijridate( QWidget * parent = 0, Qt::WFlags f = 0 );    
     void init();
+    void setPath(QString);
     
 protected:
     void closeEvent(QCloseEvent *);

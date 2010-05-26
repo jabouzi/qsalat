@@ -35,6 +35,7 @@ Qqibla::Qqibla( QWidget * parent, Qt::WFlags f)
 void Qqibla::setPath(QString lpath)
 {
     path = lpath;
+    setWindowIcon(QIcon(path+"images/mecque.png"));
 }
 
 void Qqibla::setLatitude(double latde)
@@ -48,8 +49,7 @@ void Qqibla::setLongitude(double lngtde)
 
 // 
 void Qqibla::init()
-{
-    setWindowIcon(QIcon(path+"images/mecque.png"));
+{    
     qiblaAngle = getQibla();        
     update();
 }

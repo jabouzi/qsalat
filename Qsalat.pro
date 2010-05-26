@@ -18,16 +18,13 @@ FORMS = ui/salat.ui \
  ui/location.ui \
  ui/audio.ui \
  ui/calculation.ui \
- ui/monthly.ui \
- ui/yearly.ui 
+ ui/calendar.ui 
 HEADERS = src/qsalat.h \
  src/qpray.h \
  src/qhijri.h \
  src/qqibla.h \
  src/qlocation.h \
  src/qaudio.h \
- src/qmonthly.h \
- src/qyearly.h \
  src/qworldTime.h \
  src/qcalculation.h \
  src/qhijridate.h \
@@ -40,8 +37,6 @@ SOURCES = src/qsalat.cpp \
  src/qqibla.cpp \
  src/qlocation.cpp \
  src/qaudio.cpp \
- src/qmonthly.cpp \
- src/qyearly.cpp \
  src/qcalculation.cpp \
  src/qworldTime.cpp \
  src/qhijridate.cpp \

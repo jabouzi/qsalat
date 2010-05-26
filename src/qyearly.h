@@ -26,9 +26,7 @@
 
 #include <QtGui>
 #include "ui_yearly.h"
-#include "utils.h"
 #include "qpray.h"
-#include "domparser.h"
 
 class Qyearly : public QDialog, public Ui::Yearly
 {
@@ -49,7 +47,6 @@ private:
     void setActions();
     QDate date;
     Qpray *prayers;
-    DomParser parser;
     QString file;
     int calcMethod;
     int asrMethod;
