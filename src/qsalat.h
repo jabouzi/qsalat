@@ -41,6 +41,7 @@
 #include "qhijridate.h"
 #include "alarm.h"
 #include "database.h"
+#include "log.h"
 
 //
 class Qsalat : public QMainWindow, public Ui::Salat
@@ -94,6 +95,7 @@ private:
     QString path;    
     QStringList audioList;
     Database *db;
+    Log *pLog;
     
     // private methods
     void init();      

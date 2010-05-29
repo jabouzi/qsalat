@@ -5,6 +5,7 @@ Database* Database::single = NULL;
 
 Database::Database() 
 {
+    pLog = new Log("errors.log");
     db = QSqlDatabase::addDatabase("QSQLITE");    
 }
 
@@ -38,10 +39,10 @@ void Database::setDatabase()
 }
 
 void Database::prepareDB()
-{
+{    
     db.open(); 
     if (!tablesExists())
-    {
+    {        
         createTables();
     }   
 } 
@@ -64,11 +65,12 @@ void Database::selectAll()
 }
 
 QString Database::select(QString select)
-{   
+{       
     prepareDB();
     QSqlQuery query;
     QString sql = "SELECT "+select+" FROM "+table+" "+sqlWhere;
-    qDebug("%s",sql.toLatin1().data());
+    //qDebug("%s",sql.toLatin1().data());
+    pLog->Write(sql);
     query.exec(sql);
     int field = query.record().indexOf(select);
     query.next();
@@ -87,7 +89,8 @@ void Database::update(QString field, QString value)
     prepareDB();
     QSqlQuery query;    
     QString sql = "UPDATE "+table+" SET "+field+" = '"+value+"' "+sqlWhere;
-    qDebug("%s",sql.toLatin1().data());
+    //qDebug("%s",sql.toLatin1().data());
+    pLog->Write(sql);
     query.exec(sql);
 }
 
@@ -134,7 +137,8 @@ bool Database::tablesExists()
 
 void Database::createTables()
 {
-    qDebug("##CREATE##");
+    //qDebug("##CREATE##");
+    pLog->Write("##CREATE##");
     QSqlQuery query;
     query.exec ("CREATE TABLE audio (id integer, athan string, fajr string, dua string, playAthan integer, playDua integer)");
     query.exec ("CREATE TABLE calculation (id integer, method integer, fajr integer, duhr integer, asr integer, hijri integer, higherLat integer)");

@@ -26,7 +26,7 @@
 Qsalat::Qsalat( QWidget * parent, Qt::WFlags f) 
     : QMainWindow(parent, f)
 {
-
+    pLog = new Log("errors.log");
     path = QCoreApplication::applicationDirPath ();
     if (path.data()[path.size() - 1] != '/') path += "/";
     setupUi(this);
@@ -50,7 +50,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     getSalats();
     getHijri();
     createTrayIcon();
-    startSalatAlarm();
+    startSalatAlarm();    
 }
 
 /**    
@@ -389,6 +389,12 @@ QString Qsalat::getNextSalat()
         salatOrder = 5;
         salatTitle = "Midnight ";
    }
+   pLog->Write(timeOfSalat);
+   pLog->Write(QString::number(salatOrder));
+   pLog->Write(salatTitle);
+   //qDebug("%s",timeOfSalat.toLatin1().data());
+   //qDebug("%s",QString::number(salatOrder).toLatin1().data());
+   //qDebug("%s",salatTitle.toLatin1().data());
    return timeOfSalat;
 }
 
