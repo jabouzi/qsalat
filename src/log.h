@@ -14,7 +14,7 @@ class Log {
     ~Log();
     void Write(QString);
   private:    
-	QString fileName;
+    QString fileName;
 };
 
 #endif

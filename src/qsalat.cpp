@@ -47,6 +47,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     initCalculation();
     initCalculationObject();
     initHijriDateObject();
+    initCalendarObject();
     getSalats();
     getHijri();
     createTrayIcon();
@@ -78,7 +79,10 @@ void Qsalat::initLocation()
     longitude = db->select("longitude").toDouble(); 
     city = db->select("city");
     country = db->select("country");
-    timezone = db->select("timezone").toInt();    
+    timezone = db->select("timezone").toInt();   
+    pLog->Write(QString::number(latitude)); 
+    pLog->Write(QString::number(longitude)); 
+    pLog->Write(QString::number(timezone)); 
 }
 
 void Qsalat::initLocationObject()
@@ -144,6 +148,17 @@ void Qsalat::initCalculationObject()
 void Qsalat::initHijriDateObject()
 {
     hijridate.setPath(path);
+}
+
+void Qsalat::initCalendarObject()
+{
+    calendar.setPath(path);
+    calendar.setLatitude(latitude);
+    calendar.setLongitude(longitude);
+    calendar.setTimezone(timezone);
+    calendar.setCalculationMethod(calcMethod);
+    calendar.setAsrMethod(asrMethod);
+    calendar.init();
 }
 
 /**    
@@ -243,8 +258,7 @@ void Qsalat::closeEvent(QCloseEvent *event)
     audio.hide();
     calculation.hide();
     worldtime.hide();
-    //monthly.hide();
-   // yearly.hide();
+    calendar.hide();
     hijridate.hide();
 }
 
@@ -269,8 +283,7 @@ void Qsalat::createActions()
     connect(actionAudio, SIGNAL(triggered()), this, SLOT(showAudio()));     
     connect(actionCalculation_options, SIGNAL(triggered()), this, SLOT(showCalculation()));    
     connect(actionWorldtime, SIGNAL(triggered()), this, SLOT(showWorldtime()));
-    connect(actionGenerate_monthly_prayer_times, SIGNAL(triggered()), this, SLOT(showMonthly()));
-    connect(actionGenerate_yearly_prayer_times, SIGNAL(triggered()), this, SLOT(showYearly())); 
+    connect(actionGenerate_prayer_times, SIGNAL(triggered()), this, SLOT(showCalendar()));
     connect(actionHijri_date, SIGNAL(triggered()), this, SLOT(showHijridate())); 
     actionQuit->setShortcut(tr("Ctrl+Q"));    
     connect(actionQuit, SIGNAL(triggered()), qApp, SLOT(quit()));    
@@ -392,9 +405,6 @@ QString Qsalat::getNextSalat()
    pLog->Write(timeOfSalat);
    pLog->Write(QString::number(salatOrder));
    pLog->Write(salatTitle);
-   //qDebug("%s",timeOfSalat.toLatin1().data());
-   //qDebug("%s",QString::number(salatOrder).toLatin1().data());
-   //qDebug("%s",salatTitle.toLatin1().data());
    return timeOfSalat;
 }
 
@@ -506,15 +516,15 @@ void Qsalat::showWorldtime(){
 /**    
  * show monthly prayer window function : show the salat time for one month
  */
-//~ void Qsalat::showMonthly(){    
-    //~ if (monthly.isHidden()){        
-        //~ monthly.show();
-    //~ }    
-    //~ else{        
-        //~ monthly.activateWindow();
-        //~ monthly.raise();        
-    //~ }    
-//~ }
+void Qsalat::showCalendar(){    
+    if (calendar.isHidden()){        
+        calendar.show();
+    }    
+    else{        
+        calendar.activateWindow();
+        calendar.raise();        
+    }    
+}
 
 /**    
  * show yearly prayer window function : show the salat time for one year
@@ -556,7 +566,7 @@ void Qsalat::_about()
 /**    
  * close all windows when the main window is closed 
  */
-void::Qsalat::_hide()
+void Qsalat::_hide()
 {
     hide();    
     if (!qibla.isHidden()){        
@@ -574,9 +584,9 @@ void::Qsalat::_hide()
     if (!worldtime.isHidden()){        
         worldtime.hide();
     }    
-    //~ if (!monthly.isHidden()){        
-        //~ monthly.hide();
-    //~ }    
+    if (!calendar.isHidden()){        
+        calendar.hide();
+    }    
     //~ if (!yearly.isHidden()){        
         //~ yearly.hide();
     //~ }    

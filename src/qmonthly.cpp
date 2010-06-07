@@ -1,6 +1,6 @@
 /****************************************************************************
 ** Qsalat project V1.0
-** qmonthly.cpp
+** qcalendar.cpp
 **
 ** Copyright (C) 2008 Skander Jabouzi (Skander Software Solutions).
 ** Contact: skander@skanderjabouzi.com or jabouzi@gmail.com
@@ -21,10 +21,10 @@
 **
 ***************************************************************************/
 
-#include "qmonthly.h"
+#include "qcalendar.h"
 
 //
-Qmonthly::Qmonthly( QWidget * parent, Qt::WFlags f) 
+Qcalendar::Qcalendar( QWidget * parent, Qt::WFlags f) 
     : QDialog(parent, f)
 {
 #ifdef Q_WS_WIN
@@ -49,14 +49,14 @@ Qmonthly::Qmonthly( QWidget * parent, Qt::WFlags f)
 }
 
 //
-void Qmonthly::closeEvent(QCloseEvent *event)
+void Qcalendar::closeEvent(QCloseEvent *event)
 {
     hide();
     event->ignore();
 }
 
 //
-void Qmonthly::init()
+void Qcalendar::init()
 {
     yearBox->setValue(date.year());
     calcMethod = parser.getElement(2,0).toInt();
@@ -65,14 +65,14 @@ void Qmonthly::init()
 }
 
 //
-void Qmonthly::setActions()
+void Qcalendar::setActions()
 {
     connect(selectButton, SIGNAL(clicked()), this, SLOT(load()));
     connect(generateButton, SIGNAL(clicked()), this, SLOT(generate()));
 }
 
 //
-void Qmonthly::setUI()
+void Qcalendar::setUI()
 {
     setWindowIcon(QIcon(path+"images/mecque.png"));
     selectButton->setIcon(style()->standardIcon(QStyle::SP_DialogOpenButton));
@@ -80,7 +80,7 @@ void Qmonthly::setUI()
 }
 
 //
-void Qmonthly::setMethods()
+void Qcalendar::setMethods()
 {
     QStringList list;    
     list << "January"<<"February"<<"March"<<"April"<<"May"<<"June"<<"July"<<"August"<<"September"
@@ -89,13 +89,13 @@ void Qmonthly::setMethods()
 }
 
 //load loaction to save html file
-void Qmonthly::load()
+void Qcalendar::load()
 {
     pathEdit->setText(QFileDialog::getExistingDirectory(this, tr("Select Directory"),"/home",QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks));
 }
 
-//generate monthly prayer times
-void Qmonthly::generate()
+//generate calendar prayer times
+void Qcalendar::generate()
 {
     if (pathEdit->text().length() == 0) QMessageBox::warning(this, tr("My Application"),"No folder selected",QMessageBox::Ok);
     else{
@@ -124,7 +124,7 @@ void Qmonthly::generate()
         text += "</tbody></table></body></html>";
         QString slash = "";
         if (pathEdit->text().data()[pathEdit->text().size() - 1] != '/') slash = "/";        
-        utils.saveFile(pathEdit->text()+slash+"monthly.html", text);
-        QDesktopServices::openUrl(QUrl::fromLocalFile(pathEdit->text()+slash+"monthly.html"));
+        utils.saveFile(pathEdit->text()+slash+"calendar.html", text);
+        QDesktopServices::openUrl(QUrl::fromLocalFile(pathEdit->text()+slash+"calendar.html"));
     }
 }

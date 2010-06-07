@@ -39,6 +39,7 @@
 #include "qcalculation.h"
 #include "qworldTime.h"
 #include "qhijridate.h"
+#include "qcalendar.h"
 #include "alarm.h"
 #include "database.h"
 #include "log.h"
@@ -67,7 +68,7 @@ private:
     int day;
     double latitude;
     double longitude;
-    double timezone;
+    int timezone;
     QString country;
     QString city;        
     Qlocation location;
@@ -76,8 +77,7 @@ private:
     Qaudio audio;
     Qcalculation calculation;
     Qworldtime worldtime;
-   // Qmonthly monthly;
-   // Qyearly yearly;
+    Qcalendar calendar;
     Qhijridate hijridate; 
     QString file;    
     int timer;    
@@ -126,6 +126,7 @@ private:
     void initAudioObject();
     void initQiblaObject();
     void initHijriDateObject();
+    void initCalendarObject();
     
 private slots:
     void iconActivated(QSystemTrayIcon::ActivationReason);
@@ -134,7 +135,7 @@ private slots:
     void showAudio();
     void showCalculation();
     void showWorldtime();
-   // void showMonthly();
+    void showCalendar();
    // void showYearly();
     void showHijridate();
     void _about();

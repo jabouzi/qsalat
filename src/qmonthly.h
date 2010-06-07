@@ -1,6 +1,6 @@
 /****************************************************************************
 ** Qsalat project V1.0
-** qmonthly.h
+** calendar.h
 **
 ** Copyright (C) 2008 Skander Jabouzi (Skander Software Solutions).
 ** Contact: skander@skanderjabouzi.com or jabouzi@gmail.com
@@ -21,19 +21,19 @@
 **
 ***************************************************************************/
 
-#ifndef __QMONTHLY_H__
-#define __QMONTHLY_H__
+#ifndef __QCALENDAR_H__
+#define __QCALENDAR_H__
 
 #include <QtGui>
 #include <QString>
-#include "ui_monthly.h"
+#include "ui_calendar.h"
 #include "qpray.h"
 
-class Qmonthly : public QDialog, public Ui::Monthly
+class Qcalendar : public QDialog, public Ui::Calendar
 {
 Q_OBJECT
 public:
-    Qmonthly( QWidget * parent = 0, Qt::WFlags f = 0 );    
+    Qcalendar( QWidget * parent = 0, Qt::WFlags f = 0 );    
     
 protected:
     void closeEvent(QCloseEvent *);
@@ -57,4 +57,4 @@ private:
 };
 
 
-#endif // __QMONTHLY_H__
+#endif // __QCALENDAR_H__

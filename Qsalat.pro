@@ -30,6 +30,7 @@ HEADERS = src/qsalat.h \
  src/qhijridate.h \
  src/alarm.h \
  src/database.h \
+ src/qcalendar.h \
  src/log.h
 SOURCES = src/qsalat.cpp \
  src/main.cpp \
@@ -43,6 +44,7 @@ SOURCES = src/qsalat.cpp \
  src/qhijridate.cpp \
  src/alarm.cpp \
  src/database.cpp \
+ src/qcalendar.cpp \
  src/log.cpp
 RESOURCES += qrc/salat.qrc qrc/qibla.qrc qrc/worldtime.qrc
 TRANSLATIONS = en/qsalat_en.ts fr/qsalat_fr.ts
