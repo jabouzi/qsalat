@@ -3,7 +3,7 @@
 Alarm::Alarm(QObject* parent) :
     QObject(parent)
 {
-
+    pLog = new Log("errors.log");
 }
 
 void Alarm::init()
@@ -28,13 +28,15 @@ void Alarm::setAlarm()
     timeLeft = now.secsTo(alarmTime);
     if (timeLeft > 0)
     {
-        qDebug("There are %d seconds to alarm", now.secsTo(alarmTime));
+        //qDebug("There are %d seconds to alarm", now.secsTo(alarmTime));
+        pLog->Write("There are "+QString::number(now.secsTo(alarmTime))+" seconds to alarm");
         timeToAlarm = timeLeft*1000;
         startAlarm();
     }
     else
     {
-        qDebug("There are %d seconds passed", abs(now.secsTo(alarmTime)));
+        //qDebug("There are %d seconds passed", abs(now.secsTo(alarmTime)));
+        pLog->Write("There are "+QString::number(now.secsTo(alarmTime))+" seconds passed");
         stopAlarm();
     }
 }
@@ -47,7 +49,8 @@ void Alarm::startAlarm()
 void Alarm::stopAlarm()
 {
     timer->stop();
-    qDebug("Alarm stopped");
+    //qDebug("Alarm stopped");
+    pLog->Write("Alarm stopped");
 }
 
 void Alarm::setYear(int year_)

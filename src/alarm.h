@@ -6,6 +6,7 @@
 #include <QDateTime>
 #include <QCoreApplication>
 #include <stdlib.h>
+#include "log.h"
 
 class Alarm : public QObject
 {  
@@ -33,7 +34,8 @@ class Alarm : public QObject
         int seconds;
         int timeToAlarm;
         int timeLeft;
-        QTimer *timer;       
+        QTimer *timer;   
+        Log *pLog;    
         
     private slots:
         void finishAalarm();
