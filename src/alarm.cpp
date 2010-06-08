@@ -47,6 +47,7 @@ void Alarm::startAlarm()
 void Alarm::stopAlarm()
 {
     timer->stop();
+    qDebug("Alarm stopped");
 }
 
 void Alarm::setYear(int year_)

@@ -112,7 +112,7 @@ void Qsalat::initAudio()
     fajrAudio = db->select("fajr");
     duaAudio = db->select("dua"); 
     playAthan = db->select("playAthan").toInt(); 
-    playDua = db->select("playDua").toInt(); 
+    playDua = db->select("playDua").toInt();     
 }
 
 void Qsalat::initAudioObject()
@@ -427,6 +427,10 @@ void Qsalat::startSalatAlarm()
         alarm.setSeconds(time.second());
         alarm.setAlarm();
     }
+    else
+    {
+        alarm.stopAlarm();
+    }
 } 
 
 // Private Slots
@@ -620,6 +624,7 @@ void Qsalat::setPlayer(QStringList files, QString label)
  
 void Qsalat::itsSalatTime()
 {
+    pLog->Write("Its Athan of "+salatTitle);
     if (salatOrder > 4)
     {
         init();      
