@@ -24,6 +24,7 @@ class Alarm : public QObject
         void setAlarm();
         void init();
         int getTimeLeft();
+        bool isActive();
     
     private:    
         int year;

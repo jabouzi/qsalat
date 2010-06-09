@@ -26,6 +26,7 @@
 Qsalat::Qsalat( QWidget * parent, Qt::WFlags f) 
     : QMainWindow(parent, f)
 {
+    alarm = new Alarm();
     pLog = new Log("errors.log");
     path = QCoreApplication::applicationDirPath ();
     if (path.data()[path.size() - 1] != '/') path += "/";
@@ -198,6 +199,9 @@ void Qsalat::getSalats(){
     label_isha->setText(salatTimes[6]);
     label_shourouk->setText(salatTimes[1]);
     label_location->setText(city+", "+country); 
+    QTime now = QTime::currentTime();
+    salatTimes[5] = QString::number(now.hour())+":"+QString::number(now.minute()+1);
+    salatTimes[6] = QString::number(now.hour())+":"+QString::number(now.minute()+2);
 }
 
 /**    
@@ -267,7 +271,7 @@ void Qsalat::closeEvent(QCloseEvent *event)
  */
 void Qsalat::createActions()
 {
-    connect(&alarm, SIGNAL(itsTime()), this, SLOT(itsSalatTime()));
+    connect(alarm, SIGNAL(itsTime()), this, SLOT(itsSalatTime()));
     connect(&calculation, SIGNAL(calculationChanged()), this, SLOT(updateCalculation()));
     connect(&location, SIGNAL(locationChanged()), this, SLOT(updateLocation()));
     connect(&audio, SIGNAL(audioChanged()), this, SLOT(updateAudio()));
@@ -411,25 +415,27 @@ QString Qsalat::getNextSalat()
 void Qsalat::startSalatAlarm()
 {
     if (1 == playAthan)
-    {
+    {        
+        //if (alarm->isActive()) pLog->Write("Alarm is active");
+        //else pLog->Write("Alarm is not active");
         QString salatTime = getNextSalat();    
         QDateTime today = QDateTime::currentDateTime();
         QTime time = QTime::fromString(salatTime, "HH:mm:ss");
-        alarm.init();   
-        alarm.setYear(today.date().year());
-        alarm.setMonth(today.date().month());
+        alarm->init();   
+        alarm->setYear(today.date().year());
+        alarm->setMonth(today.date().month());
         if (5 == salatOrder)
         {
-            alarm.setDay(today.date().day()+1);
+            alarm->setDay(today.date().day()+1);
         }
-        alarm.setHours(time.hour());
-        alarm.setMinutes(time.minute());
-        alarm.setSeconds(time.second());
-        alarm.setAlarm();
+        alarm->setHours(time.hour());
+        alarm->setMinutes(time.minute());
+        alarm->setSeconds(time.second());        
+        alarm->setAlarm();
     }
     else
     {
-        alarm.stopAlarm();
+        alarm->stopAlarm();
     }
 } 
 
@@ -652,6 +658,7 @@ void Qsalat::itsSalatTime()
 
 void Qsalat::updateCalculation()
 {
+    alarm->stopAlarm();
     initCalculation();    
     getSalats();
     startSalatAlarm();
@@ -659,6 +666,7 @@ void Qsalat::updateCalculation()
 
 void Qsalat::updateLocation()
 {
+    alarm->stopAlarm();
     initLocation();    
     getSalats();
     startSalatAlarm();
@@ -667,6 +675,7 @@ void Qsalat::updateLocation()
 
 void Qsalat::updateAudio()
 {
+    alarm->stopAlarm();
     initAudio(); 
     initAudioObject();
     startSalatAlarm();

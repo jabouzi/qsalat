@@ -22,7 +22,9 @@ void Alarm::init()
 
 void Alarm::setAlarm()
 {
-    stopAlarm();
+    //stopAlarm();
+    if (timer->isActive()) pLog->Write("is active");
+    else pLog->Write("not active");
     QDateTime now = QDateTime::currentDateTime();
     QDateTime alarmTime(QDate(year, month, day), QTime(hours, minutes, seconds));
     timeLeft = now.secsTo(alarmTime);
@@ -43,13 +45,24 @@ void Alarm::setAlarm()
 
 void Alarm::startAlarm()
 {
-    timer->start(timeToAlarm);
+    if (timer->isActive()) 
+    {
+        pLog->Write("Alarm is active");
+        timer->stop();
+    }
+    else 
+    {   
+        pLog->Write("Alarm not active");
+        timer->start(timeToAlarm);
+        pLog->Write("Timer ID : "+QString::number(timer->timerId()));
+    }
 }
 
 void Alarm::stopAlarm()
 {
+    pLog->Write("Timerz ID : "+QString::number(timer->timerId()));
     timer->stop();
-    //qDebug("Alarm stopped");
+    pLog->Write("Timerz ID : "+QString::number(timer->timerId()));
     pLog->Write("Alarm stopped");
 }
 
@@ -97,4 +110,9 @@ void Alarm::printMassage()
 int Alarm::getTimeLeft()
 {
     return timeLeft;
+}
+
+bool Alarm::isActive()
+{
+    return timer->isActive();
 }

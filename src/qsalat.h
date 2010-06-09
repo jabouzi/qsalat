@@ -53,7 +53,7 @@ public:
     
 private:    
     // private members
-    Alarm alarm; 
+    Alarm * alarm; 
     QString timeOfSalat;
     Qpray *prayers;
     Qhijri *hijri;
