@@ -53,3 +53,78 @@ table a:hover {
 tfoot th, tfoot td {
 	font-size: 85%;
 }
+
+#tab0{
+	margin-bottom:50px;
+	float:left;
+	margin-right:20px;	
+}
+
+#tab1{
+	margin-bottom:50px;
+	float:left;
+	margin-right:20px;
+}
+
+#tab2{
+	margin-bottom:50px;
+	float:left;
+	margin-right:100px;	
+}
+
+#tab3{
+	margin-bottom:50px;
+	float:left;
+	margin-right:20px;
+	clear:left;
+}
+
+#tab4{
+	margin-bottom:50px;
+	float:left;
+	margin-right:20px;
+}
+
+#tab5{
+	margin-bottom:50px;
+	float:left;
+	margin-right:100px;
+}
+
+#tab6{
+	margin-bottom:50px;
+	float:left;
+	margin-right:20px;
+	clear:left;
+}
+
+#tab7{
+	margin-bottom:50px;
+	float:left;
+	margin-right:20px;	
+}
+
+#tab8{
+	margin-bottom:50px;
+	float:left;
+	margin-right:100px;
+}
+
+#tab9{
+	margin-bottom:50px;
+	float:left;
+	margin-right:20px;
+	clear:left;
+}
+
+#tab10{
+	margin-bottom:50px;
+	float:left;
+	margin-right:20px;
+}
+
+#tab11{
+	margin-bottom:50px;
+	float:left;
+	margin-right:100px;
+}

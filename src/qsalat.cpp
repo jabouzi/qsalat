@@ -200,8 +200,8 @@ void Qsalat::getSalats(){
     label_shourouk->setText(salatTimes[1]);
     label_location->setText(city+", "+country); 
     QTime now = QTime::currentTime();
-    salatTimes[5] = QString::number(now.hour())+":"+QString::number(now.minute()+1);
-    salatTimes[6] = QString::number(now.hour())+":"+QString::number(now.minute()+2);
+    //salatTimes[2] = QString::number(now.hour())+":"+QString::number(now.minute()+1);
+    //salatTimes[3] = QString::number(now.hour())+":"+QString::number(now.minute()+2);
 }
 
 /**    
