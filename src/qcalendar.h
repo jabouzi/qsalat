@@ -26,6 +26,9 @@
 
 #include <QtGui>
 #include <QString>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QDir>
 #include "ui_calendar.h"
 #include "qpray.h"
 #include "log.h"

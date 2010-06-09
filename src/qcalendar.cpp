@@ -194,6 +194,21 @@ void Qcalendar::setMonths()
 //generate calendar prayer times
 void Qcalendar::generate()
 {
+    QFile file0("data/.header");    
+    file0.open(QIODevice::ReadOnly|QIODevice::Text);
+    QString data0 = QString::fromUtf8(file0.readAll()); 
+    QFile file1("data/.body");    
+    file1.open(QIODevice::ReadOnly|QIODevice::Text);
+    QString data1 = QString::fromUtf8(file1.readAll());        
+    QFile file2("data/.footer");    
+    file2.open(QIODevice::ReadOnly|QIODevice::Text);
+    QString data2 = QString::fromUtf8(file2.readAll());
+    
+    QFile file("data/salats.html");    
+    if (file.open(QIODevice::WriteOnly|QIODevice::Text)) {
+        file.write(data0.toUtf8()); 
+        
+    
     setMonths();
     pLog->Write(QString::number(latitude));
     pLog->Write(QString::number(longitude));
@@ -202,17 +217,54 @@ void Qcalendar::generate()
     pLog->Write(" ");    
     for (int i = 0; i < months.size(); i++)
     {
-        pLog->Write(months.at(i));
-        int index[] = {0,2,3,5,6};
-        for (int j = 1; j <= days.at(i); j++){
-            pLog->Write(QString::number(j));
-            salatTimes = prayers->getDatePrayerTimes(date.year(),monthNumber.at(i),j,latitude,longitude,timezone);
-            for (int k = 0; k < 5; k++){
-                pLog->Write(salatTimes[index[k]]);
-            }
-        }    
-        pLog->Write(" ");    
+        file.write("<script type=\"text/javascript\">");
+        file.write("$(document).ready(function(){");
+        file.write("$(\"#tab"+QString::number(i)+"\").tablesorter();");
+        file.write("});");
+        file.write("</script>");
     }
+    file.write(data0.toUtf8());
+    for (int i = 0; i < months.size(); i++)
+    {
+        file.write("<table id=\"tab"+QString::number(i)+"\" class=\"tablesorter\">");
+        file.write("<thead>");
+        file.write("<tr>");
+            file.write("<th style=\"cursor:pointer;\" scope=\"col\">Date</th>");
+            file.write("<th style=\"cursor:pointer;\" scope=\"col\">Fajr</th>");
+            file.write("<th style=\"cursor:pointer;\" scope=\"col\">Shourouk</th>");
+            file.write("<th style=\"cursor:pointer;\" scope=\"col\">Duhr</th>");
+            file.write("<th style=\"cursor:pointer;\" scope=\"col\">Asr/th>");
+            file.write("<th style=\"cursor:pointer;\" scope=\"col\">Maghrib</th>");
+            file.write("<th style=\"cursor:pointer;\" scope=\"col\">Isha</th>");
+        file.write("</tr>");
+        file.write("</thead>");
+        file.write("<tbody>");   
+        
+        //pLog->Write(months.at(i));
+        int index[] = {0,1,2,3,5,6};
+        for (int j = 1; j <= days.at(i); j++){
+            file.write("<tr>\n"); 
+            file.write("<td>");   
+            file.write(QString::number(j));
+            file.write("</td>\n");   
+            //pLog->Write(QString::number(j));
+            salatTimes = prayers->getDatePrayerTimes(date.year(),monthNumber.at(i),j,latitude,longitude,timezone);
+            for (int k = 0; k < 6; k++){
+                file.write("<td>");   
+                file.write(salatTimes[index[k]]);
+                file.write("</td>\n");  
+                //pLog->Write(salatTimes[index[k]]);
+            }
+            file.write("</tr>\n");  
+        }    
+        //pLog->Write(" ");    
+    }
+    file.write(data1.toUtf8());    
+    QDir dir;
+    QDesktopServices::openUrl(QUrl("file:///"+dir.currentPath()+"/data/salats.html"));  
+    
+    
+    
 }
 
 void Qcalendar::selectAll()
