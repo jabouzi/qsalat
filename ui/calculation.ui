@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>370</width>
+    <width>372</width>
     <height>420</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>370</width>
+    <width>372</width>
     <height>420</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>370</width>
+    <width>372</width>
     <height>420</height>
    </size>
   </property>
@@ -30,7 +30,7 @@
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>341</width>
+     <width>351</width>
      <height>111</height>
     </rect>
    </property>
@@ -81,10 +81,10 @@
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>160</y>
-     <width>141</width>
-     <height>91</height>
+     <width>161</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -102,7 +102,7 @@
    <widget class="QRadioButton" name="shafiiButton">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>60</y>
       <width>101</width>
       <height>24</height>
@@ -118,7 +118,7 @@
    <widget class="QRadioButton" name="hanafiButton">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>80</x>
       <y>60</y>
       <width>81</width>
       <height>24</height>
@@ -143,7 +143,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Select asr method</string>
+     <string>  Select asr method</string>
     </property>
    </widget>
   </widget>
@@ -153,7 +153,7 @@
      <x>180</x>
      <y>160</y>
      <width>181</width>
-     <height>111</height>
+     <height>101</height>
     </rect>
    </property>
    <property name="title">
@@ -174,7 +174,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Set high Latitudes option</string>
+     <string>  Set high Latitudes option</string>
     </property>
    </widget>
    <widget class="QComboBox" name="highList">
@@ -204,9 +204,9 @@
   <widget class="QGroupBox" name="groupBox_5">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>270</y>
-     <width>181</width>
+     <width>161</width>
      <height>111</height>
     </rect>
    </property>
