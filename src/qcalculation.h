@@ -59,8 +59,8 @@ private:
     QString *times;
     int calcMethod;
     int asrMethod;
-    int duhrMinutes;
-    int asrMinutes;
+    //int duhrMinutes;
+    //int asrMinutes;
     Database *db;
     
     void initDB();

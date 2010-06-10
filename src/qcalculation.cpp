@@ -122,8 +122,8 @@ void Qcalculation::apply()
     asrMethod = asrChecked;
     db->setTable("calculation");   
     db->update("method",QString::number(calcList->currentIndex()));
-    db->update("asr",QString::number(asrChecked));
-    asrMinutes = 0;
+    db->update("asr",QString::number(asrChecked));    
+    db->update("hijri",QString::number(hijriBox->value()));    
     emit(calculationChanged());
 }
 

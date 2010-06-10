@@ -205,53 +205,53 @@ void Qcalendar::generate()
     QFile file("data/salats.html");    
     if (file.open(QIODevice::WriteOnly|QIODevice::Text)) {
         file.write(data0.toUtf8()); 
-		setMonths();  
-		for (int i = 0; i < months.size(); i++)
-		{
-			file.write("<script type=\"text/javascript\">\n");
-			file.write("$(document).ready(function(){\n");
-			file.write("$(\"#tab"+QString::number(i).toUtf8()+"\").tablesorter();\n");
-			file.write("});\n");
-			file.write("</script>\n");
-		}
-		file.write(data1.toUtf8());
-		for (int i = 0; i < months.size(); i++)
-		{
-			file.write("<table id=\"tab"+QString::number(i).toUtf8()+"\" class=\"tablesorter\">\n");
-			file.write("<caption>"+months.at(i).toUtf8()+"</caption>\n");
-			file.write("<thead>\n");
-			file.write("<tr>\n");
-				file.write("<th style=\"cursor:pointer;\" scope=\"col\">Date</th>\n");
-				file.write("<th style=\"cursor:pointer;\" scope=\"col\">Fajr</th>\n");
-				file.write("<th style=\"cursor:pointer;\" scope=\"col\">Shourouk</th>\n");
-				file.write("<th style=\"cursor:pointer;\" scope=\"col\">Duhr</th>\n");
-				file.write("<th style=\"cursor:pointer;\" scope=\"col\">Asr</th>\n");
-				file.write("<th style=\"cursor:pointer;\" scope=\"col\">Maghrib</th>\n");
-				file.write("<th style=\"cursor:pointer;\" scope=\"col\">Isha</th>\n");
-			file.write("</tr>\n");
-			file.write("</thead>\n");
-			file.write("<tbody>\n"); 
-			int index[] = {0,1,2,3,5,6};
-			for (int j = 1; j <= days.at(i); j++){
-				file.write("<tr>\n"); 
-				file.write("<td>");   
-				file.write(QString::number(j).toUtf8());
-				file.write("</td>\n");   
-				salatTimes = prayers->getDatePrayerTimes(date.year(),monthNumber.at(i),j,latitude,longitude,timezone);
-				for (int k = 0; k < 6; k++){
-					file.write("<td>");   
-					file.write(salatTimes[index[k]].toUtf8());
-					file.write("</td>\n");  
-				}
-				file.write("</tr>\n");  
-			}    
-			
-			file.write("</tbody>\n");  
-			file.write("</table>\n");  
-			//file.write("<br /><br />\n");  
-		}
-		file.write(data2.toUtf8());    
-	}
+        setMonths();  
+        for (int i = 0; i < months.size(); i++)
+        {
+            file.write("<script type=\"text/javascript\">\n");
+            file.write("$(document).ready(function(){\n");
+            file.write("$(\"#tab"+QString::number(i).toUtf8()+"\").tablesorter();\n");
+            file.write("});\n");
+            file.write("</script>\n");
+        }
+        file.write(data1.toUtf8());
+        for (int i = 0; i < months.size(); i++)
+        {
+            file.write("<table id=\"tab"+QString::number(i).toUtf8()+"\" class=\"tablesorter\">\n");
+            file.write("<caption>"+months.at(i).toUtf8()+"</caption>\n");
+            file.write("<thead>\n");
+            file.write("<tr>\n");
+                file.write("<th style=\"cursor:pointer;\" scope=\"col\">Day</th>\n");
+                file.write("<th style=\"cursor:pointer;\" scope=\"col\">Fajr</th>\n");
+                file.write("<th style=\"cursor:pointer;\" scope=\"col\">Shourouk</th>\n");
+                file.write("<th style=\"cursor:pointer;\" scope=\"col\">Duhr</th>\n");
+                file.write("<th style=\"cursor:pointer;\" scope=\"col\">Asr</th>\n");
+                file.write("<th style=\"cursor:pointer;\" scope=\"col\">Maghrib</th>\n");
+                file.write("<th style=\"cursor:pointer;\" scope=\"col\">Isha</th>\n");
+            file.write("</tr>\n");
+            file.write("</thead>\n");
+            file.write("<tbody>\n"); 
+            int index[] = {0,1,2,3,5,6};
+            for (int j = 1; j <= days.at(i); j++){
+                file.write("<tr>\n"); 
+                file.write("<td>");   
+                file.write(QString::number(j).toUtf8());
+                file.write("</td>\n");   
+                salatTimes = prayers->getDatePrayerTimes(date.year(),monthNumber.at(i),j,latitude,longitude,timezone);
+                for (int k = 0; k < 6; k++){
+                    file.write("<td>");   
+                    file.write("<center>"+salatTimes[index[k]].toUtf8()+"</center>");
+                    file.write("</td>\n");  
+                }
+                file.write("</tr>\n");  
+            }    
+            
+            file.write("</tbody>\n");  
+            file.write("</table>\n");  
+            //file.write("<br /><br />\n");  
+        }
+        file.write(data2.toUtf8());    
+    }
     QDir dir;
     QDesktopServices::openUrl(QUrl("file:///"+dir.currentPath()+"/data/salats.html"));    
     

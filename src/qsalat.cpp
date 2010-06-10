@@ -131,8 +131,6 @@ void Qsalat::initCalculation()
 {
     db->setTable("calculation");
     calcMethod = db->select("method").toInt();
-    fajrMinutes = db->select("fajr").toInt();
-    duhrMinutes = db->select("duhr").toInt();
     asrMethod = db->select("asr").toInt();    
     hijriDays = db->select("hijri").toInt();
     highlatitude = db->select("higherLat").toInt();        
@@ -661,6 +659,7 @@ void Qsalat::updateCalculation()
     alarm->stopAlarm();
     initCalculation();    
     getSalats();
+    getHijri();
     startSalatAlarm();
 }
 
