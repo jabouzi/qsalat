@@ -247,8 +247,7 @@ void Qcalendar::generate()
             }    
             
             file.write("</tbody>\n");  
-            file.write("</table>\n");  
-            //file.write("<br /><br />\n");  
+            file.write("</table>\n");                
         }
         file.write(data2.toUtf8());    
     }

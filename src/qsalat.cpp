@@ -187,7 +187,6 @@ void Qsalat::getSalats(){
     salatTimes = new QString[7];
     prayers->setCalcMethod(calcMethod);
     prayers->setAsrMethod(asrMethod);
-    prayers->setDhuhrMinutes(duhrMinutes);
     prayers->setHighLatsMethod(highlatitude);
     salatTimes = prayers->getDatePrayerTimes(year,month,day,latitude,longitude,timezone);
     label_fajr->setText(salatTimes[0]);
@@ -197,9 +196,9 @@ void Qsalat::getSalats(){
     label_isha->setText(salatTimes[6]);
     label_shourouk->setText(salatTimes[1]);
     label_location->setText(city+", "+country); 
-    QTime now = QTime::currentTime();
-    //salatTimes[2] = QString::number(now.hour())+":"+QString::number(now.minute()+1);
-    //salatTimes[3] = QString::number(now.hour())+":"+QString::number(now.minute()+2);
+    pLog->Write("###########");
+    pLog->Write(salatTimes[2]);
+    pLog->Write("###########");
 }
 
 /**    
@@ -413,9 +412,7 @@ QString Qsalat::getNextSalat()
 void Qsalat::startSalatAlarm()
 {
     if (1 == playAthan)
-    {        
-        //if (alarm->isActive()) pLog->Write("Alarm is active");
-        //else pLog->Write("Alarm is not active");
+    { 
         QString salatTime = getNextSalat();    
         QDateTime today = QDateTime::currentDateTime();
         QTime time = QTime::fromString(salatTime, "HH:mm:ss");
@@ -535,19 +532,6 @@ void Qsalat::showCalendar(){
 }
 
 /**    
- * show yearly prayer window function : show the salat time for one year
- */
-//~ void Qsalat::showYearly(){    
-    //~ if (yearly.isHidden()){        
-        //~ yearly.show();
-    //~ }    
-    //~ else{        
-        //~ yearly.activateWindow();
-        //~ yearly.raise();        
-    //~ }    
-//~ }
-
-/**    
  * show hijri date window function : show the hijri date conversion
  */
 void Qsalat::showHijridate(){    
@@ -567,7 +551,7 @@ void Qsalat::_about()
 {    
     QString cp = "©";
     QMessageBox::about(this, tr("About Qsalat"),
-             tr("<b> Qsalat V0.9.3</b> Copyright ") +  QString::fromUtf8(cp.toLatin1().data()) + tr(" 2008-2010 Skander Jabouzi skander@skanderjabouzi.com<br>"             
+             tr("<b> Qsalat V1.0</b> Copyright ") +  QString::fromUtf8(cp.toLatin1().data()) + tr(" 2008-2010 Skander Jabouzi skander@skanderjabouzi.com<br>"             
                  " This is a free software distributed under the terms of the GNU General Public License version 3\n(http://www.gnu.org/licenses/gpl-3.0.html)"));     
 } 
 
@@ -594,10 +578,7 @@ void Qsalat::_hide()
     }    
     if (!calendar.isHidden()){        
         calendar.hide();
-    }    
-    //~ if (!yearly.isHidden()){        
-        //~ yearly.hide();
-    //~ }    
+    } 
     if (!hijridate.isHidden()){        
         hijridate.hide();
     }    

@@ -123,7 +123,7 @@ void Qcalculation::apply()
     db->setTable("calculation");   
     db->update("method",QString::number(calcList->currentIndex()));
     db->update("asr",QString::number(asrChecked));    
-    db->update("hijri",QString::number(hijriBox->value()));    
+    //db->update("hijri",QString::number(hijriBox->value()));    
     emit(calculationChanged());
 }
 
@@ -139,33 +139,3 @@ void Qcalculation::cancel()
 {
     close();
 }
-
-//calculate time diffrence
-int Qcalculation::calcTime(QString time1,QString time2){
-    QStringList list1 = time1.split(":");
-    QStringList list2 = time2.split(":");
-    int hours = list2[0].toInt() - list1[0].toInt();
-    int minutes = list2[1].toInt() - list1[1].toInt();
-    return (hours * 60) + minutes - 5;
-}
-
-//
-int Qcalculation::getDuhrMinutes(){
-    //return duhrBox->maximum() - parser.getElement(2,1).toInt();
-    return 0;
-}
-
-//
-int Qcalculation::setDuhrMinutes(){
-    //int result = duhrBox->maximum() - duhrBox->value();
-    //if (result < 0) return 0;
-    //else return result;
-    return 0;
-}
-
-//calculate time diffrence between duhr and asr
-int Qcalculation::getAsrDiff(int flag,QString time1,QString time2){
-    if (0 == flag) return calcTime(time1,time2);
-    else return -1 * calcTime(time1,time2);
-}
-

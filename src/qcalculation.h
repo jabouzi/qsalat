@@ -66,10 +66,6 @@ private:
     void initDB();
     void setUI();     
     void setActions();
-    int calcTime(QString,QString);
-    int getDuhrMinutes();
-    int setDuhrMinutes();
-    int getAsrDiff(int,QString,QString);
     
 signals:
     void calculationChanged();
