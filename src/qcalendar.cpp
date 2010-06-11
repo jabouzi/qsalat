@@ -184,7 +184,7 @@ void Qcalendar::setMonths()
     {
         months << "December";
         monthNumber << 12;
-        days << 30;
+        days << 31;
         i++;
     }
 }
