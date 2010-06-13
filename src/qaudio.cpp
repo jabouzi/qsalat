@@ -27,8 +27,7 @@
 Qaudio::Qaudio( QWidget * parent, Qt::WFlags f) : QDialog(parent, f )
 {
     setupUi(this);    
-    setActions();
-    initDB();
+    setActions();    
 }
 
 void Qaudio::setPath(QString lpath)
@@ -40,7 +39,7 @@ void Qaudio::setPath(QString lpath)
 void Qaudio::initDB()
 {
     db = Database::getInstance();
-    db->setDatabaseName("data/qsalat.db");
+    db->setDatabaseName(path+"data/qsalat.db");
     db->setDatabase();   
     db->setTable("audio");
 }
@@ -73,6 +72,7 @@ void Qaudio::setPlayDua(int dua)
 //
 void Qaudio::init()
 {
+    initDB();
     setMediaFilesLists();    
     if (0 == playAthan) {
         salatCheckBox->setChecked(false); 

@@ -26,10 +26,10 @@
 Qsalat::Qsalat( QWidget * parent, Qt::WFlags f) 
     : QMainWindow(parent, f)
 {
-    alarm = new Alarm();
-    pLog = new Log("errors.log");
+    alarm = new Alarm();    
     path = QCoreApplication::applicationDirPath ();
     if (path.data()[path.size() - 1] != '/') path += "/";
+    pLog = new Log(path+"errors.log");
     setupUi(this);
     adjustWindow();
     prayers = new Qpray();
@@ -69,7 +69,7 @@ void Qsalat::init()
 void Qsalat::initDB()
 {
     db = Database::getInstance();
-    db->setDatabaseName("data/qsalat.db");
+    db->setDatabaseName(path+"data/qsalat.db");
     db->setDatabase();   
 }
 
@@ -141,6 +141,7 @@ void Qsalat::initCalculationObject()
     calculation.setPath(path);
     calculation.setCalcMethod(calcMethod);
     calculation.setAsrMethod(asrMethod);
+    calculation.setHijriDays(hijriDays);
     calculation.init();
 }
 

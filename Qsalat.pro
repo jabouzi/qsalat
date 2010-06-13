@@ -6,7 +6,7 @@ QT = gui \
  phonon \
  xml \
  sql
-CONFIG += qt warn_on release
+CONFIG += qt warn_on debug
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build

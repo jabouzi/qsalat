@@ -38,7 +38,7 @@ public:
     void init();
     void setCalcMethod(int);
     void setAsrMethod(int);
-    //void setDuhrMinutes(int);
+    void setHijriDays(int);
     //void setFajrMinutes(int);
     void setPath(QString);
     
@@ -59,6 +59,7 @@ private:
     QString *times;
     int calcMethod;
     int asrMethod;
+    int hijriDays;
     //int duhrMinutes;
     //int asrMinutes;
     Database *db;

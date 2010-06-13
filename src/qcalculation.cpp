@@ -32,7 +32,6 @@ Qcalculation::Qcalculation( QWidget * parent, Qt::WFlags f)
     setActions();
     date = QDate::currentDate();
     times = new QString[7]; 
-    initDB();
 }
 
 void Qcalculation::setPath(QString lpath)
@@ -44,7 +43,7 @@ void Qcalculation::setPath(QString lpath)
 void Qcalculation::initDB()
 {
     db = Database::getInstance();
-    db->setDatabaseName("data/qsalat.db");
+    db->setDatabaseName(path+"data/qsalat.db");
     db->setDatabase();   
     db->setTable("calculation");
 }
@@ -59,10 +58,10 @@ void Qcalculation::setAsrMethod(int method)
     asrMethod = method;
 }
 
-//~ void Qcalculation::setAsrMethod(int method)
-//~ {
-    //~ asrMethod = method;
-//~ }
+void Qcalculation::setHijriDays(int hijri)
+{
+    hijriDays = hijri;
+}
 
 //
 void Qcalculation::closeEvent(QCloseEvent *event)
@@ -75,28 +74,18 @@ void Qcalculation::closeEvent(QCloseEvent *event)
 //
 void Qcalculation::init()
 {    
-    QString temp = "";    
-    //prayers->setAsrMethod(asrMethod);        
-    //times = prayers->getDatePrayerTimes(date.year(),date.month(),date.day(),parser.getElement(0,0).toDouble(),parser.getElement(0,1).toDouble(),parser.getElement(0,4).toDouble());    
-    //duhrBox->setMaximum(calcTime(times[2],times[3]));    
-    //label_12->setText(" Max "+QString::number(duhrBox->maximum())+" min (5 min before asr)");
+    initDB();
+    QString temp = "";     
+    list << "Ithna Ashari"<<"University of Islamic Sciences, Karachi"<<"Islamic Society of North America (ISNA)"
+        <<"Muslim World League (MWL)"<<"Umm al-Qura, Makkah"<<"Egyptian General Authority of Survey"<<"Institute of Geophysics, University of Tehran";
+    calcList->addItems(list);
+    calcList->setCurrentIndex(calcMethod);
+    hList << "No adjustment"<<"middle of night"<<"1/7th of night"<<"angle/60th of night";
+    highList->addItems(hList);
 
-    //if (0 == flag){
-        list << "Ithna Ashari"<<"University of Islamic Sciences, Karachi"<<"Islamic Society of North America (ISNA)"
-            <<"Muslim World League (MWL)"<<"Umm al-Qura, Makkah"<<"Egyptian General Authority of Survey"<<"Institute of Geophysics, University of Tehran";
-             //<<"Custom settings";    
-        calcList->addItems(list);
-        calcList->setCurrentIndex(calcMethod);
-        hList << "No adjustment"<<"middle of night"<<"1/7th of night"<<"angle/60th of night";
-        highList->addItems(hList);
-
-        if (asrMethod == 0) shafiiButton->setChecked(true);
-        else hanafiButton->setChecked(true);
-        //hijriBox->setValue(parser.getElement(2,3).toInt());            
-    //}
-   //else{
-    //    apply();
-   // }
+    if (asrMethod == 0) shafiiButton->setChecked(true);
+    else hanafiButton->setChecked(true);
+    hijriBox->setValue(hijriDays);   
 }
 
 //
@@ -123,7 +112,7 @@ void Qcalculation::apply()
     db->setTable("calculation");   
     db->update("method",QString::number(calcList->currentIndex()));
     db->update("asr",QString::number(asrChecked));    
-    //db->update("hijri",QString::number(hijriBox->value()));    
+    db->update("hijri",QString::number(hijriBox->value()));    
     emit(calculationChanged());
 }
 

@@ -29,8 +29,7 @@ Qlocation::Qlocation( QWidget * parent, Qt::WFlags f)
 {
     setupUi(this);    
     manager = new QNetworkAccessManager(this);
-    setActions();            
-    initDB();
+    setActions();    
 }
 
 void Qlocation::setPath(QString lpath)
@@ -42,7 +41,7 @@ void Qlocation::setPath(QString lpath)
 void Qlocation::initDB()
 {
     db = Database::getInstance();
-    db->setDatabaseName("data/qsalat.db");
+    db->setDatabaseName(path+"data/qsalat.db");
     db->setDatabase();   
     db->setTable("location");
 }
@@ -75,6 +74,7 @@ void Qlocation::setTimezone(int timezone_)
 //
 void Qlocation::init()
 {
+    initDB();
     loadCoordinates(latitude,longitude);
     latLineEdit->setText(QString::number(latitude));
     lngLineEdit->setText(QString::number(longitude));
