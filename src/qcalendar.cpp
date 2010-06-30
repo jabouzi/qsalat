@@ -73,6 +73,11 @@ void Qcalendar::setAsrMethod(int asrMethod_)
     asrMethod = asrMethod_;
 }
 
+void Qcalendar::sethigherLatitude(int highlatitude_)
+{
+    highlatitude = highlatitude_;
+}
+
 void Qcalendar::setPath(QString path_)
 {
     path = path_;
@@ -237,6 +242,8 @@ void Qcalendar::generate()
                 file.write("<td>");   
                 file.write(QString::number(j).toUtf8());
                 file.write("</td>\n");   
+                prayers->setCalcMethod(calcMethod);
+                prayers->setAsrMethod(asrMethod);
                 salatTimes = prayers->getDatePrayerTimes(date.year(),monthNumber.at(i),j,latitude,longitude,timezone);
                 for (int k = 0; k < 6; k++){
                     file.write("<td>");   

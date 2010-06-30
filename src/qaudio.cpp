@@ -147,7 +147,7 @@ void Qaudio::preview()
     if (regularRadioButton->isChecked()) audioFile << path+"audio/salat/"+salatFiles->currentText() << "Athan preview";
     else if (fajrRadioButton->isChecked()) audioFile << path+"audio/fajr/"+fajrFiles->currentText() << "Athan fajr preview"; 
     else audioFile << path+"audio/dua/"+duaFiles->currentText() << "Dua fajr preview";   
-    QString program = "salatPlayer";
+    QString program = path+"salatPlayer";
     QProcess *myProcess = new QProcess(this);
     myProcess->start(program, audioFile);
 }

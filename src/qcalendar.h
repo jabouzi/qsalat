@@ -45,6 +45,7 @@ public:
     void setCalculationMethod(int);
     void setAsrMethod(int);
     void setPath(QString);    
+    void sethigherLatitude(int);
     
     
 protected:
@@ -67,6 +68,7 @@ private:
     double latitude;
     double longitude;
     int timezone; 
+    int highlatitude;
     QString path;
     QList<int> monthNumber;
     QList<int> days;

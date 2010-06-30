@@ -158,6 +158,7 @@ void Qsalat::initCalendarObject()
     calendar.setTimezone(timezone);
     calendar.setCalculationMethod(calcMethod);
     calendar.setAsrMethod(asrMethod);
+    calendar.sethigherLatitude(highlatitude);
     calendar.init();
 }
 
@@ -197,9 +198,6 @@ void Qsalat::getSalats(){
     label_isha->setText(salatTimes[6]);
     label_shourouk->setText(salatTimes[1]);
     label_location->setText(city+", "+country); 
-    pLog->Write("###########");
-    pLog->Write(salatTimes[2]);
-    pLog->Write("###########");
 }
 
 /**    
@@ -601,7 +599,7 @@ void Qsalat::setPlayer(QStringList files, QString label)
     if (playAthan == 1)
     {
         files << label;
-        QString program = "salatPlayer";
+        QString program = path+"salatPlayer";
         QProcess *myProcess = new QProcess(this);
         myProcess->start(program, files);
     }
