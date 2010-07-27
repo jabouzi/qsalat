@@ -221,7 +221,7 @@ void Qlocation::blockLocation()
     searchButton->setEnabled(false);
     applyButton->setEnabled(false);
     messageLabel->show();
-    locTimer->start(60000);
+    locTimer->start(900000);
 }
 
 void Qlocation::unBlockLocation()
