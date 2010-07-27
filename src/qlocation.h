@@ -59,6 +59,8 @@ private slots:
     void apply();
     void save();
     void cancel();
+    void blockLocation();
+    void unBlockLocation();
 
 protected:
     void closeEvent(QCloseEvent *);
@@ -67,7 +69,7 @@ signals:
     void reloadMap();
     void updateMap();
     
-private:
+private:    
     QNetworkAccessManager *manager;
     QList<QPointF> coordinates;
     QString file;    
@@ -79,6 +81,8 @@ private:
     int pendingRequests;   
     QString path;
     Database *db;
+    bool blocked;
+    QTimer * locTimer;
     
     void setActions();
     void setUI();    

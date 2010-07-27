@@ -29,7 +29,10 @@ Qlocation::Qlocation( QWidget * parent, Qt::WFlags f)
 {
     setupUi(this);    
     manager = new QNetworkAccessManager(this);
-    setActions();    
+    locTimer = new QTimer(this);     
+    blocked = false;    
+    messageLabel->hide();
+    setActions();   
 }
 
 void Qlocation::setPath(QString lpath)
@@ -165,6 +168,8 @@ void Qlocation::setActions()
     connect(cancelButton,SIGNAL(clicked()),this,SLOT(cancel()));
     connect(cityLineEdit,SIGNAL(textChanged(const QString &)),this,SLOT(update()));
     connect(this,SIGNAL(updateMap()),this,SLOT(updateLatLng())); 
+    connect(applyButton,SIGNAL(clicked()),this,SLOT(blockLocation()));
+    connect(locTimer, SIGNAL(timeout()), this, SLOT(unBlockLocation()));
 }
 
 //
@@ -208,5 +213,22 @@ void Qlocation::save()
 void Qlocation::cancel()
 {
     close();
+}
+
+void Qlocation::blockLocation()
+{
+    webView->setEnabled(false);
+    searchButton->setEnabled(false);
+    applyButton->setEnabled(false);
+    messageLabel->show();
+    locTimer->start(60000);
+}
+
+void Qlocation::unBlockLocation()
+{
+    webView->setEnabled(true);
+    searchButton->setEnabled(true);
+    applyButton->setEnabled(true);
+    messageLabel->hide();
 }
 //
