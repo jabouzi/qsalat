@@ -315,13 +315,13 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>saveButton</tabstop>
-  <tabstop>highList</tabstop>
-  <tabstop>hijriBox</tabstop>
   <tabstop>calcList</tabstop>
   <tabstop>shafiiButton</tabstop>
-  <tabstop>cancelButton</tabstop>
   <tabstop>hanafiButton</tabstop>
+  <tabstop>highList</tabstop>
+  <tabstop>hijriBox</tabstop>
+  <tabstop>saveButton</tabstop>
+  <tabstop>cancelButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

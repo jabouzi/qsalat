@@ -257,6 +257,23 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>checkBox_01</tabstop>
+  <tabstop>checkBox_02</tabstop>
+  <tabstop>checkBox_03</tabstop>
+  <tabstop>checkBox_04</tabstop>
+  <tabstop>checkBox_05</tabstop>
+  <tabstop>checkBox_06</tabstop>
+  <tabstop>checkBox_07</tabstop>
+  <tabstop>checkBox_08</tabstop>
+  <tabstop>checkBox_09</tabstop>
+  <tabstop>checkBox_10</tabstop>
+  <tabstop>checkBox_11</tabstop>
+  <tabstop>checkBox_12</tabstop>
+  <tabstop>selectButton</tabstop>
+  <tabstop>unselectButton</tabstop>
+  <tabstop>generateButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

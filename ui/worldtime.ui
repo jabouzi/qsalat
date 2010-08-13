@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>WorldTime</class>
- <widget class="QDialog" name="WorldTime" >
-  <property name="geometry" >
+ <widget class="QDialog" name="WorldTime">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,26 +10,26 @@
     <height>320</height>
    </rect>
   </property>
-  <property name="minimumSize" >
+  <property name="minimumSize">
    <size>
     <width>640</width>
     <height>320</height>
    </size>
   </property>
-  <property name="maximumSize" >
+  <property name="maximumSize">
    <size>
     <width>640</width>
     <height>320</height>
    </size>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Qsalat - world time</string>
   </property>
-  <property name="styleSheet" >
-   <string notr="true" />
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
-  <widget class="QLabel" name="label" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
@@ -36,25 +37,25 @@
      <height>320</height>
     </rect>
    </property>
-   <property name="minimumSize" >
+   <property name="minimumSize">
     <size>
      <width>640</width>
      <height>320</height>
     </size>
    </property>
-   <property name="maximumSize" >
+   <property name="maximumSize">
     <size>
      <width>640</width>
      <height>320</height>
     </size>
    </property>
-   <property name="text" >
+   <property name="text">
     <string/>
    </property>
   </widget>
  </widget>
  <resources>
-  <include location="../worldtime.qrc" />
+  <include location="../qrc/worldtime.qrc"/>
  </resources>
  <connections/>
 </ui>

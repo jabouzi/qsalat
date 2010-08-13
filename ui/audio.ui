@@ -318,6 +318,22 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>salatFiles</tabstop>
+  <tabstop>prayerButton</tabstop>
+  <tabstop>fajrFiles</tabstop>
+  <tabstop>fajrButton</tabstop>
+  <tabstop>duaFiles</tabstop>
+  <tabstop>duaButton</tabstop>
+  <tabstop>salatCheckBox</tabstop>
+  <tabstop>duaCheckBox</tabstop>
+  <tabstop>regularRadioButton</tabstop>
+  <tabstop>fajrRadioButton</tabstop>
+  <tabstop>duaRadioButton</tabstop>
+  <tabstop>previewButton</tabstop>
+  <tabstop>saveButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

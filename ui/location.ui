@@ -304,6 +304,19 @@ color: rgb(255, 255, 255);</string>
    <header>QtWebKit/QWebView</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>locationLineEdit</tabstop>
+  <tabstop>searchButton</tabstop>
+  <tabstop>webView</tabstop>
+  <tabstop>latLineEdit</tabstop>
+  <tabstop>lngLineEdit</tabstop>
+  <tabstop>countryLineEdit</tabstop>
+  <tabstop>cityLineEdit</tabstop>
+  <tabstop>timezoneLineEdit</tabstop>
+  <tabstop>okButton</tabstop>
+  <tabstop>applyButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
