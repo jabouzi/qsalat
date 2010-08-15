@@ -37,6 +37,7 @@ class Alarm : public QObject
         int timeLeft;
         QTimer *timer;   
         Log *pLog;    
+        QString path;
         
     private slots:
         void finishAalarm();

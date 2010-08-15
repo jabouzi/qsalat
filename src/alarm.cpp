@@ -3,7 +3,9 @@
 Alarm::Alarm(QObject* parent) :
     QObject(parent)
 {
-    pLog = new Log("errors.log");
+    path = QCoreApplication::applicationDirPath ();
+    if (path.data()[path.size() - 1] != '/') path += "/";
+    pLog = new Log(path+"errors.log");
 }
 
 void Alarm::init()
@@ -47,23 +49,23 @@ void Alarm::startAlarm()
 {
     if (timer->isActive()) 
     {
-        pLog->Write("Alarm is active");
+        //pLog->Write("Alarm is active");
         timer->stop();
     }
     else 
     {   
-        pLog->Write("Alarm not active");
+        //pLog->Write("Alarm not active");
         timer->start(timeToAlarm);
-        pLog->Write("Timer ID : "+QString::number(timer->timerId()));
+        //pLog->Write("Timer ID : "+QString::number(timer->timerId()));
     }
 }
 
 void Alarm::stopAlarm()
 {
-    pLog->Write("Timerz ID : "+QString::number(timer->timerId()));
+    //pLog->Write("Timerz ID : "+QString::number(timer->timerId()));
     timer->stop();
-    pLog->Write("Timerz ID : "+QString::number(timer->timerId()));
-    pLog->Write("Alarm stopped");
+    //pLog->Write("Timerz ID : "+QString::number(timer->timerId()));
+    //pLog->Write("Alarm stopped");
 }
 
 void Alarm::setYear(int year_)

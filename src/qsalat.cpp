@@ -368,31 +368,31 @@ QString Qsalat::getNextSalat()
 {
    if (getFajr() > 0) 
    {
-       timeOfSalat = salatTimes[0]+":00";
+       timeOfSalat = salatTimes[0]+":01";
        salatOrder = 0;
        salatTitle = "Fajr prayer ";
    }
    else if (getDuhr() > 0)
    {
-        timeOfSalat = salatTimes[2]+":00";
+        timeOfSalat = salatTimes[2]+":01";
         salatOrder = 1;
         salatTitle = "Duhr prayer "; 
    }
    else if (getAsr() > 0) 
    {
-       timeOfSalat = salatTimes[3]+":00";
+       timeOfSalat = salatTimes[3]+":01";
        salatOrder = 2;
        salatTitle = "Asr prayer ";
    }
    else if (getMaghrib() > 0)
    {
-        timeOfSalat = salatTimes[5]+":00";
+        timeOfSalat = salatTimes[5]+":01";
         salatOrder = 3;
         salatTitle = "Maghreb prayer ";
    }
    else if (getIsha() > 0)
    {
-        timeOfSalat =salatTimes[6]+":00";
+        timeOfSalat =salatTimes[6]+":01";
         salatOrder = 4;
         salatTitle = "Isha prayer ";
    }
@@ -402,9 +402,9 @@ QString Qsalat::getNextSalat()
         salatOrder = 5;
         salatTitle = "Midnight ";
    }
-   pLog->Write(timeOfSalat);
-   pLog->Write(QString::number(salatOrder));
-   pLog->Write(salatTitle);
+   pLog->Write(" NextTime --> "+timeOfSalat);
+   //pLog->Write(QString::number(salatOrder));
+   pLog->Write(" SalatTime --> "+salatTitle);
    return timeOfSalat;
 }
 
