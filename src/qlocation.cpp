@@ -149,6 +149,7 @@ void Qlocation::updateLatLng()
     countryLineEdit->setText(sres3);
     cityLineEdit->setText(sres4);
     timezoneLineEdit->setText(sres5); 
+    timezone = sres5.toInt();
 }
 
 //
@@ -184,17 +185,18 @@ void Qlocation::setUI()
 //
 void Qlocation::apply()
 {
-    latitude = latLineEdit->text().toDouble();
+    /*latitude = latLineEdit->text().toDouble();
     longitude = lngLineEdit->text().toDouble();
     city = cityLineEdit->text();
     country = countryLineEdit->text();
-    timezone = timezoneLineEdit->text().toInt();
+    timezone_dst = timezoneLineEdit->text().toInt();*/
     db->setTable("location");
     db->update("latitude",latLineEdit->text());
     db->update("longitude",lngLineEdit->text()); 
     db->update("city",cityLineEdit->text());
     db->update("country",countryLineEdit->text());
-    db->update("timezone",timezoneLineEdit->text());
+    db->update("timezone",QString::number(timezone));
+    db->update("timezone_dst",timezoneLineEdit->text());
     emit(locationChanged());
 }
 

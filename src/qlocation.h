@@ -78,6 +78,7 @@ private:
     QString country;
     QString city;
     int timezone;
+    //int timezone_dst;
     int pendingRequests;   
     QString path;
     Database *db;

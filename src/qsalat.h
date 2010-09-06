@@ -69,6 +69,7 @@ private:
     double latitude;
     double longitude;
     int timezone;
+    int timezone_dst;
     QString country;
     QString city;        
     Qlocation location;

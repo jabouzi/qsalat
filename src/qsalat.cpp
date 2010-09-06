@@ -81,6 +81,7 @@ void Qsalat::initLocation()
     city = db->select("city");
     country = db->select("country");
     timezone = db->select("timezone").toInt();   
+    timezone_dst = db->select("timezone_dst").toInt();   
     pLog->Write(QString::number(latitude)); 
     pLog->Write(QString::number(longitude)); 
     pLog->Write(QString::number(timezone)); 
@@ -93,7 +94,7 @@ void Qsalat::initLocationObject()
     location.setLongitude(longitude);
     location.setCountry(country);
     location.setCity(city);
-    location.setTimezone(timezone);
+    location.setTimezone(timezone_dst);
     location.init();
 }
 
@@ -190,7 +191,7 @@ void Qsalat::getSalats(){
     prayers->setCalcMethod(calcMethod);
     prayers->setAsrMethod(asrMethod);
     prayers->setHighLatsMethod(highlatitude);
-    salatTimes = prayers->getDatePrayerTimes(year,month,day,latitude,longitude,timezone);
+    salatTimes = prayers->getDatePrayerTimes(year,month,day,latitude,longitude,timezone_dst);
     label_fajr->setText(salatTimes[0]);
     label_duhr->setText(salatTimes[2]);
     label_asr->setText(salatTimes[3]);
@@ -392,7 +393,7 @@ QString Qsalat::getNextSalat()
    }
    else if (getIsha() > 0)
    {
-        timeOfSalat =salatTimes[6]+":01";
+        timeOfSalat = salatTimes[6]+":01";
         salatOrder = 4;
         salatTitle = "Isha prayer ";
    }
@@ -507,7 +508,7 @@ void Qsalat::showCalculation(){
  * show calculation window function : show the salat calculation parameters window
  */
 void Qsalat::showWorldtime(){
-    worldtime.init(timezone);
+    worldtime.init(timezone_dst);
     if (worldtime.isHidden()){        
         worldtime.show();
     }    
