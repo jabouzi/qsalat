@@ -39,7 +39,6 @@ public:
     void setCalcMethod(int);
     void setAsrMethod(int);
     void setHijriDays(int);
-    //void setFajrMinutes(int);
     void setPath(QString);
     
 protected:
@@ -60,8 +59,6 @@ private:
     int calcMethod;
     int asrMethod;
     int hijriDays;
-    //int duhrMinutes;
-    //int asrMinutes;
     Database *db;
     
     void initDB();
