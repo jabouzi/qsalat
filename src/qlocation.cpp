@@ -176,7 +176,7 @@ void Qlocation::setActions()
 //
 void Qlocation::setUI()
 {
-    setWindowIcon(QIcon(path+"images/mecque.png"));
+    setWindowIcon(QIcon(":/images/mecque.png"));
     okButton->setIcon(style()->standardIcon(QStyle::SP_DialogOkButton));
     applyButton->setIcon(style()->standardIcon(QStyle::SP_DialogApplyButton));
     cancelButton->setIcon(style()->standardIcon(QStyle::SP_DialogCancelButton));
@@ -185,11 +185,6 @@ void Qlocation::setUI()
 //
 void Qlocation::apply()
 {
-    /*latitude = latLineEdit->text().toDouble();
-    longitude = lngLineEdit->text().toDouble();
-    city = cityLineEdit->text();
-    country = countryLineEdit->text();
-    timezone_dst = timezoneLineEdit->text().toInt();*/
     db->setTable("location");
     db->update("latitude",latLineEdit->text());
     db->update("longitude",lngLineEdit->text()); 

@@ -35,7 +35,7 @@ Qqibla::Qqibla( QWidget * parent, Qt::WFlags f)
 void Qqibla::setPath(QString lpath)
 {
     path = lpath;
-    setWindowIcon(QIcon(path+"images/mecque.png"));
+    setWindowIcon(QIcon(":/images/mecque.png"));
 }
 
 void Qqibla::setLatitude(double latde)

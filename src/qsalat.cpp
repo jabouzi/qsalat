@@ -29,7 +29,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     alarm = new Alarm();    
     path = QCoreApplication::applicationDirPath ();
     if (path.data()[path.size() - 1] != '/') path += "/";
-    pLog = new Log(path+"errors.log");
+    //pLog = new Log(path+"errors.log");
     setupUi(this);
     adjustWindow();
     prayers = new Qpray();
@@ -82,9 +82,9 @@ void Qsalat::initLocation()
     country = db->select("country");
     timezone = db->select("timezone").toInt();   
     timezone_dst = db->select("timezone_dst").toInt();   
-    pLog->Write(QString::number(latitude)); 
-    pLog->Write(QString::number(longitude)); 
-    pLog->Write(QString::number(timezone)); 
+    //pLog->Write(QString::number(latitude)); 
+    //pLog->Write(QString::number(longitude)); 
+    //pLog->Write(QString::number(timezone)); 
 }
 
 void Qsalat::initLocationObject()
@@ -216,7 +216,7 @@ void Qsalat::getHijri(){
  */
 void Qsalat::createTrayIcon()
 {
-    setWindowIcon(QIcon(path+"images/mecque.png"));
+    setWindowIcon(QIcon(":/images/mecque.png"));
     QColor *c = new QColor ( 238, 238, 157, 255 );    
     QPalette * p = new QPalette();
     p->setColor(QPalette::ToolTipBase,*c);
@@ -228,7 +228,7 @@ void Qsalat::createTrayIcon()
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);    
     trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setIcon(QIcon(path+"images/mecque.png"));
+    trayIcon->setIcon(QIcon(":/images/mecque.png"));
     QString ttmessage = "Fajr : "+label_fajr->text()+ QString::fromUtf8(" : فجر")+"\nDuhr : "    +label_duhr->text()+QString::fromUtf8(" : ظهر")+"\nAsr : "+label_asr->text()+QString::fromUtf8(" : عصر")+"\nMaghreb : "+label_maghreb->text()+QString::fromUtf8(" : مغرب")+"\nIsha : "+label_isha->text()+QString::fromUtf8(" : عشاء");
     trayIcon->setToolTip("Qsalat Islamic cross-platform prayers time V1.0");
     trayIcon->setToolTip(ttmessage);
@@ -403,9 +403,9 @@ QString Qsalat::getNextSalat()
         salatOrder = 5;
         salatTitle = "Midnight ";
    }
-   pLog->Write(" NextTime --> "+timeOfSalat);
-   //pLog->Write(QString::number(salatOrder));
-   pLog->Write(" SalatTime --> "+salatTitle);
+   //pLog->Write(" NextTime --> "+timeOfSalat);
+   ////pLog->Write(QString::number(salatOrder));
+   //pLog->Write(" SalatTime --> "+salatTitle);
    return timeOfSalat;
 }
 
@@ -609,7 +609,7 @@ void Qsalat::setPlayer(QStringList files, QString label)
  
 void Qsalat::itsSalatTime()
 {
-    pLog->Write("Its Athan of "+salatTitle);
+    //pLog->Write("Its Athan of "+salatTitle);
     if (salatOrder > 4)
     {
         init();      

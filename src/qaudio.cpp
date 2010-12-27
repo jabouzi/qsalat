@@ -113,7 +113,7 @@ void Qaudio::setActions()
 //
 void Qaudio::setUI()
 {
-    setWindowIcon(QIcon(path+"images/mecque.png"));
+    setWindowIcon(QIcon(":/images/mecque.png"));
     prayerButton->setIcon(style()->standardIcon(QStyle::SP_DialogOpenButton));
     fajrButton->setIcon(style()->standardIcon(QStyle::SP_DialogOpenButton));
     duaButton->setIcon(style()->standardIcon(QStyle::SP_DialogOpenButton));

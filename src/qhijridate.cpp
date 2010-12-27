@@ -58,7 +58,7 @@ void Qhijridate::init(){
 //
 void Qhijridate::setUI()
 {
-    setWindowIcon(QIcon(path+"images/mecque.png"));
+    setWindowIcon(QIcon(":/images/mecque.png"));
     convertButton->setIcon(style()->standardIcon(QStyle::SP_DialogApplyButton));
     glist << "January"<<"February"<<"March"<<"April"<<"May"<<"June"<<"July"<<"August"<<"September"<<"October"<<"November"<<"December";    
     jmonthBox->addItems(glist);

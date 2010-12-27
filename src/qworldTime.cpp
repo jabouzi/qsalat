@@ -27,11 +27,7 @@
 Qworldtime::Qworldtime( QWidget * parent, Qt::WFlags f) 
     : QDialog(parent, f)
 {
-//#ifdef Q_WS_WIN
     path = QCoreApplication::applicationDirPath ();
-//#else 
-    //path = "/usr/share/qsalat/";
-//#endif
     if (path.data()[path.size() - 1] != '/') path += "/";
     setupUi(this);    
     setUI();        
@@ -62,7 +58,7 @@ QString Qworldtime::getImage(int hour, int timezone)
     int number = hour - int(timezone);
     if (number >= 24) number = number -24;
     else if (number < 0) number = 24 - timezone;
-    return path+"images/worldtime/img"+QString::number(number)+".jpg";
+    return ":/images/worldtime/img"+QString::number(number)+".jpg";
 }
 
 //
@@ -75,7 +71,7 @@ void Qworldtime::closeEvent(QCloseEvent *event)
 //
 void Qworldtime::setUI()
 {
-    setWindowIcon(QIcon(path+"images/mecque.png"));    
+    setWindowIcon(QIcon(":/images/mecque.png"));    
 }
 
 

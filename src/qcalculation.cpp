@@ -91,7 +91,7 @@ void Qcalculation::init()
 //
 void Qcalculation::setUI()
 {
-    setWindowIcon(QIcon(path+"images/mecque.png"));
+    setWindowIcon(QIcon(":/images/mecque.png"));
     saveButton->setIcon(style()->standardIcon(QStyle::SP_DialogApplyButton));
     cancelButton->setIcon(style()->standardIcon(QStyle::SP_DialogCancelButton));
 }

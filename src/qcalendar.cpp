@@ -27,7 +27,7 @@
 Qcalendar::Qcalendar( QWidget * parent, Qt::WFlags f) 
     : QDialog(parent, f)
 {
-    pLog = new Log("calendar.log");
+    //pLog = new Log("calendar.log");
     setupUi(this);    
     setUI();
     date = QDate::currentDate();
@@ -45,7 +45,7 @@ void Qcalendar::closeEvent(QCloseEvent *event)
 //
 void Qcalendar::init()
 {
-    setUI();        
+    setUI();
 }
 
 void Qcalendar::setLatitude(double latitude_)
@@ -94,7 +94,7 @@ void Qcalendar::setActions()
 //
 void Qcalendar::setUI()
 {
-    setWindowIcon(QIcon(path+"images/mecque.png"));
+    setWindowIcon(QIcon(":/images/mecque.png"));
     generateButton->setIcon(style()->standardIcon(QStyle::SP_DialogApplyButton));
     selectButton->setIcon(style()->standardIcon(QStyle::SP_DialogOkButton));
     unselectButton->setIcon(style()->standardIcon(QStyle::SP_DialogCancelButton));

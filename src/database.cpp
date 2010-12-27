@@ -70,7 +70,7 @@ QString Database::select(QString select)
     QSqlQuery query;
     QString sql = "SELECT "+select+" FROM "+table+" "+sqlWhere;
     //qDebug("%s",sql.toLatin1().data());
-    pLog->Write(sql);
+    //pLog->Write(sql);
     query.exec(sql);
     int field = query.record().indexOf(select);
     query.next();
@@ -90,7 +90,7 @@ void Database::update(QString field, QString value)
     QSqlQuery query;    
     QString sql = "UPDATE "+table+" SET "+field+" = '"+value+"' "+sqlWhere;
     //qDebug("%s",sql.toLatin1().data());
-    pLog->Write(sql);
+    //pLog->Write(sql);
     query.exec(sql);
 }
 
@@ -138,7 +138,7 @@ bool Database::tablesExists()
 void Database::createTables()
 {
     //qDebug("##CREATE##");
-    pLog->Write("##CREATE##");
+    //pLog->Write("##CREATE##");
     QSqlQuery query;
     query.exec ("CREATE TABLE audio (id integer, athan string, fajr string, dua string, playAthan integer, playDua integer)");
     query.exec ("CREATE TABLE calculation (id integer, method integer, fajr integer, duhr integer, asr integer, hijri integer, higherLat integer)");
