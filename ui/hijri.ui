@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Qsalat - date conversion</string>
+   <string>Salat - date conversion</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">

@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Qsalat - qibla direction</string>
+   <string>Salat - qibla direction</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-image: url(:/images/boussole.png);

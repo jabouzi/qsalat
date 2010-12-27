@@ -230,7 +230,7 @@ void Qsalat::createTrayIcon()
     trayIcon->setContextMenu(trayIconMenu);
     trayIcon->setIcon(QIcon(":/images/mecque.png"));
     QString ttmessage = "Fajr : "+label_fajr->text()+ QString::fromUtf8(" : فجر")+"\nDuhr : "    +label_duhr->text()+QString::fromUtf8(" : ظهر")+"\nAsr : "+label_asr->text()+QString::fromUtf8(" : عصر")+"\nMaghreb : "+label_maghreb->text()+QString::fromUtf8(" : مغرب")+"\nIsha : "+label_isha->text()+QString::fromUtf8(" : عشاء");
-    trayIcon->setToolTip("Qsalat Islamic cross-platform prayers time V1.0");
+    trayIcon->setToolTip("Salat Islamic cross-platform prayers time V1.0");
     trayIcon->setToolTip(ttmessage);
     trayIcon->show();    
 }
@@ -549,9 +549,11 @@ void Qsalat::showHijridate(){
  */
 void Qsalat::_about()
 {    
+    QDateTime today = QDateTime::currentDateTime();
+    int this_year = today.date().year();
     QString cp = "©";
     QMessageBox::about(this, tr("About Qsalat"),
-             tr("<b> Qsalat V1.0</b> Copyright ") +  QString::fromUtf8(cp.toLatin1().data()) + tr(" 2008-2010 Skander Jabouzi skander@skanderjabouzi.com<br>"             
+             tr("<b> Salat V1.0</b> Copyright ") +  QString::fromUtf8(cp.toLatin1().data()) + tr(" 2008-")+QString::number(this_year)+tr(" Skander Jabouzi skander@skanderjabouzi.com<br>"             
                  " This is a free software distributed under the terms of the GNU General Public License version 3\n(http://www.gnu.org/licenses/gpl-3.0.html)"));     
 } 
 

@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Qsalat - Calendar generation </string>
+   <string>Salat - Calendar generation </string>
   </property>
   <widget class="QPushButton" name="generateButton">
    <property name="geometry">

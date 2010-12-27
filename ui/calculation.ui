@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Qsalat - calculation options</string>
+   <string>Salat - calculation options</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">

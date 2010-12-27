@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Qsalat - audio</string>
+   <string>Salat - audio</string>
   </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
