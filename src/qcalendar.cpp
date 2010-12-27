@@ -207,7 +207,7 @@ void Qcalendar::generate()
     file2.open(QIODevice::ReadOnly|QIODevice::Text);
     QString data2 = QString::fromUtf8(file2.readAll());
     
-    QFile file("data/salats.html");    
+    QFile file(QDir::tempPath()+"/salats.html");    
     if (file.open(QIODevice::WriteOnly|QIODevice::Text)) {
         file.write(data0.toUtf8()); 
         setMonths();  
@@ -259,8 +259,10 @@ void Qcalendar::generate()
         file.write(data2.toUtf8());    
     }
     QDir dir;
-    QDesktopServices::openUrl(QUrl("file:///"+dir.currentPath()+"/data/salats.html"));    
-    
+    QDesktopServices::openUrl(QUrl("file:///"+QDir::tempPath()+"/salats.html"));
+    QFile::copy("data/css/css.css",QDir::tempPath()+"/css.css"); 
+    QFile::copy("data/js/jquery.tablesorter.js",QDir::tempPath()+"/jquery.tablesorter.js"); 
+    QFile::copy("data/js/jquery-latest.js",QDir::tempPath()+"/jquery-latest.js"); 
 }
 
 void Qcalendar::selectAll()
