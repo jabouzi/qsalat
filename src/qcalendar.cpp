@@ -199,13 +199,13 @@ void Qcalendar::setMonths()
 //generate calendar prayer times
 void Qcalendar::generate()
 {
-    QFile file0(path+"data/.header");    
+    QFile file0(":/data/.header");    
     file0.open(QIODevice::ReadOnly|QIODevice::Text);
     QString data0 = QString::fromUtf8(file0.readAll()); 
-    QFile file1(path+"data/.body");    
+    QFile file1(":/data/.body");    
     file1.open(QIODevice::ReadOnly|QIODevice::Text);
     QString data1 = QString::fromUtf8(file1.readAll());        
-    QFile file2(path+"data/.footer");    
+    QFile file2(":/data/.footer");    
     file2.open(QIODevice::ReadOnly|QIODevice::Text);
     QString data2 = QString::fromUtf8(file2.readAll());
     
