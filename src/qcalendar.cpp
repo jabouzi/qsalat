@@ -43,10 +43,12 @@ void Qcalendar::closeEvent(QCloseEvent *event)
 }
 
 //
-void Qcalendar::init()
+void Qcalendar::init(QString path_)
 {
-    setUI();
+    setUI();  
+    path = path_;      
 }
+
 
 void Qcalendar::setLatitude(double latitude_)
 {
@@ -197,13 +199,13 @@ void Qcalendar::setMonths()
 //generate calendar prayer times
 void Qcalendar::generate()
 {
-    QFile file0("data/.header");    
+    QFile file0(path+"data/.header");    
     file0.open(QIODevice::ReadOnly|QIODevice::Text);
     QString data0 = QString::fromUtf8(file0.readAll()); 
-    QFile file1("data/.body");    
+    QFile file1(path+"data/.body");    
     file1.open(QIODevice::ReadOnly|QIODevice::Text);
     QString data1 = QString::fromUtf8(file1.readAll());        
-    QFile file2("data/.footer");    
+    QFile file2(path+"data/.footer");    
     file2.open(QIODevice::ReadOnly|QIODevice::Text);
     QString data2 = QString::fromUtf8(file2.readAll());
     
@@ -260,9 +262,9 @@ void Qcalendar::generate()
     }
     QDir dir;
     QDesktopServices::openUrl(QUrl("file:///"+QDir::tempPath()+"/salats.html"));
-    QFile::copy("data/css/css.css",QDir::tempPath()+"/css.css"); 
-    QFile::copy("data/js/jquery.tablesorter.js",QDir::tempPath()+"/jquery.tablesorter.js"); 
-    QFile::copy("data/js/jquery-latest.js",QDir::tempPath()+"/jquery-latest.js"); 
+    QFile::copy(path+"data/css/css.css",QDir::tempPath()+"/css.css"); 
+    QFile::copy(path+"data/js/jquery.tablesorter.js",QDir::tempPath()+"/jquery.tablesorter.js"); 
+    QFile::copy(path+"data/js/jquery-latest.js",QDir::tempPath()+"/jquery-latest.js"); 
 }
 
 void Qcalendar::selectAll()

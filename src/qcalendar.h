@@ -38,7 +38,7 @@ class Qcalendar : public QDialog, public Ui::Calendar
 Q_OBJECT
 public:
     Qcalendar( QWidget * parent = 0, Qt::WFlags f = 0 );
-    void init();
+    void init(QString);
     void setLatitude(double);
     void setLongitude(double);
     void setTimezone(int);

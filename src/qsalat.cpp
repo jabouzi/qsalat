@@ -160,7 +160,7 @@ void Qsalat::initCalendarObject()
     calendar.setCalculationMethod(calcMethod);
     calendar.setAsrMethod(asrMethod);
     calendar.sethigherLatitude(highlatitude);
-    calendar.init();
+    calendar.init(path);
 }
 
 /**    
