@@ -4,7 +4,6 @@ QT = gui \
  network \
  webkit \
  phonon \
- xml \
  sql
 CONFIG += qt warn_on release
 OBJECTS_DIR = build
