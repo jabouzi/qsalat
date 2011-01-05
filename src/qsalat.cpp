@@ -230,7 +230,7 @@ void Qsalat::createTrayIcon()
     trayIcon->setContextMenu(trayIconMenu);
     trayIcon->setIcon(QIcon(":/images/mecque.png"));
     QString ttmessage = "Fajr : "+label_fajr->text()+ QString::fromUtf8(" : فجر")+"\nDuhr : "    +label_duhr->text()+QString::fromUtf8(" : ظهر")+"\nAsr : "+label_asr->text()+QString::fromUtf8(" : عصر")+"\nMaghreb : "+label_maghreb->text()+QString::fromUtf8(" : مغرب")+"\nIsha : "+label_isha->text()+QString::fromUtf8(" : عشاء");
-    trayIcon->setToolTip("Salat Islamic cross-platform prayers time V1.0");
+    trayIcon->setToolTip(tr("Salat Islamic cross-platform prayers time V1.0"));
     trayIcon->setToolTip(ttmessage);
     trayIcon->show();    
 }
@@ -371,37 +371,37 @@ QString Qsalat::getNextSalat()
    {
        timeOfSalat = salatTimes[0]+":01";
        salatOrder = 0;
-       salatTitle = "Fajr prayer ";
+       salatTitle = "Salat Fajr";
    }
    else if (getDuhr() > 0)
    {
         timeOfSalat = salatTimes[2]+":01";
         salatOrder = 1;
-        salatTitle = "Duhr prayer "; 
+        salatTitle = "Salat Duhr"; 
    }
    else if (getAsr() > 0) 
    {
        timeOfSalat = salatTimes[3]+":01";
        salatOrder = 2;
-       salatTitle = "Asr prayer ";
+       salatTitle = "Salat Asr";
    }
    else if (getMaghrib() > 0)
    {
         timeOfSalat = salatTimes[5]+":01";
         salatOrder = 3;
-        salatTitle = "Maghreb prayer ";
+        salatTitle = "Salat Maghreb";
    }
    else if (getIsha() > 0)
    {
         timeOfSalat = salatTimes[6]+":01";
         salatOrder = 4;
-        salatTitle = "Isha prayer ";
+        salatTitle = "Salat Isha";
    }
    else 
    {
         timeOfSalat = "00:00:01"; 
         salatOrder = 5;
-        salatTitle = "Midnight ";
+        salatTitle = tr("Midnight ");
    }
    //pLog->Write(" NextTime --> "+timeOfSalat);
    ////pLog->Write(QString::number(salatOrder));

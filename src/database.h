@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QtSql>
 #include <stdlib.h>
-#include "log.h"
+//#include "log.h"
 
 class Database : public QObject
 {  
@@ -39,7 +39,7 @@ class Database : public QObject
         Database(); 
         bool tablesExists();
         void createTables();
-        Log *pLog;
+        //Log *pLog;
 };
 
 #endif

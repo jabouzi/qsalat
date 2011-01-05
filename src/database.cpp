@@ -5,7 +5,7 @@ Database* Database::single = NULL;
 
 Database::Database() 
 {
-    pLog = new Log("errors.log");
+    //pLog = new Log("errors.log");
     db = QSqlDatabase::addDatabase("QSQLITE");    
 }
 
