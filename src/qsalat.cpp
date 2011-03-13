@@ -652,6 +652,7 @@ void Qsalat::updateLocation()
     initLocation();    
     getSalats();
     startSalatAlarm();
+    initLocationObject();
     initQiblaObject();
 }
 
