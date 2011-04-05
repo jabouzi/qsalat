@@ -1,9 +1,14 @@
-#include <QApplication>
+#include "lib/qtsingleapplication.h"
+//#include <QApplication>
 #include "qsalat.h"
 //
 int main(int argc, char ** argv)
 {
-    QApplication app( argc, argv );
+    QtSingleApplication app(argc, argv);
+
+    if (app.isRunning())
+        return 0;
+
     app.setApplicationName( "Qsalat" );
     QString locale = QLocale::system().name();
     QTranslator translator;
@@ -13,7 +18,10 @@ int main(int argc, char ** argv)
     else if (locale.contains("en", Qt::CaseInsensitive)) translator.load(QString(path+"en/qsalat_en"));
     app.installTranslator(&translator);
     Qsalat win;
+    app.setActivationWindow(&win);
     win.show(); 
+    app.setActivationWindow(&win, false);
+    QObject::connect(&win, SIGNAL(needToShow()), &app, SLOT(activateWindow()));
     app.connect( &app, SIGNAL( lastWindowClosed() ), &app, SLOT( quit() ) );
     return app.exec();
 }
