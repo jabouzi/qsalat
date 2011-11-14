@@ -101,7 +101,21 @@ void Alarm::setSeconds(int seconds_)
 void Alarm::finishAalarm()
 {
     timer->stop(); 
-    emit(itsTime());   
+    int error = 0;
+    QDateTime now = QDateTime::currentDateTime();
+    if (now.date().year() != year) error++;
+    if (now.date().month() != month) error++;
+    if (now.date().day() != day) error++;
+    if (now.time().hour() != hours) error++;
+    if (now.time().minute() != minutes) error++;
+    if (error == 0)
+    {        
+        emit(itsTime());
+    }
+    else
+    {
+        emit(wrongTime());
+    }
 }
 
 void Alarm::printMassage()

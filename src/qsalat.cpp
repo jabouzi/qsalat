@@ -269,6 +269,7 @@ void Qsalat::closeEvent(QCloseEvent *event)
 void Qsalat::createActions()
 {
     connect(alarm, SIGNAL(itsTime()), this, SLOT(itsSalatTime()));
+    connect(alarm, SIGNAL(wrongTime()), this, SLOT(restartSalat()));
     connect(&calculation, SIGNAL(calculationChanged()), this, SLOT(updateCalculation()));
     connect(&location, SIGNAL(locationChanged()), this, SLOT(updateLocation()));
     connect(&audio, SIGNAL(audioChanged()), this, SLOT(updateAudio()));
@@ -643,6 +644,7 @@ void Qsalat::updateCalculation()
     initCalculation();    
     getSalats();
     getHijri();
+    createTrayIcon();
     startSalatAlarm();
 }
 
@@ -653,6 +655,7 @@ void Qsalat::updateLocation()
     getSalats();
     startSalatAlarm();
     initLocationObject();
+    createTrayIcon();
     initQiblaObject();
 }
 
@@ -661,6 +664,11 @@ void Qsalat::updateAudio()
     alarm->stopAlarm();
     initAudio(); 
     initAudioObject();
+    startSalatAlarm();
+}
+
+void Qsalat::restartSalat()
+{
     startSalatAlarm();
 }
 //

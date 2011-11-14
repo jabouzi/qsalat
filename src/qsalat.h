@@ -146,6 +146,7 @@ private slots:
     void updateCalculation();
     void updateLocation();
     void updateAudio();
+    void restartSalat();
 };
 #endif
 
