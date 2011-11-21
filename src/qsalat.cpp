@@ -669,6 +669,10 @@ void Qsalat::updateAudio()
 
 void Qsalat::restartSalat()
 {
+    init();      
+    getSalats();
+    getHijri();
+    createTrayIcon();   
     startSalatAlarm();
 }
 //
