@@ -29,7 +29,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     alarm = new Alarm();    
     path = QCoreApplication::applicationDirPath ();
     if (path.data()[path.size() - 1] != '/') path += "/";
-    //pLog = new Log(path+"errors.log");
+    pLog = new Log(path+"errors.log");
     setupUi(this);
     adjustWindow();
     prayers = new Qpray();
@@ -404,9 +404,9 @@ QString Qsalat::getNextSalat()
         salatOrder = 5;
         salatTitle = tr("Midnight ");
    }
-   //pLog->Write(" NextTime --> "+timeOfSalat);
-   ////pLog->Write(QString::number(salatOrder));
-   //pLog->Write(" SalatTime --> "+salatTitle);
+   pLog->Write(" NextTime --> "+timeOfSalat);
+   //pLog->Write(QString::number(salatOrder));
+   pLog->Write(" SalatTime --> "+salatTitle);
    return timeOfSalat;
 }
 
@@ -612,7 +612,7 @@ void Qsalat::setPlayer(QStringList files, QString label)
  
 void Qsalat::itsSalatTime()
 {
-    //pLog->Write("Its Athan of "+salatTitle);
+    pLog->Write("Its Athan of "+salatTitle);
     if (salatOrder > 4)
     {
         init();      

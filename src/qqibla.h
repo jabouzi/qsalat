@@ -40,7 +40,8 @@ public:
     
 protected:
     void closeEvent(QCloseEvent *);
-    void paintEvent(QPaintEvent *);   
+    void paintEvent(QPaintEvent *);
+    void resizeEvent(QResizeEvent *event);
 
 private:
     double latitude;

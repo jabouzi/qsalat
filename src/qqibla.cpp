@@ -103,6 +103,14 @@ void Qqibla::paintEvent(QPaintEvent *)
     label->setText("Qibla angle direction : "+QString::number(qiblaAngle)+"N");
 }
 
+void Qqibla::resizeEvent(QResizeEvent * /* event */)
+{
+    int side = qMin(width(), height());
+    QRegion maskedRegion(width() / 2 - side / 2, height() / 2 - side / 2, side,
+                         side, QRegion::Ellipse);
+    setMask(maskedRegion);
+}
+
 //
 void Qqibla::closeEvent(QCloseEvent *event)
 {

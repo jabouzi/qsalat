@@ -33,14 +33,14 @@ void Alarm::setAlarm()
     if (timeLeft > 0)
     {
         //qDebug("There are %d seconds to alarm", now.secsTo(alarmTime));
-        //pLog->Write("There are "+QString::number(now.secsTo(alarmTime))+" seconds to alarm");
+        pLog->Write("There are "+QString::number(now.secsTo(alarmTime))+" seconds to alarm");
         timeToAlarm = timeLeft*1000;
         startAlarm();
     }
     else
     {
         //qDebug("There are %d seconds passed", abs(now.secsTo(alarmTime)));
-        //pLog->Write("There are "+QString::number(now.secsTo(alarmTime))+" seconds passed");
+        pLog->Write("There are "+QString::number(now.secsTo(alarmTime))+" seconds passed");
         stopAlarm();
     }
 }
@@ -49,12 +49,12 @@ void Alarm::startAlarm()
 {
     if (timer->isActive()) 
     {
-        //pLog->Write("Alarm is active");
+        pLog->Write("Alarm is active");
         timer->stop();
     }
     else 
     {   
-        //pLog->Write("Alarm not active");
+        pLog->Write("Alarm not active");
         timer->start(timeToAlarm);
         //pLog->Write("Timer ID : "+QString::number(timer->timerId()));
     }
@@ -109,11 +109,13 @@ void Alarm::finishAalarm()
     if (now.time().hour() != hours) error++;
     if (now.time().minute() != minutes) error++;
     if (error == 0)
-    {        
+    {
+        pLog->Write("Time is ok");
         emit(itsTime());
     }
     else
     {
+        pLog->Write("Wrong time");
         emit(wrongTime());
     }
 }
