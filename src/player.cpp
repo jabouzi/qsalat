@@ -94,7 +94,7 @@ void Player::adjustWindow()
 void Player::closeEvent(QCloseEvent *event)
 {
     stop();
-    close();
+    hide();
 }
 
 // set player label text
