@@ -602,10 +602,11 @@ void Qsalat::setPlayer(QStringList files, QString label)
 {
     if (playAthan == 1)
     {
-        files << label;
+        //files << label;
         //~ QString program = path+"salatPlayer";
         //~ QProcess *myProcess = new QProcess(this);
         //~ myProcess->start(program, files);
+        player.setTitle(label);
         player.loadFiles(files);
         player.show();
     }

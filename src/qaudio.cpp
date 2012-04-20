@@ -142,14 +142,28 @@ void Qaudio::loadDua()
 //
 void Qaudio::preview()
 {       
-    QStringList audioFile;         
+    QStringList audioFile;     
+    QString label;    
     audioFile.clear();
-    if (regularRadioButton->isChecked()) audioFile << path+"audio/salat/"+salatFiles->currentText() << "Athan preview";
-    else if (fajrRadioButton->isChecked()) audioFile << path+"audio/fajr/"+fajrFiles->currentText() << "Athan fajr preview"; 
-    else audioFile << path+"audio/dua/"+duaFiles->currentText() << "Dua fajr preview";   
+    if (regularRadioButton->isChecked()) 
+    {
+        audioFile << path+"audio/salat/"+salatFiles->currentText();
+        label = "Athan preview";
+    } 
+    else if (fajrRadioButton->isChecked())
+    {
+        audioFile << path+"audio/fajr/"+fajrFiles->currentText();
+        label = "Athan fajr preview"; 
+    } 
+    else
+    {
+        audioFile << path+"audio/dua/"+duaFiles->currentText();
+        label = "Dua fajr preview";   
+    }
     //~ QString program = path+"salatPlayer";
     //~ QProcess *myProcess = new QProcess(this);
     //~ myProcess->start(program, audioFile);
+    player.setTitle(label);
     player.loadFiles(audioFile);
     player.show(); 
 }
