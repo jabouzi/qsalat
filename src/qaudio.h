@@ -28,6 +28,7 @@
 #include <phonon>
 #include <QProcess>
 #include "ui_audio.h"
+#include "player.h"
 #include "database.h"
 
 class Qaudio : public QDialog, public Ui::Audio
@@ -58,6 +59,7 @@ private:
     void setActions();
     void setUI();
     Database *db;
+    Player player;
     void initDB();
     QStringList getMediaFiles(QString);
     void setMediaFilesLists();

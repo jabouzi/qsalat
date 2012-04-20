@@ -17,7 +17,8 @@ FORMS = ui/salat.ui \
  ui/location.ui \
  ui/audio.ui \
  ui/calculation.ui \
- ui/calendar.ui 
+ ui/calendar.ui  \
+ ui/player.ui
 HEADERS = src/qsalat.h \
  src/qpray.h \
  src/qhijri.h \
@@ -30,6 +31,7 @@ HEADERS = src/qsalat.h \
  src/alarm.h \
  src/database.h \
  src/qcalendar.h \
+ src/player.h \
  src/log.h
 SOURCES = src/qsalat.cpp \
  src/main.cpp \
@@ -44,6 +46,7 @@ SOURCES = src/qsalat.cpp \
  src/alarm.cpp \
  src/database.cpp \
  src/qcalendar.cpp \
+ src/player.cpp \
  src/log.cpp
 RESOURCES += qrc/salat.qrc qrc/qibla.qrc qrc/worldtime.qrc
 TRANSLATIONS = en/qsalat_en.ts fr/qsalat_fr.ts

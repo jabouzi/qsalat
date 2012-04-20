@@ -143,7 +143,9 @@ void Database::createTables()
     query.exec ("CREATE TABLE audio (id integer, athan string, fajr string, dua string, playAthan integer, playDua integer)");
     query.exec ("CREATE TABLE calculation (id integer, method integer, fajr integer, duhr integer, asr integer, hijri integer, higherLat integer)");
     query.exec ("CREATE TABLE location (id integer, latitude float, longitude float, country string, city string, timezone integer, timezone_dst integer)");
+    query.exec ("CREATE TABLE player (volume float)");    
     query.exec ("INSERT INTO audio VALUES ('1','/home/nour/Development/Qsalat/audio/athan.mp4','/home/nour/Development/Qsalat/audio/athanFajr.mp4','/home/nour/Development/Qsalat/audio/dua.mp4','1','1')");
     query.exec ("INSERT INTO calculation VALUES ('1','2','0','0','0','0','0')");
     query.exec ("INSERT INTO location VALUES ('1','45.5454','-73.6391','Canada','Montreal','-5','-5')"); 
+    query.exec ("INSERT INTO player VALUES ('0.5')"); 
 }

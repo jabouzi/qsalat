@@ -42,6 +42,7 @@
 #include "qcalendar.h"
 #include "alarm.h"
 #include "database.h"
+#include "player.h"
 #include "log.h"
 
 //
@@ -80,6 +81,7 @@ private:
     Qworldtime worldtime;
     Qcalendar calendar;
     Qhijridate hijridate; 
+    Player player;
     QString file;    
     int timer;    
     QString prayerAudio;
