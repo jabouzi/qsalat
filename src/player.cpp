@@ -95,6 +95,7 @@ void Player::closeEvent(QCloseEvent *event)
 {
     stop();
     hide();
+    event->ignore();
 }
 
 // set player label text
@@ -223,7 +224,7 @@ void Player::finished(){
     }
     else
     {
-        close();
+        hide();
     }
 }
 
