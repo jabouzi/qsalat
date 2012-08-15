@@ -52,3 +52,4 @@ RESOURCES += qrc/salat.qrc qrc/qibla.qrc qrc/worldtime.qrc
 TRANSLATIONS = en/qsalat_en.ts fr/qsalat_fr.ts
 CODECFORTR = UTF-8
 RC_FILE = rc/qsalat.rc
+ICON = qsalat.icns

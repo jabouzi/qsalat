@@ -20,7 +20,7 @@
 ** the file GPL_EXCEPTION.txt in this package.
 **
 ***************************************************************************/
-
+#include <QtGui>
 #include "qsalat.h" 
 //
 Qsalat::Qsalat( QWidget * parent, Qt::WFlags f) 

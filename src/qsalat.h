@@ -25,7 +25,6 @@
 #define QSALAT_H
 //
 #include <QMainWindow>
-#include <QtGui>
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QProcess>
