@@ -28,6 +28,9 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
 {
     alarm = new Alarm();    
     path = QCoreApplication::applicationDirPath ();
+    #ifdef Q_WS_X11
+        path = QDir::homePath();
+    #endif
     if (path.data()[path.size() - 1] != '/') path += "/";
     pLog = new Log(path+"errors.log");
     setupUi(this);
