@@ -40,6 +40,7 @@ class Alarm : public QObject
         QString path;
         
     private slots:
+        void checkTimer();
         void finishAalarm();
         void printMassage();
         

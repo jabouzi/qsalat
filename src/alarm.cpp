@@ -50,12 +50,12 @@ void Alarm::startAlarm()
     if (timer->isActive()) 
     {
         pLog->Write("Alarm is active");
-        timer->stop();
+        //timer->stop();
     }
     else 
     {   
         pLog->Write("Alarm not active");
-        timer->start(timeToAlarm);
+        timer->start(60000);
         //pLog->Write("Timer ID : "+QString::number(timer->timerId()));
     }
 }
@@ -98,9 +98,13 @@ void Alarm::setSeconds(int seconds_)
     seconds = seconds_;
 }
 
+void Alarm::checkTimer()
+{
+
+}
+
 void Alarm::finishAalarm()
 {
-    timer->stop(); 
     int error = 0;
     QDateTime now = QDateTime::currentDateTime();
     if (now.date().year() != year) error++;
@@ -112,11 +116,12 @@ void Alarm::finishAalarm()
     {
         pLog->Write("Time is ok");
         emit(itsTime());
+        timer->stop();
     }
     else
     {
         pLog->Write("Wrong time");
-        emit(wrongTime());
+        //emit(wrongTime());
     }
 }
 
