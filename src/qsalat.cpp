@@ -72,7 +72,7 @@ void Qsalat::init()
 
 void Qsalat::checkData()
 {
-     QDir dir(path+"data");
+    QDir dir(path+"data");
     if (!dir.exists())
     {
         dir.mkpath(path+"data");
