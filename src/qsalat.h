@@ -100,7 +100,8 @@ private:
     Log *pLog;
     
     // private methods
-    void init();      
+    void init();
+    void checkData();
     void initLocation();
     void initAudio();
     void initCalculation();

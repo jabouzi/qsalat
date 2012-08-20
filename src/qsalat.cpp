@@ -29,7 +29,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     alarm = new Alarm();    
     path = QCoreApplication::applicationDirPath ();
     #ifdef Q_WS_X11
-        path = QDir::homePath();
+        path = QDir::homePath()."/.salat";
     #endif
     if (path.data()[path.size() - 1] != '/') path += "/";
     pLog = new Log(path+"errors.log");
@@ -42,6 +42,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     createActions();
     setVisible(true);
     init();
+    checkData();
     initDB();
     initLocation();
     initLocationObject();
@@ -67,6 +68,20 @@ void Qsalat::init()
     year = date.year();
     month = date.month();
     day = date.day();
+}
+
+void Qsalat::checkData()
+{
+     QDir dir(path+"data");
+    if (!dir.exists())
+    {
+        dir.mkpath(path+"data");
+    }
+
+    if (!QFile(path+"data/qsalat.db").exists())
+    {
+        QFile(path+"data/qsalat.db");
+    }
 }
 
 void Qsalat::initDB()
