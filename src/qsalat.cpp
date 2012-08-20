@@ -72,10 +72,28 @@ void Qsalat::init()
 
 void Qsalat::checkData()
 {
-    QDir dir(path+"data");
-    if (!dir.exists())
+    QDir dataDir(path+"data");
+    if (!dataDir.exists())
     {
-        dir.mkpath(path+"data");
+        dataDir.mkpath(path+"data");
+    }
+    
+    QDir athanDir(path+"audio/salat"); // changer pour media au lieu de audio partout ety mettre tous les fichiers ensemble!!!
+    if (!athanDir.exists())
+    {
+        athanDir.mkpath(path+"audio/salat");
+    }
+    
+    QDir fajrDir(path+"audio/fajr"); 
+    if (!fajrDir.exists())
+    {
+        fajrDir.mkpath(path+"audio/fajr");
+    }
+    
+    QDir duaDir(path+"audio/dua");
+    if (!duaDir.exists())
+    {
+        duaDir.mkpath(path+"audio/dua");
     }
 
     if (!QFile(path+"data/qsalat.db").exists())
@@ -435,7 +453,7 @@ void Qsalat::startSalatAlarm()
         QString salatTime = getNextSalat();    
         QDateTime today = QDateTime::currentDateTime();
         QTime time = QTime::fromString(salatTime, "HH:mm:ss");
-        alarm->init();   
+        alarm->init(path);   
         alarm->setYear(today.date().year());
         alarm->setMonth(today.date().month());
         if (5 == salatOrder)

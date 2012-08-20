@@ -22,7 +22,7 @@ class Alarm : public QObject
         void setMinutes(int);
         void setSeconds(int);
         void setAlarm();
-        void init();
+        void init(QString);
         int getTimeLeft();
         bool isActive();
     

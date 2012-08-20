@@ -1,15 +1,17 @@
+#include <QtGui>
 #include "alarm.h" 
 
 Alarm::Alarm(QObject* parent) :
     QObject(parent)
 {
-    path = QCoreApplication::applicationDirPath ();
-    if (path.data()[path.size() - 1] != '/') path += "/";
-    pLog = new Log(path+"errors.log");
+    
 }
 
-void Alarm::init()
+void Alarm::init(QString path_)
 {    
+	path = path_;
+	pLog = new Log(path+"errors.log");
+	qDebug() << path;
     QDateTime today = QDateTime::currentDateTime();
     year = today.date().year();
     month = today.date().month();
@@ -112,6 +114,7 @@ void Alarm::finishAalarm()
     if (now.date().day() != day) error++;
     if (now.time().hour() != hours) error++;
     if (now.time().minute() != minutes) error++;
+    qDebug() << error;
     if (error == 0)
     {
         pLog->Write("Time is ok");
