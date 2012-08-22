@@ -95,7 +95,7 @@ void Qlocation::loadAddress(QString adr)
         latLineEdit->setText(QString::number(point.x()));
         lngLineEdit->setText(QString::number(point.y()));
     }   
-   scriptStr << QString("http://www.skanderjabouzi.com/qpray/?adr=%1")                        
+   scriptStr << QString("http://www.skanderjabouzi.com/app/salat/maps/?adr=%1")
                              .arg(adr);
     
     QUrl url(scriptStr.join("\n"));
@@ -106,7 +106,7 @@ void Qlocation::loadAddress(QString adr)
 void Qlocation::loadCoordinates(double lat, double lng)
 {
    QStringList scriptStr;   
-   scriptStr << QString("http://www.skanderjabouzi.com/qpray/?adr=0&lat=%1&lng=%2")                        
+   scriptStr << QString("http://www.skanderjabouzi.com/app/salat/maps/?adr=0&lat=%1&lng=%2")
                              .arg(QString::number(lat))
                              .arg(QString::number(lng));
     
@@ -218,7 +218,7 @@ void Qlocation::blockLocation()
     searchButton->setEnabled(false);
     applyButton->setEnabled(false);
     messageLabel->show();
-    locTimer->start(900000);
+    locTimer->start(60000);
 }
 
 void Qlocation::unBlockLocation()

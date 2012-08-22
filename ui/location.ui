@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>304</width>
-    <height>576</height>
+    <width>301</width>
+    <height>578</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>301</width>
-    <height>536</height>
+    <height>578</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
-    <height>800</height>
+    <width>301</width>
+    <height>578</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -51,9 +51,9 @@
   <widget class="QPushButton" name="searchButton">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>220</x>
      <y>40</y>
-     <width>61</width>
+     <width>71</width>
      <height>28</height>
     </rect>
    </property>
@@ -75,7 +75,7 @@
    </property>
    <property name="url">
     <url>
-     <string>http://www.skanderjabouzi.com/qpray/</string>
+     <string>http://www.skanderjabouzi.com/app/salat/maps/</string>
     </url>
    </property>
   </widget>
@@ -111,7 +111,7 @@
   <widget class="QPushButton" name="cancelButton">
    <property name="geometry">
     <rect>
-     <x>219</x>
+     <x>210</x>
      <y>540</y>
      <width>71</width>
      <height>28</height>
@@ -127,9 +127,9 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>70</x>
      <y>540</y>
-     <width>131</width>
+     <width>141</width>
      <height>28</height>
     </rect>
    </property>
@@ -290,7 +290,7 @@
 color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
-    <string>Yo can only use this once every 15 min</string>
+    <string>Yo can only use this once every minute</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
