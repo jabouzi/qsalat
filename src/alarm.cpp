@@ -29,20 +29,18 @@ void Alarm::setAlarm()
     //stopAlarm();
     //if (timer->isActive()) //pLog->Write("is active");
     //else //pLog->Write("not active");
-    QDateTime now = QDateTime::currentDateTime();
-    QDateTime alarmTime(QDate(year, month, day), QTime(hours, minutes, seconds));
-    timeLeft = now.secsTo(alarmTime);
-    if (timeLeft > 0)
+    if (getTimeLeft() > 0)
     {
         //qDebug("There are %d seconds to alarm", now.secsTo(alarmTime));
-        pLog->Write("There are "+QString::number(now.secsTo(alarmTime))+" seconds to alarm");
+        //pLog->Write("There are "+QString::number(now.secsTo(alarmTime))+" seconds to alarm");
         timeToAlarm = timeLeft*1000;
+        pLog->Write("There are "+QString::number(timeToAlarm)+" seconds to alarm");
         startAlarm();
     }
     else
     {
         //qDebug("There are %d seconds passed", abs(now.secsTo(alarmTime)));
-        pLog->Write("There are "+QString::number(now.secsTo(alarmTime))+" seconds passed");
+        pLog->Write("There are "+QString::number(timeToAlarm)+" seconds passed");
         stopAlarm();
     }
 }
@@ -117,14 +115,18 @@ void Alarm::finishAalarm()
     qDebug() << error;
     if (error == 0)
     {
+        pLog->Write("Time left : " + QString::number(getTimeLeft()));
         pLog->Write("Time is ok");
         emit(itsTime());
         timer->stop();
     }
     else
     {
-        pLog->Write("Wrong time");
-        //emit(wrongTime());
+        if (getTimeLeft() < 0)
+        {
+            pLog->Write("Wrong time");
+            emit(wrongTime());
+        }
     }
 }
 
@@ -135,6 +137,9 @@ void Alarm::printMassage()
 
 int Alarm::getTimeLeft()
 {
+    QDateTime now = QDateTime::currentDateTime();
+    QDateTime alarmTime(QDate(year, month, day), QTime(hours, minutes, seconds));
+    timeLeft = now.secsTo(alarmTime);
     return timeLeft;
 }
 
