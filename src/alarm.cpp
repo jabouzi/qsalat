@@ -115,6 +115,7 @@ void Alarm::finishAalarm()
     //qDebug() << error;
     if (error == 0)
     {        
+		pLog->Write("Time left2 : " + QString::number(getTimeLeft()));
         pLog->Write("Time is ok");
         emit(itsTime());
         timer->stop();
