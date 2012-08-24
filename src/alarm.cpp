@@ -141,6 +141,8 @@ int Alarm::getTimeLeft()
     QDateTime now = QDateTime::currentDateTime();
     QDateTime alarmTime(QDate(year, month, day), QTime(hours, minutes, seconds));
     timeLeft = now.secsTo(alarmTime);
+    QTime strTime = QTime(0,0,timeLeft);
+    pLog->Write(strTime.toString("hh hours mm minutes"));
     return timeLeft;
 }
 
