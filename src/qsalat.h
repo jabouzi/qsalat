@@ -139,7 +139,7 @@ private slots:
     void showCalculation();
     void showWorldtime();
     void showCalendar();
-   // void showYearly();
+    void showTimeLeft();
     void showHijridate();
     void _about();
     void _hide();

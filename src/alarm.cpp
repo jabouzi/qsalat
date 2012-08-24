@@ -36,6 +36,7 @@ void Alarm::setAlarm()
         timeToAlarm = timeLeft*1000;
         pLog->Write("There are "+QString::number(timeLeft)+" seconds to alarm");
         startAlarm();
+        emit(salatTimeLeft());
     }
     else
     {
@@ -112,7 +113,6 @@ void Alarm::finishAalarm()
     if (now.date().day() != day) error++;
     if (now.time().hour() != hours) error++;
     if (now.time().minute() != minutes) error++;
-    //qDebug() << error;
     if (error == 0)
     {        
 		pLog->Write("Time left2 : " + QString::number(getTimeLeft()));
@@ -122,6 +122,7 @@ void Alarm::finishAalarm()
     }
     else
     {
+		emit(salatTimeLeft());
         pLog->Write("Time left : " + QString::number(getTimeLeft()));
         if (getTimeLeft() < 0)
         {
@@ -142,7 +143,7 @@ int Alarm::getTimeLeft()
     QDateTime alarmTime(QDate(year, month, day), QTime(hours, minutes, seconds));
     timeLeft = now.secsTo(alarmTime);
     QTime strTime = QTime(0,0,timeLeft);
-    pLog->Write(strTime.toString("hh hours mm minutes"));
+    pLog->Write(strTime.toString("hh:mm"));
     return timeLeft;
 }
 

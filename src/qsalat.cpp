@@ -306,6 +306,7 @@ void Qsalat::createActions()
 {
     connect(alarm, SIGNAL(itsTime()), this, SLOT(itsSalatTime()));
     connect(alarm, SIGNAL(wrongTime()), this, SLOT(restartSalat()));
+    connect(alarm, SIGNAL(salatTimeLeft()), this, SLOT(showTimeLeft()));
     connect(&calculation, SIGNAL(calculationChanged()), this, SLOT(updateCalculation()));
     connect(&location, SIGNAL(locationChanged()), this, SLOT(updateLocation()));
     connect(&audio, SIGNAL(audioChanged()), this, SLOT(updateAudio()));
@@ -713,5 +714,13 @@ void Qsalat::restartSalat()
     getHijri();
     createTrayIcon();   
     startSalatAlarm();
+}
+
+void Qsalat::showTimeLeft()
+{
+	//qDebug() << alarm->getTimeLeft();
+	QTime strTime = QTime(0,0,alarm->getTimeLeft());
+    qDebug() << strTime.toString("hh:mm");
+	statusbar->showMessage ( QString::number(alarm->getTimeLeft()), 0);
 }
 //

@@ -47,6 +47,7 @@ class Alarm : public QObject
     signals:
         void itsTime();
         void wrongTime();
+		void salatTimeLeft();
     
 };
 
