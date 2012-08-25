@@ -719,7 +719,20 @@ void Qsalat::restartSalat()
 void Qsalat::showTimeLeft()
 {
 	//qDebug() << alarm->getTimeLeft();
-    qDebug() << QDateTime::fromTime_t(alarm->getTimeLeft()).toString("hh mm");
-	statusbar->showMessage ( QString::number(alarm->getTimeLeft()), 0);
+    //qDebug() << QDateTime::fromTime_t(alarm->getTimeLeft()).toString("hh mm");
+    statusbar->showMessage ( seconds_to_DHMS(alarm->getTimeLeft()) + salatTitle, 0);
+}
+
+QString Qsalat::seconds_to_DHMS(quint32 duration)
+{
+    QString res;
+    //int seconds = (int) (duration % 60);
+    duration /= 60;
+    int minutes = (int) (duration % 60);
+    duration /= 60;
+    int hours = (int) (duration % 24);
+    if(hours == 0)
+        return res.sprintf("%02d m to ", minutes);
+    return res.sprintf("%02d h %02d m to " , hours, minutes);
 }
 //

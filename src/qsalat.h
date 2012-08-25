@@ -130,6 +130,7 @@ private:
     void initQiblaObject();
     void initHijriDateObject();
     void initCalendarObject();
+    QString seconds_to_DHMS(quint32);
     
 private slots:
     void iconActivated(QSystemTrayIcon::ActivationReason);
