@@ -264,11 +264,12 @@ void Qsalat::createTrayIcon()
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);    
     trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setIcon(QIcon(":/images/mecque.png"));
+    trayIcon->setIcon(QIcon(":/images/kaaba.svg"));
     QString ttmessage = "Fajr : "+label_fajr->text()+ QString::fromUtf8(" : فجر")+"\nDuhr : "    +label_duhr->text()+QString::fromUtf8(" : ظهر")+"\nAsr : "+label_asr->text()+QString::fromUtf8(" : عصر")+"\nMaghreb : "+label_maghreb->text()+QString::fromUtf8(" : مغرب")+"\nIsha : "+label_isha->text()+QString::fromUtf8(" : عشاء");
     trayIcon->setToolTip(tr("Salat Islamic cross-platform prayers time V1.0"));
     trayIcon->setToolTip(ttmessage);
-    trayIcon->show();    
+    trayIcon->setVisible(true);
+    trayIcon->show();
 }
 
 
