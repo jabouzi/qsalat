@@ -32,6 +32,7 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
         path = QDir::homePath()+"/.salat";
     #endif
     if (path.data()[path.size() - 1] != '/') path += "/";
+    qDebug() << path;
     pLog = new Log(path+"errors.log");
     setupUi(this);
     adjustWindow();
