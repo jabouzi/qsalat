@@ -260,7 +260,7 @@ void Qsalat::createTrayIcon()
     QFont *f = new QFont ( "sans", 10, -1, false );    
     QToolTip::setFont ( *f );
     QToolTip::setPalette(*p);    
-    trayIconMenu->addAction(minimizeAction);
+    //trayIconMenu->addAction(minimizeAction);
     trayIconMenu->addAction(restoreAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);    
@@ -280,8 +280,8 @@ void Qsalat::createTrayIcon()
  */
 void Qsalat::setVisible(bool visible)
 {
-    minimizeAction->setEnabled(visible);
-    restoreAction->setEnabled(!visible);
+    //minimizeAction->setEnabled(visible);
+    restoreAction->setEnabled(true);
     QMainWindow::setVisible(visible);
 }
 
@@ -313,9 +313,9 @@ void Qsalat::createActions()
     connect(&location, SIGNAL(locationChanged()), this, SLOT(updateLocation()));
     connect(&audio, SIGNAL(audioChanged()), this, SLOT(updateAudio()));
     connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason))); 
-    minimizeAction = new QAction(tr("Mi&nimize"), this);
-    connect(minimizeAction, SIGNAL(triggered()), this, SLOT(_hide()));
-    restoreAction = new QAction(tr("&Restore"), this);
+    //minimizeAction = new QAction(tr("Mi&nimize"), this);
+    //connect(minimizeAction, SIGNAL(triggered()), this, SLOT(_hide()));
+    restoreAction = new QAction(tr("&Activate"), this);
     connect(restoreAction, SIGNAL(triggered()), this, SLOT(_showNormal()));
     quitAction = new QAction(tr("&Quit"), this);
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));    
@@ -660,7 +660,7 @@ void Qsalat::itsSalatTime()
         init();      
         getSalats();
         getHijri();
-        createTrayIcon();   
+        //createTrayIcon();   
     }
     else if (salatOrder > 0)
     {
@@ -686,7 +686,7 @@ void Qsalat::updateCalculation()
     initCalculation();    
     getSalats();
     getHijri();
-    createTrayIcon();
+    //createTrayIcon();
     startSalatAlarm();
 }
 
@@ -697,7 +697,7 @@ void Qsalat::updateLocation()
     getSalats();
     startSalatAlarm();
     initLocationObject();
-    createTrayIcon();
+    //createTrayIcon();
     initQiblaObject();
 }
 
@@ -714,7 +714,7 @@ void Qsalat::restartSalat()
     init();      
     getSalats();
     getHijri();
-    createTrayIcon();   
+    //createTrayIcon();   
     startSalatAlarm();
 }
 
