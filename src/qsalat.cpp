@@ -265,7 +265,11 @@ void Qsalat::createTrayIcon()
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);    
     trayIcon->setContextMenu(trayIconMenu);
-    trayIcon->setIcon(QIcon(":/images/kaaba.svg"));
+    #ifdef Q_WS_X11
+        trayIcon->setIcon(QIcon(":/images/kaaba.svg"));
+    #else
+        trayIcon->setIcon(QIcon(":/images/mecque.png"));
+    #endif
     //~ QString ttmessage = "Fajr : "+label_fajr->text()+ QString::fromUtf8(" : فجر")+"\nDuhr : "    +label_duhr->text()+QString::fromUtf8(" : ظهر")+"\nAsr : "+label_asr->text()+QString::fromUtf8(" : عصر")+"\nMaghreb : "+label_maghreb->text()+QString::fromUtf8(" : مغرب")+"\nIsha : "+label_isha->text()+QString::fromUtf8(" : عشاء");
     //~ trayIcon->setToolTip(tr("Salat Islamic cross-platform prayers time V1.0"));
     //~ trayIcon->setToolTip(ttmessage);
@@ -312,7 +316,7 @@ void Qsalat::createActions()
     connect(&calculation, SIGNAL(calculationChanged()), this, SLOT(updateCalculation()));
     connect(&location, SIGNAL(locationChanged()), this, SLOT(updateLocation()));
     connect(&audio, SIGNAL(audioChanged()), this, SLOT(updateAudio()));
-    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason))); 
+    //connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
     //minimizeAction = new QAction(tr("Mi&nimize"), this);
     //connect(minimizeAction, SIGNAL(triggered()), this, SLOT(_hide()));
     restoreAction = new QAction(tr("&Activate"), this);
