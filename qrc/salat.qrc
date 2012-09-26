@@ -18,5 +18,6 @@
    <file>../data/.body</file>
    <file>../data/.footer</file>
    <file>../data/.header</file>
+   <file>../data/google_maps.html</file>
 </qresource>
 </RCC> 
