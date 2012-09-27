@@ -43,7 +43,7 @@
     <widget class="QWebView" name="locationView">
      <property name="url">
       <url>
-       <string>about:blank</string>
+       <string>qrc:/data/google_maps.html</string>
       </url>
      </property>
     </widget>
@@ -78,7 +78,11 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="countryEdit"/>
+        <widget class="QLineEdit" name="countryEdit">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -170,6 +174,8 @@
    <header>QtWebKit/QWebView</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../qrc/salat.qrc"/>
+ </resources>
  <connections/>
 </ui>
