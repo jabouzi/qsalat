@@ -43,6 +43,7 @@ void Qlocation::setPath(QString lpath)
 
 void Qlocation::initDB()
 {
+    qDebug() << "INIT";
     db = Database::getInstance();
     db->setDatabaseName(path+"data/qsalat.db");
     db->setDatabase();   

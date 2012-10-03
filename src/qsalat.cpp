@@ -27,12 +27,13 @@ Qsalat::Qsalat( QWidget * parent, Qt::WFlags f)
     : QMainWindow(parent, f)
 {
     alarm = new Alarm();    
-    path = QCoreApplication::applicationDirPath ();
     #ifdef Q_WS_X11
         path = QDir::homePath()+"/.salat";
+    #else
+        path = QCoreApplication::applicationDirPath ();        
     #endif
     if (path.data()[path.size() - 1] != '/') path += "/";
-    qDebug() << path;
+    //qDebug() << path;
     pLog = new Log(path+"errors.log");
     setupUi(this);
     adjustWindow();
@@ -266,7 +267,7 @@ void Qsalat::createTrayIcon()
     trayIconMenu->addAction(quitAction);    
     trayIcon->setContextMenu(trayIconMenu);
     #ifdef Q_WS_X11
-        trayIcon->setIcon(QIcon(":/images/kaaba.svg"));
+        trayIcon->setIcon(QIcon(":/images/mecque1.svg"));
     #else
         trayIcon->setIcon(QIcon(":/images/mecque.png"));
     #endif

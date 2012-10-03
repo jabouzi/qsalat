@@ -40,7 +40,7 @@ void Database::setDatabase()
 
 void Database::prepareDB()
 {    
-    db.open(); 
+    qDebug() << "OPEN : " << db.open(); 
     if (!tablesExists())
     {        
         createTables();
@@ -61,6 +61,7 @@ void Database::selectAll()
 {
     prepareDB();
     QSqlQuery query;
+    qDebug() << "SELECT * FROM "+table+" "+sqlWhere;
     query.exec("SELECT * FROM "+table+" "+sqlWhere);
 }
 
@@ -69,7 +70,7 @@ QString Database::select(QString select)
     prepareDB();
     QSqlQuery query;
     QString sql = "SELECT "+select+" FROM "+table+" "+sqlWhere;
-    //qDebug("%s",sql.toLatin1().data());
+    qDebug() << sql;
     //pLog->Write(sql);
     query.exec(sql);
     int field = query.record().indexOf(select);
