@@ -150,6 +150,8 @@ private slots:
     void updateLocation();
     void updateAudio();
     void restartSalat();
+protected:
+        void paintEvent(QPaintEvent *);
 };
 #endif
 

@@ -742,4 +742,12 @@ QString Qsalat::seconds_to_DHMS(quint32 duration)
         return res.sprintf("%02d m to ", minutes);
     return res.sprintf("%02d h %02d m to " , hours, minutes);
 }
+
+void Qsalat::paintEvent(QPaintEvent *pe)
+{
+    QPainter* pPainter = new QPainter(this);
+    pPainter->drawPixmap(rect(), QPixmap(":/images/ipray.svg"));
+    delete pPainter;
+    QWidget::paintEvent(pe);
+}
 //
