@@ -745,8 +745,10 @@ QString Qsalat::seconds_to_DHMS(quint32 duration)
 
 void Qsalat::paintEvent(QPaintEvent *pe)
 {
+
+    //background = QPixmap(qRound(centralwidget.width()), qRound(centralwidget.height()));
     QPainter* pPainter = new QPainter(this);
-    pPainter->drawPixmap(rect(), QPixmap(":/images/ipray.svg"));
+    pPainter->drawPixmap(centralwidget->x(), centralwidget->y(), centralwidget->width(),centralwidget->height(),  QPixmap(":/images/ipray.svg"));
     delete pPainter;
     QWidget::paintEvent(pe);
 }

@@ -98,6 +98,7 @@ private:
     QStringList audioList;
     Database *db;
     Log *pLog;
+    QPixmap background;
     
     // private methods
     void init();
