@@ -1,0 +1,5 @@
+<html><head>
+<title> Salat times </title>
+<link type="text/css" href="css.css" rel="stylesheet" />
+<script type="text/javascript" src="jquery-latest.js"></script>
+<script type="text/javascript" src="jquery.tablesorter.js"></script>
