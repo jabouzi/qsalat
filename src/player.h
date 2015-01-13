@@ -14,7 +14,7 @@ class Player : public QMainWindow, public Ui::Player
 Q_OBJECT
 public:
     Player( QWidget * parent = 0, Qt::WFlags f = 0 );
-    
+    ~Player();
 public:
     void loadFiles(QStringList);
     void setTitle(QString);

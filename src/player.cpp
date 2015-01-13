@@ -18,6 +18,13 @@ Player::Player( QWidget * parent, Qt::WFlags f)
     //addButton->hide();
 }
 
+Player::~Player()
+{
+    videoPlayer->deleteLater();
+    //delete ui;
+    //delete videoPlayer;
+}
+
 void Player::loadFiles(QStringList list)
 {
     sources.clear();
@@ -227,6 +234,8 @@ void Player::finished(){
     else
     {
         hide();
+        videoPlayer->deleteLater();
+        delete videoPlayer;
     }
 }
 
